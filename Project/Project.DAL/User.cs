@@ -7,6 +7,8 @@ namespace Project.DAL
         [Key]
         public Guid Id { get; set; }
 
+        public Guid ActivityId { get; set; }
+
         [Required]
         public string FirstName { get; set; }
 
