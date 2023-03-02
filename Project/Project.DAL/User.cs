@@ -12,5 +12,10 @@ namespace Project.DAL
         public required string LastName { get; set; }
 
         public string PhotoUrl { get; set; }
+
+        public ICollection<Activity> Activities { get; init; } = new List<Activity>();
+
+        public ICollection<UserProject> UserProjects { get; init; } = new List<UserProject>();
+        
     }
 }
