@@ -5,9 +5,9 @@ namespace Project.DAL
     public class UserProject
     {
         [Key]
-        public Guid Id { get; set; }
-        public Guid UserId { get; set; }
-        public Guid ProjectId { get; set; }
+        public required Guid Id { get; set; }
+        public required Guid UserId { get; set; }
+        public required Guid ProjectId { get; set; }
         public User User { get; set; }
         public Project Project { get; set; }
 

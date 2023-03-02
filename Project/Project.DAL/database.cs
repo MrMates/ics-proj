@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Project.DAL;
 
@@ -22,8 +21,10 @@ public class DatabaseContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-      //  modelBuilder.Entity<User>()
-        //    .HasMany(i => i.Activity);
+        modelBuilder.Entity<User>()
+            .HasMany(i => i.Activities)
+            .HasMany(i => i.Projects)
+            .OnDelete(DeleteBehavior.Cascade);
 
 
     }

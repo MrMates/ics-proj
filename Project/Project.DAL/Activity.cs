@@ -6,9 +6,9 @@ namespace Project.DAL
     public class Activity
     {
         [Key]
-        public Guid Id { get; set; }
-
-        public Guid ProjectId { get; set; }
+        public required Guid Id { get; set; }
+        public required Guid ProjectId { get; set; }
+        public required Guid UserId { get; set; }
         public string Name { get; set; }
         public DateTime TimeBegin { get; set; }
         public DateTime TimeEnd { get; set; }
