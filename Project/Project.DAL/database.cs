@@ -24,9 +24,6 @@ public class DatabaseContext : DbContext
         modelBuilder.Entity<User>()
             .HasMany(i => i.Activities);
 
-        modelBuilder.Entity<Project>()
-            .HasMany(i => i.Users);
-
         modelBuilder.Entity<UserProject>()
             .HasKey(i => new { i.UserId, i.ProjectId });
 

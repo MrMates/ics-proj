@@ -2,7 +2,7 @@
 
 namespace Project.DAL
 {
-    public class User
+    public record User : IEntity
     {
         [Key]
         public required Guid Id { get; set; }
@@ -11,7 +11,7 @@ namespace Project.DAL
        
         public required string LastName { get; set; }
 
-        public string PhotoUrl { get; set; }
+        public string? PhotoUrl { get; set; }
 
         public ICollection<Activity> Activities { get; init; } = new List<Activity>();
 
