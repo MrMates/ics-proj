@@ -4,6 +4,12 @@ namespace Project.DAL;
 
 public class DatabaseContext : DbContext
 {
+    private readonly bool _seedDemoData;
+
+    public DatabaseContext(DbContextOptions contextOptions, bool seedDemoData = false)
+        : base(contextOptions) =>
+        _seedDemoData = seedDemoData;
+
     public DbSet<User> Users => Set<User>();
 
     public DbSet<Activity> Activities => Set<Activity>();
