@@ -22,8 +22,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Project.DAL\Project.DAL.csproj" />
     <ProjectReference Include="..\Project.Common.Tests\Project.Common.Tests.csproj" />
-    <ProjectReference Include="..\Project.DAL\Project.DAL.csproj" />
   </ItemGroup>
 
 </Project>

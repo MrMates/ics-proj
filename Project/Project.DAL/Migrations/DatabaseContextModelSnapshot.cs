@@ -52,7 +52,7 @@ namespace Project.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Activities");
+                    b.ToTable("Activities", (string)null);
                 });
 
             modelBuilder.Entity("Project.DAL.Project", b =>
@@ -67,7 +67,7 @@ namespace Project.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Projects");
+                    b.ToTable("Projects", (string)null);
                 });
 
             modelBuilder.Entity("Project.DAL.User", b =>
@@ -89,7 +89,7 @@ namespace Project.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Project.DAL.UserProject", b =>
@@ -107,7 +107,7 @@ namespace Project.DAL.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("UserProjects");
+                    b.ToTable("UserProjects", (string)null);
                 });
 
             modelBuilder.Entity("Project.DAL.Activity", b =>

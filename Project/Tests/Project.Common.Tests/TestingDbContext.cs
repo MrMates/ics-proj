@@ -1,4 +1,5 @@
-﻿using Project.DAL;
+﻿using Project.Common.Tests.Seeds;
+using Project.DAL;
 using Microsoft.EntityFrameworkCore;
 
 namespace Project.Common.Tests
@@ -8,7 +9,7 @@ namespace Project.Common.Tests
         private readonly bool _seedTestingData;
 
         public TestingDbContext(DbContextOptions contextOptions, bool seedTestingData = false)
-            : base(contextOptions, seedDemoData: false)
+            : base(contextOptions, seedDemoData:false)
         {
             _seedTestingData = seedTestingData;
         }
@@ -17,12 +18,10 @@ namespace Project.Common.Tests
         {
             base.OnModelCreating(modelBuilder);
 
-            //if (_seedTestingData)
-            //{
-            //    IngredientSeeds.Seed(modelBuilder);
-            //    RecipeSeeds.Seed(modelBuilder);
-            //    IngredientAmountSeeds.Seed(modelBuilder);
-            //}
+            if (_seedTestingData)
+            {
+                UserSeeds.Seed(modelBuilder);
+            }
         }
     }
 }

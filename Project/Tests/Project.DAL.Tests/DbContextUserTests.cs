@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Project.Common.Tests;
+using Project.Common.Tests.Seeds;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -14,11 +15,10 @@ namespace Project.DAL.Tests
         public async Task AddNew_User_Persisted()
         {
             //Arrange
-            var entity = new User
+            var entity = UserSeeds.EmptyUser with
             {
-                Id = Guid.Parse("03D3AC6D-B95B-41D2-A94A-A8E6ECAE62DD"),
-                FirstName = "Jan",
-                LastName = "Novák"
+                FirstName = "Tomáš",
+                LastName = "Jedno",
             };
 
             //Act
@@ -30,6 +30,20 @@ namespace Project.DAL.Tests
             var actualEntity = await dbx.Users
                 .SingleAsync(i => i.Id == entity.Id);
             DeepAssert.Equal(entity, actualEntity);
+        }
+
+        [Fact]
+        public async Task Delete_User_Deleted()
+        {
+            //Arrange
+            var entity = UserSeeds.UserToDelete;
+
+            //Act
+            DbContextSUT.Users.Remove(entity);
+            await DbContextSUT.SaveChangesAsync();
+
+            //Assert
+            Assert.False(await DbContextSUT.Users.AnyAsync(i => i.Id == entity.Id));
         }
     }
 }
