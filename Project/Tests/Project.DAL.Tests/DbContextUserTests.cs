@@ -45,5 +45,41 @@ namespace Project.DAL.Tests
             //Assert
             Assert.False(await DbContextSUT.Users.AnyAsync(i => i.Id == entity.Id));
         }
+
+        [Fact]
+        public async Task Update_User_Changed()
+        {
+            //Arrange
+            var unchanged = UserSeeds.DefaultUser;
+            var entity =
+                unchanged with
+                {
+                    FirstName = unchanged.FirstName + "Changed",
+                    LastName = unchanged.LastName + "Changed",
+                    PhotoUrl = "none"
+                };
+
+            //Act
+            DbContextSUT.Users.Update(entity);
+            await DbContextSUT.SaveChangesAsync();
+
+            //Assert
+            await using var dbx = await DbContextFactory.CreateDbContextAsync();
+            var actualEntity = await dbx.Users
+                .SingleAsync(i => i.Id == entity.Id);
+            DeepAssert.Equal(entity, actualEntity);
+        }
+
+        [Fact]
+        public async Task GetById_User()
+        {
+            //Act
+            var entity = await DbContextSUT.Users
+                .SingleAsync(i => i.Id == UserSeeds.DefaultUser.Id);
+
+            //Assert
+            DeepAssert.Equal(
+                UserSeeds.DefaultUser with { UserProjects = Array.Empty<UserProject>(), Activities = Array.Empty<Activity>() }, entity);
+        }
     }
 }
