@@ -4,7 +4,6 @@ namespace Project.DAL
 {
     public record User : IEntity
     {
-        [Key]
         public required Guid Id { get; set; }
 
         public required string FirstName { get; set; }
