@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Project.DAL.Seeds;
 
 namespace Project.DAL;
 
@@ -46,6 +47,10 @@ public class DatabaseContext : DbContext
         modelBuilder.Entity<Project>()
             .HasMany(i => i.Activities);
 
+        if(_seedDemoData)
+        {
+            UserSeeds.Seed(modelBuilder);
+        }
 
 
 
