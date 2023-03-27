@@ -5,11 +5,13 @@ VisualStudioVersion = 17.5.33414.496
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.DAL", "Project.DAL\Project.DAL.csproj", "{DFF25400-4FF2-4EEA-8052-6ADBFD696916}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.DAL.Tests", "Tests\Project.DAL.Tests\Project.DAL.Tests.csproj", "{5445A7DB-9FBC-4267-8B16-996B66B94DA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.DAL.Tests", "Tests\Project.DAL.Tests\Project.DAL.Tests.csproj", "{5445A7DB-9FBC-4267-8B16-996B66B94DA6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{B8558007-C47B-4A49-8E75-0FB05C8B795E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.Common.Tests", "Tests\Project.Common.Tests\Project.Common.Tests.csproj", "{41FE8B4E-FA71-46E7-A4E4-2DA7D723EC77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Common.Tests", "Tests\Project.Common.Tests\Project.Common.Tests.csproj", "{41FE8B4E-FA71-46E7-A4E4-2DA7D723EC77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.BL", "Project.BL\Project.BL.csproj", "{5458F1AE-BB92-4D27-8DDD-24064612EF89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +31,10 @@ Global
 		{41FE8B4E-FA71-46E7-A4E4-2DA7D723EC77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{41FE8B4E-FA71-46E7-A4E4-2DA7D723EC77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41FE8B4E-FA71-46E7-A4E4-2DA7D723EC77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5458F1AE-BB92-4D27-8DDD-24064612EF89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5458F1AE-BB92-4D27-8DDD-24064612EF89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5458F1AE-BB92-4D27-8DDD-24064612EF89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5458F1AE-BB92-4D27-8DDD-24064612EF89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
