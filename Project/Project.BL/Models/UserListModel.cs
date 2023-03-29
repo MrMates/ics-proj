@@ -8,16 +8,16 @@ namespace Project.BL.Models
 {
     public record UserListModel : ModelBase
     {
-        public required string FirstName { get; set; }
-        public required string LastName { get; set; }
-        public string? PhotoUrl { get; set; }
+        public required string UserFirstName { get; set; }
+        public required string UserLastName { get; set; }
+        public string? UserPhotoUrl { get; set; }
 
         public static UserListModel Empty => new()
         {
             Id = Guid.NewGuid(),
-            FirstName = string.Empty,
-            LastName = string.Empty,
-            PhotoUrl = null
+            UserFirstName = string.Empty,
+            UserLastName = string.Empty,
+            UserPhotoUrl = null
         };
     }
 }
