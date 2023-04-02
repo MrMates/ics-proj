@@ -12,7 +12,7 @@ namespace Project.BL.Models
         public required string UserLastName { get; set; }
         public string? UserPhotoUrl { get; set; }
 
-        public UserDetailModel Empty => new()
+        public static UserDetailModel Empty => new()
         {
             Id = Guid.NewGuid(),
             UserFirstName = string.Empty,
