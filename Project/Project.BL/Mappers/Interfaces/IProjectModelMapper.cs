@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Project.BL.Models;
-using Project.DAL;
+using DAL=Project.DAL;
 
 namespace Project.BL.Mappers
 {
 
-    public interface IProjectModelMapper : IModelMapper<Project, ProjectListModel, ProjectDetailModel>
+    public interface IProjectModelMapper : IModelMapper<DAL.Project, ProjectListModel, ProjectDetailModel>
     {
     }
 }

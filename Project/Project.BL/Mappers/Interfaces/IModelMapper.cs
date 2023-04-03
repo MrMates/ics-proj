@@ -4,15 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Project.BL.Mappers;
-
-public interface IModelMapper<TEntity, out TListModel, TDetailModel>
+namespace Project.BL.Mappers
 {
-    TListModel MapToListModel(TEntity? entity);
 
-    IEnumerable<TListModel> MapToListModel(IEnumerable<TEntity> entities)
-        => entities.Select(MapToListModel);
+    public interface IModelMapper<TEntity, out TListModel, TDetailModel>
+    {
+        TListModel MapToListModel(TEntity? entity);
 
-    TDetailModel MapToListDetailModel(TEntity entity);
-    TEntity MapToEntity(TDetailModel model);
+        IEnumerable<TListModel> MapToListModel(IEnumerable<TEntity> entities)
+            => entities.Select(MapToListModel);
+
+        TDetailModel MapToDetailModel(TEntity entity);
+        TEntity MapToEntity(TDetailModel model);
+    }
 }
