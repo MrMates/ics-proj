@@ -25,24 +25,24 @@ steps:
   displayName: 'Build Project 1'
   inputs:
     command: 'build'
-    projects: '**/Project/Tests/Project.Common.Tests.csproj'
+    projects: '/Project/Tests/Project.Common.Tests.csproj'
     arguments: '--configuration $(buildConfiguration)'
 - task: DotNetCoreCLI@2
   displayName: 'Run Tests for Project 1'
   inputs:
     command: 'test'
-    projects: '**/Project/Tests/Project.Common.Tests.csproj'
+    projects: '/Project/Tests/Project.Common.Tests.csproj'
     arguments: '--configuration $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
   displayName: 'Build Project 2'
   inputs:
     command: 'build'
-    projects: '**Project/Tests/Project.DAL.Tests/Project.DAL.Tests.csproj'
+    projects: 'Project/Tests/Project.DAL.Tests/Project.DAL.Tests.csproj'
     arguments: '--configuration $(buildConfiguration)'
 - task: DotNetCoreCLI@2
   displayName: 'Run Tests for Project 2'
   inputs:
     command: 'test'
-    projects: '**Project/Tests/Project.DAL.Tests/Project.DAL.Tests.csproj'
+    projects: 'Project/Tests/Project.DAL.Tests/Project.DAL.Tests.csproj'
     arguments: '--configuration $(buildConfiguration)'
