@@ -33,7 +33,7 @@ steps:
   inputs:
     command: 'test'
     projects: '**/Project.Common.Tests.csproj'
-    arguments: '--configuration $(buildConfiguration)'
+    arguments: '--configuration $(buildConfiguration) --logger "trx"'
 
 - task: DotNetCoreCLI@2
   displayName: 'Build Project 2'
@@ -47,7 +47,7 @@ steps:
   inputs:
     command: 'test'
     projects: '**/Project.DAL.Tests.csproj'
-    arguments: '--configuration $(buildConfiguration)'
+    arguments: '--configuration $(buildConfiguration) --logger "trx"'
 
 
 
