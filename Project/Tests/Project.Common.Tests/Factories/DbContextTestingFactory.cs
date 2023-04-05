@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Project.Common.Tests
 {
-    public class DbContextSqlLiteTestingFactory : IDbContextFactory<DatabaseContext>
+    public class DbContextTestingFactory : IDbContextFactory<DatabaseContext>
     {
         private readonly string _databaseName;
         private readonly bool _seedTestingData;
 
-        public DbContextSqlLiteTestingFactory(string databaseName, bool seedTestingData = false)
+        public DbContextTestingFactory(string databaseName, bool seedTestingData = false)
         {
             _databaseName = databaseName;
             _seedTestingData = seedTestingData;

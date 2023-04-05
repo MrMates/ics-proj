@@ -21,6 +21,8 @@ namespace Project.Common.Tests
             if (_seedTestingData)
             {
                 UserSeeds.Seed(modelBuilder);
+                ActivitySeeds.Seed(modelBuilder);
+                ProjectSeeds.Seed(modelBuilder);
             }
         }
     }
