@@ -1,6 +1,6 @@
 ﻿namespace Project.DAL.Mappers
 {
-    internal class UserProjectEntityMapper : IEntityMapper<UserProject>
+    public class UserProjectEntityMapper : IEntityMapper<UserProject>
     {
         public void MapToExistingEntity(UserProject existingEntity, UserProject newEntity)
         {
