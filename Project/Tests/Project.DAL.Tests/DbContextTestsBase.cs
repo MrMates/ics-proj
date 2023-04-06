@@ -13,7 +13,7 @@ namespace Project.DAL.Tests
 
         protected DbContextTestsBase(ITestOutputHelper output)
         {
-            DbContextFactory = new DbContextSqlLiteTestingFactory(GetType().FullName!, seedTestingData: true);
+            DbContextFactory = new DbContextTestingFactory(GetType().FullName!, seedTestingData: true);
             DbContextSUT = DbContextFactory.CreateDbContext();
         }
 
