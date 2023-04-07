@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.Common.Tests", "Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project.BL", "Project.BL\Project.BL.csproj", "{5458F1AE-BB92-4D27-8DDD-24064612EF89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.BL.Tests", "Project.BL.Tests\Project.BL.Tests.csproj", "{B7293234-082C-4594-BE93-4A4955C02099}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project.BL.Tests", "Tests\Project.BL.Tests\Project.BL.Tests.csproj", "{B7293234-082C-4594-BE93-4A4955C02099}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
