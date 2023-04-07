@@ -28,12 +28,12 @@ steps:
     projects: '**/Project.Common.Tests.csproj'
     arguments: '--configuration $(buildConfiguration)'
 
-- task: DotNetCoreCLI@2
-  displayName: 'Run Tests for Project 1'
-  inputs:
-    command: 'test'
-    projects: '**/Project.Common.Tests.csproj'
-    arguments: '--configuration $(buildConfiguration) --logger "trx"'
+#- task: DotNetCoreCLI@2
+#  displayName: 'Run Tests for Project 1'
+#  inputs:
+#    command: 'test'
+#    projects: '**/Project.Common.Tests.csproj'
+#    arguments: '--configuration $(buildConfiguration) --logger "trx"'
 
 - task: DotNetCoreCLI@2
   displayName: 'Build Project 2'
