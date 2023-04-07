@@ -40,7 +40,7 @@ namespace Project.DAL.Migrations
                     b.Property<DateTime>("TimeBegin")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("TimeEnd")
+                    b.Property<DateTime?>("TimeEnd")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("UserId")
@@ -52,7 +52,7 @@ namespace Project.DAL.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Activities", (string)null);
+                    b.ToTable("Activities");
                 });
 
             modelBuilder.Entity("Project.DAL.Project", b =>
@@ -67,7 +67,7 @@ namespace Project.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Projects", (string)null);
+                    b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("Project.DAL.User", b =>
@@ -89,7 +89,7 @@ namespace Project.DAL.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("Project.DAL.UserProject", b =>
@@ -107,7 +107,7 @@ namespace Project.DAL.Migrations
 
                     b.HasIndex("ProjectId");
 
-                    b.ToTable("UserProjects", (string)null);
+                    b.ToTable("UserProjects");
                 });
 
             modelBuilder.Entity("Project.DAL.Activity", b =>
@@ -115,7 +115,7 @@ namespace Project.DAL.Migrations
                     b.HasOne("Project.DAL.Project", null)
                         .WithMany("Activities")
                         .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Project.DAL.User", null)

@@ -8,7 +8,7 @@ using Project.DAL;
 
 namespace Project.BL.Mappers
 {
-    public class ProjectModelMapper : ModelMapperBase<DAL.Project, ProjectListModel, ProjectDetailModel>
+    public class ProjectModelMapper : ModelMapperBase<DAL.Project, ProjectListModel, ProjectDetailModel>, IProjectModelMapper
     {
         public override ProjectListModel MapToListModel(DAL.Project? entity)
             => entity is null

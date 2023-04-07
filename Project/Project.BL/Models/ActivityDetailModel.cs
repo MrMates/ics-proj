@@ -9,6 +9,7 @@ namespace Project.BL.Models
     public record ActivityDetailModel : ModelBase
     {
         public Guid ProjectId { get; set; }
+        public Guid UserId { get; set; }
         public required string ActivityName { get; set; }
         public DateTime TimeBegin { get; set; }
         public DateTime? TimeEnd { get; set; }
@@ -19,6 +20,7 @@ namespace Project.BL.Models
         {
             Id = Guid.NewGuid(),
             ProjectId = Guid.Empty,
+            UserId = Guid.Empty,
             ActivityName = string.Empty,
             ActivityType = string.Empty,
             TimeBegin =DateTime.Now

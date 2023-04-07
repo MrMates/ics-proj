@@ -6,6 +6,7 @@ using Project.DAL.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 using Xunit.Abstractions;
+using Project.BL.Mappers.Interfaces;
 
 namespace Project.BL.Tests;
 
@@ -13,6 +14,9 @@ public class FacadeTestsBase : IAsyncLifetime
 {
     protected FacadeTestsBase(ITestOutputHelper output)
     {
+        XUnitTestOutputConverter converter = new(output);
+        Console.SetOut(converter);
+
         DbContextFactory = new DbContextTestingFactory(GetType().FullName!, seedTestingData: true);
 
         ActivityEntityMapper = new ActivityEntityMapper();
@@ -36,10 +40,10 @@ public class FacadeTestsBase : IAsyncLifetime
     protected UserProjectEntityMapper UserProjectEntityMapper { get; }
 
 
-    protected ActivityModelMapper ActivityModelMapper { get; }
-    protected ProjectModelMapper ProjectModelMapper { get; }
-    protected ProjectCreationReportModelMapper ProjectCreationReportModelMapper { get; }
-    protected UserModelMapper UserModelMapper { get; }
+    protected IActivityModelMapper ActivityModelMapper { get; }
+    protected IProjectModelMapper ProjectModelMapper { get; }
+    protected IProjectCreationReportModelMapper ProjectCreationReportModelMapper { get; }
+    protected IUserModelMapper UserModelMapper { get; }
 
     protected UnitOfWorkFactory UnitOfWorkFactory { get; }
 

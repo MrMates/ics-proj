@@ -46,7 +46,7 @@ namespace Project.DAL.Migrations
                     UserId = table.Column<Guid>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     TimeBegin = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    TimeEnd = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    TimeEnd = table.Column<DateTime>(type: "TEXT", nullable: true),
                     ActivityType = table.Column<string>(type: "TEXT", nullable: false),
                     ActivityDescription = table.Column<string>(type: "TEXT", nullable: true)
                 },
@@ -58,7 +58,7 @@ namespace Project.DAL.Migrations
                         column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Activities_Users_UserId",
                         column: x => x.UserId,

@@ -11,7 +11,7 @@ public class ActivityFacade :
 {
     public ActivityFacade(
         IUnitOfWorkFactory unitOfWorkFactory,
-        ActivityModelMapper modelMapper)
+        IActivityModelMapper modelMapper)
         : base(unitOfWorkFactory, modelMapper)
     {
     }
