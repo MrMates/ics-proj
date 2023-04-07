@@ -1,4 +1,5 @@
-﻿using Project.BL.Models;
+﻿using Project.BL.Mappers.Interfaces;
+using Project.BL.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using DAL = Project.DAL;
 
 namespace Project.BL.Mappers
 {
-    public class ProjectCreationReportModelMapper : ModelMapperBase<DAL.Project, ProjectReportListModel, ProjectCreationDetailModel>
+    public class ProjectCreationReportModelMapper : ModelMapperBase<DAL.Project, ProjectReportListModel, ProjectCreationDetailModel>, IProjectCreationReportModelMapper
     {
         public override ProjectReportListModel MapToListModel(DAL.Project? entity)
             => entity is null

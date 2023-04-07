@@ -8,7 +8,7 @@ using Project.DAL;
 
 namespace Project.BL.Mappers
 {
-    public class UserModelMapper : ModelMapperBase<User, UserListModel, UserDetailModel>
+    public class UserModelMapper : ModelMapperBase<User, UserListModel, UserDetailModel>, IUserModelMapper
     {
         public override UserListModel MapToListModel(User? entity)
             => entity is null

@@ -24,7 +24,9 @@ public class DatabaseContext : DbContext
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<User>()
-            .HasMany(i => i.Activities);
+            .HasMany(i => i.Activities)
+            .WithOne()
+            .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<UserProject>()
             .HasKey(i => new { i.UserId, i.ProjectId });
@@ -40,7 +42,9 @@ public class DatabaseContext : DbContext
             .HasForeignKey(i => i.ProjectId);
 
         modelBuilder.Entity<Project>()
-            .HasMany(i => i.Activities);
+            .HasMany(i => i.Activities)
+            .WithOne()
+            .OnDelete(DeleteBehavior.Restrict);
 
         if(_seedDemoData)
         {

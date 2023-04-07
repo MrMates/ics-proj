@@ -11,7 +11,7 @@ using Project.DAL;
 namespace Project.DAL.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230304192607_InitialMigration")]
+    [Migration("20230407144323_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -43,7 +43,7 @@ namespace Project.DAL.Migrations
                     b.Property<DateTime>("TimeBegin")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("TimeEnd")
+                    b.Property<DateTime?>("TimeEnd")
                         .HasColumnType("TEXT");
 
                     b.Property<Guid>("UserId")
@@ -118,7 +118,7 @@ namespace Project.DAL.Migrations
                     b.HasOne("Project.DAL.Project", null)
                         .WithMany("Activities")
                         .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Project.DAL.User", null)
