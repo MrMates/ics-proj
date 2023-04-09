@@ -21,17 +21,4 @@ public class UserFacade :
         : base(unitOfWorkFactory, UserModelMapper) =>
         _UserModelMapper = UserModelMapper;
 
-    //public async Task<UserDetailModel> SaveAsync(UserDetailModel model, Guid Id)
-    //{
-    //    User entity = _UserModelMapper.MapToEntity(model);
-
-    //    await using IUnitOfWork uow = UnitOfWorkFactory.Create();
-    //    IRepository<User> repository =
-    //        uow.GetRepository<User, UserEntityMapper>();
-
-    //    await repository.InsertAsync(entity);
-    //    await uow.CommitAsync();
-
-    //    return ModelMapper.MapToDetailModel(entity);
-    //}
 }

@@ -28,12 +28,12 @@ steps:
     projects: '**/Project.Common.Tests.csproj'
     arguments: '--configuration $(buildConfiguration)'
 
-- task: DotNetCoreCLI@2
-  displayName: 'Run Tests for Project 1'
-  inputs:
-    command: 'test'
-    projects: '**/Project.Common.Tests.csproj'
-    arguments: '--configuration $(buildConfiguration) --logger "trx"'
+#- task: DotNetCoreCLI@2
+#  displayName: 'Run Tests for Project 1'
+#  inputs:
+#    command: 'test'
+#    projects: '**/Project.Common.Tests.csproj'
+#    arguments: '--configuration $(buildConfiguration) --logger "trx"'
 
 - task: DotNetCoreCLI@2
   displayName: 'Build Project 2'
@@ -48,6 +48,22 @@ steps:
     command: 'test'
     projects: '**/Project.DAL.Tests.csproj'
     arguments: '--configuration $(buildConfiguration) --logger "trx"'
+
+# Build third tests
+- task: DotNetCoreCLI@2
+  displayName: 'Build Project 3'
+  inputs:
+    command: 'build'
+    projects: '**/Project.BL.Tests.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+
+# Run third tests
+- task: DotNetCoreCLI@2
+  displayName: 'Run tests - DL'
+  inputs:
+    command: 'test'
+    projects: '**/Project.BL.Tests.csproj'
+    arguments: '--configuration $(buildConfiguration) --logger "trx"'       
 
 
 

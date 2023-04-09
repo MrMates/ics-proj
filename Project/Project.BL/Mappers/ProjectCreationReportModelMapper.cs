@@ -14,7 +14,7 @@ namespace Project.BL.Mappers
         public override ProjectReportListModel MapToListModel(DAL.Project? entity)
             => entity is null
             ? ProjectReportListModel.Empty
-            : new ProjectReportListModel { Id = entity.Id, ProjectId = entity.Id, ProjectName = entity.Name };
+            : new ProjectReportListModel { Id = entity.Id, ProjectName = entity.Name };
 
         public override ProjectCreationDetailModel MapToDetailModel(DAL.Project entity)
             => entity is null

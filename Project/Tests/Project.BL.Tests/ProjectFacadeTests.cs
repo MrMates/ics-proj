@@ -30,6 +30,7 @@ public sealed class ProjectFacadeTests : FacadeTestsBase
         {
             Activities = new ObservableCollection<ActivityListModel>(),
             Users = new ObservableCollection<UserListModel>(),
+            ProjectName = "Nový projekt"
         };
 
         var returnedModel = await _facadeSUT.SaveAsync(model);
@@ -54,6 +55,7 @@ public sealed class ProjectFacadeTests : FacadeTestsBase
     {
         var model = new ProjectDetailModel()
         {
+            ProjectName = ProjectSeeds.AgencyProject.Name,
             Activities = new ObservableCollection<ActivityListModel>()
             {
                 new()

@@ -18,9 +18,9 @@ namespace Project.BL.Mappers
         public override ProjectDetailModel MapToDetailModel(DAL.Project? entity)
             => entity is null
             ? ProjectDetailModel.Empty
-            : new ProjectDetailModel { };
+            : new ProjectDetailModel {Id = entity.Id, ProjectName = entity.Name };
 
-        public override DAL.Project MapToEntity(ProjectDetailModel model) { return new DAL.Project { Id = model.Id, Name = "asd" }; }
-            //=> new() { /*TODO*/};
+        public override DAL.Project MapToEntity(ProjectDetailModel model) 
+            => new() { Id = model.Id, Name = model.ProjectName};
     }
 }

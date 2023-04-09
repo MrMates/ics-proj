@@ -22,14 +22,12 @@ namespace Project.Common.Tests.Seeds
         };
 
         public static readonly User UserToDelete = DefaultUser with { Id = Guid.Parse("A9336994-C6D9-482E-BEBD-40C7148E5384") };
-        public static readonly User UserToEdit = DefaultUser with { Id = Guid.Parse("086202D3-1862-4DA9-9727-B4C10A043840") };
 
         public static void Seed(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasData(
                 DefaultUser with { Activities = Array.Empty<Activity>(), UserProjects = Array.Empty<UserProject>() },
-                UserToDelete,
-                UserToEdit
+                UserToDelete
             );
         }
     }
