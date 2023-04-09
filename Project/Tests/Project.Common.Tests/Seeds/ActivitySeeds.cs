@@ -25,10 +25,13 @@ namespace Project.Common.Tests.Seeds
             UserId = UserSeeds.DefaultUser.Id
         };
 
+        public static readonly Activity ActivityToDelete = WorkActivity with { Id = Guid.Parse("A9336994-C6D9-482E-BEBD-40C7148E5384") };
+
+
         public static void Seed(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Activity>().HasData(
-                WorkActivity
+                WorkActivity,ActivityToDelete
             );
         }
     }

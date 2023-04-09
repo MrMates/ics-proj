@@ -12,7 +12,18 @@ namespace Project.DAL.Tests
         public DbContextUserTests(ITestOutputHelper output) : base(output) { }
 
         [Fact]
-        public async Task AddNew_User_Persisted()
+        public async Task GetCount_User()
+        {
+            //Act
+            var users = await DbContextSUT.Users
+                .CountAsync();
+
+            //Assert
+            Assert.Equal(2, users);
+        }
+
+        [Fact]
+        public async Task CreateNew_User_Persisted()
         {
             //Arrange
             var entity = UserSeeds.EmptyUser with
@@ -33,17 +44,15 @@ namespace Project.DAL.Tests
         }
 
         [Fact]
-        public async Task Delete_User_Deleted()
+        public async Task GetById_User()
         {
-            //Arrange
-            var entity = UserSeeds.UserToDelete;
-
             //Act
-            DbContextSUT.Users.Remove(entity);
-            await DbContextSUT.SaveChangesAsync();
+            var entity = await DbContextSUT.Users
+                .SingleAsync(i => i.Id == UserSeeds.DefaultUser.Id);
 
             //Assert
-            Assert.False(await DbContextSUT.Users.AnyAsync(i => i.Id == entity.Id));
+            DeepAssert.Equal(
+                UserSeeds.DefaultUser with { UserProjects = Array.Empty<UserProject>(), Activities = Array.Empty<Activity>() }, entity);
         }
 
         [Fact]
@@ -71,15 +80,17 @@ namespace Project.DAL.Tests
         }
 
         [Fact]
-        public async Task GetById_User()
+        public async Task Delete_User_Deleted()
         {
+            //Arrange
+            var entity = UserSeeds.UserToDelete;
+
             //Act
-            var entity = await DbContextSUT.Users
-                .SingleAsync(i => i.Id == UserSeeds.DefaultUser.Id);
+            DbContextSUT.Users.Remove(entity);
+            await DbContextSUT.SaveChangesAsync();
 
             //Assert
-            DeepAssert.Equal(
-                UserSeeds.DefaultUser with { UserProjects = Array.Empty<UserProject>(), Activities = Array.Empty<Activity>() }, entity);
+            Assert.False(await DbContextSUT.Users.AnyAsync(i => i.Id == entity.Id));
         }
     }
 }

@@ -18,10 +18,13 @@ namespace Project.Common.Tests.Seeds
             Name = "Real Agency"
         };
 
+        public static readonly DAL.Project ProjectToDelete = AgencyProject with { Id = Guid.Parse("A9336994-C6D9-482E-BEBD-40C7148E5384") };
+
         public static void Seed(this ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<DAL.Project>().HasData(
-                AgencyProject with { Activities = Array.Empty<Activity>(), UserProjects = Array.Empty<UserProject>()}
+                AgencyProject with { Activities = Array.Empty<Activity>(), UserProjects = Array.Empty<UserProject>()},
+                ProjectToDelete
             );
         }
     }
