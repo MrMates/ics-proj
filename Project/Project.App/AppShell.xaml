@@ -5,11 +5,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Project.App"
     Shell.FlyoutBehavior="Locked"
-    FlyoutBackgroundColor="#475B63">
+    FlyoutBackgroundColor="Red">
 
-    <FlyoutItem Title="Home"
-                Icon="cat.png"
-                >
+    <FlyoutItem Title="Home">
         <Tab>
             <ShellContent
                 
@@ -18,11 +16,14 @@
                 Route="MainPage" />
         </Tab>
     </FlyoutItem>
-    <!--<FlyoutItem Title="Dogs"
-                Icon="dog.png">
+    <FlyoutItem Title="Temp">
         <Tab>
-            <ShellContent ContentTemplate="{DataTemplate views:DogsPage}" />
+            <ShellContent
+                
+                Title="IDUNO"
+                ContentTemplate="{DataTemplate local:TempPage}"
+                Route="TempPage" />
         </Tab>
-    </FlyoutItem>-->
+    </FlyoutItem>
 
 </Shell>

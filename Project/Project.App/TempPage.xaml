@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Project.App.TempPage"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled">
+    
+    <StackLayout VerticalOptions="StartAndExpand"
+                 HorizontalOptions="Center">
+        <Label 
+            Text="Who’s using the app?"
+            VerticalOptions="StartAndExpand"
+            Margin="0,120,0,0"
+            HorizontalOptions="Center"
+            FontSize="Header"
+            FontAttributes="Bold"/>
+        <Button 
+            x:Name="MoveBtn"
+            Text="+"
+            FontSize="85"
+            HorizontalOptions="Center"
+            VerticalOptions="CenterAndExpand"
+            Margin="0, 100, 0, 0"
+            BackgroundColor="#475B63"
+            WidthRequest="85"
+            HeightRequest="85"
+            CornerRadius="100"
+            Padding="0,-7,0,0"
+            Clicked="Button_Clicked">
+        </Button>
+            
+
+        <Label Text="Create user" FontSize="20" TextColor="#475B63" HorizontalOptions="Center" Margin="0, 20, 0, 0"/>
+
+    </StackLayout>
+</ContentPage>
