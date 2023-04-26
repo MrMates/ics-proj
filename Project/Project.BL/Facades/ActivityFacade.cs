@@ -108,4 +108,52 @@ public class ActivityFacade :
 
         return ModelMapper.MapToListModel(entities);
     }
+
+    public async Task<IEnumerable<ActivityListModel>> GetBeginningBefore(DateTime date)
+    {
+        await using IUnitOfWork uow = UnitOfWorkFactory.Create();
+        List<Activity> entities = await uow
+            .GetRepository<Activity, ActivityEntityMapper>()
+            .Get()
+            .Where(activity => activity.TimeBegin < date)
+            .ToListAsync();
+
+        return ModelMapper.MapToListModel(entities);
+    }
+
+    public async Task<IEnumerable<ActivityListModel>> GetBeginningAfter(DateTime date)
+    {
+        await using IUnitOfWork uow = UnitOfWorkFactory.Create();
+        List<Activity> entities = await uow
+            .GetRepository<Activity, ActivityEntityMapper>()
+            .Get()
+            .Where(activity => activity.TimeBegin > date)
+            .ToListAsync();
+
+        return ModelMapper.MapToListModel(entities);
+    }
+
+    public async Task<IEnumerable<ActivityListModel>> GetEndingBefore(DateTime date)
+    {
+        await using IUnitOfWork uow = UnitOfWorkFactory.Create();
+        List<Activity> entities = await uow
+            .GetRepository<Activity, ActivityEntityMapper>()
+            .Get()
+            .Where(activity => activity.TimeEnd < date)
+            .ToListAsync();
+
+        return ModelMapper.MapToListModel(entities);
+    }
+
+    public async Task<IEnumerable<ActivityListModel>> GetEndingAfter(DateTime date)
+    {
+        await using IUnitOfWork uow = UnitOfWorkFactory.Create();
+        List<Activity> entities = await uow
+            .GetRepository<Activity, ActivityEntityMapper>()
+            .Get()
+            .Where(activity => activity.TimeEnd > date)
+            .ToListAsync();
+
+        return ModelMapper.MapToListModel(entities);
+    }
 }
