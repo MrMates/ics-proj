@@ -1,15 +1,13 @@
+using Project.App.ViewModels.User;
+
 namespace Project.App.Views.User;
 
-public partial class UserListPage : ContentPage
+public partial class UserListPage
 {
-    public UserListPage()
+    public UserListPage(UserListViewModel userListViewModel)
+        : base(userListViewModel)
     {
         InitializeComponent();
-    }
-
-    private void Button_Clicked(object sender, EventArgs e)
-    {
-        Shell.Current.Navigation.PushAsync(new UserCreatePage());
     }
 }
 

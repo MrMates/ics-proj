@@ -14,7 +14,7 @@ namespace Project.DAL.Factories
         public DbContextSqlLiteFactory(string databaseName, bool seedTestingData = false)
         {
             _seedTestingData = seedTestingData;
-            _contextOptionsBuilder.UseSqlite($"Data Source{databaseName};Cache=Shared");
+            _contextOptionsBuilder.UseSqlite($"Data Source={databaseName};Cache=Shared");
         }
 
         public DatabaseContext CreateDbContext()
