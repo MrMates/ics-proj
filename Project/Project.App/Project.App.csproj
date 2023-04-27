@@ -49,4 +49,9 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\Project.BL\Project.BL.csproj" />
+	  <ProjectReference Include="..\Project.DAL\Project.DAL.csproj" />
+	</ItemGroup>
+
 </Project>

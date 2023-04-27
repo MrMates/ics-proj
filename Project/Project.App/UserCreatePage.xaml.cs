@@ -1,13 +1,21 @@
-
-using Microsoft.Maui.Controls;
-
-namespace Project.App
+namespace Project.App   
 {
+
     public partial class UserCreatePage : ContentPage
     {
+        private string firstName;
+        private string SurName;
         public UserCreatePage()
         {
             InitializeComponent();
+        }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            firstName = FirstNameEntry.Text;
+            SurName = SurNameEntry.Text;
+            
         }
         private async void OnTapped(object sender, EventArgs e)
         {
@@ -19,7 +27,5 @@ namespace Project.App
                 frame.BackgroundColor = Color.FromRgba(0, 0, 0, 0);
             }
         }
-
-
     }
 }

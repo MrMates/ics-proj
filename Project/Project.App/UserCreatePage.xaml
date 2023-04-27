@@ -10,7 +10,7 @@
     <VerticalStackLayout>
         <StackLayout 
             VerticalOptions="FillAndExpand"
-            Margin="0, 250, 0, 0">
+            Margin="0, 150, 0, 0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -28,13 +28,15 @@
                     HeightRequest="200" 
                     CornerRadius="100"
                     Padding="10"
-                    BackgroundColor="Gray"
+                    BackgroundColor="#D9D9D9"
+                    BorderColor="#E0E0E0"
                     HorizontalOptions="Center"
                     VerticalOptions="Center">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnTapped"/>
                     </Frame.GestureRecognizers>
-                    <Image x:Name="profilePic" Source="placeholder.png"
+                    <Image x:Name="profilePic" 
+                        Source="placeholder.png"
                         Aspect="AspectFill"
                         VerticalOptions="FillAndExpand"
                         HorizontalOptions="FillAndExpand"/>
@@ -48,8 +50,8 @@
                     Text="Profile picture" 
                     HorizontalOptions="Center" Margin="0, 20, 0, 0"/>
                 <StackLayout Grid.Row="0" Grid.Column="1" VerticalOptions="Center">
-                    <Entry Placeholder="Name" WidthRequest="350" Margin="0, 25, 0, 0"/>
-                    <Entry Placeholder="Surname" WidthRequest="350" Margin="0, 25, 0, 0"/>
+                    <Entry x:Name="FirstNameEntry" Placeholder="Name" WidthRequest="350" Margin="-400, 25, 0, 0"/>
+                    <Entry x:Name="SurNameEntry" Placeholder="Surname" WidthRequest="350" Margin="-400, 25, 0, 0"/>
                 </StackLayout>
             </Grid>
             <Button 
@@ -59,7 +61,8 @@
                 FontAttributes="Bold"
                 BackgroundColor="#475B63"
                 WidthRequest="250"
-                HorizontalOptions="Center"/>
+                HorizontalOptions="Center"
+                Margin="0, 125, 0, 0"/>
         </StackLayout>
     </VerticalStackLayout>
 
