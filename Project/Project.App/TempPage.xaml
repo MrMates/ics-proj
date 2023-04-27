@@ -18,6 +18,7 @@
             x:Name="MoveBtn"
             Text="+"
             FontSize="85"
+            FontAttributes="Bold"
             HorizontalOptions="Center"
             VerticalOptions="CenterAndExpand"
             Margin="0, 100, 0, 0"
