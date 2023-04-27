@@ -54,4 +54,14 @@
 	  <ProjectReference Include="..\Project.DAL\Project.DAL.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="ViewModels\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Views\User\UserListPage.xaml.cs">
+	    <DependentUpon>UserListPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
 </Project>

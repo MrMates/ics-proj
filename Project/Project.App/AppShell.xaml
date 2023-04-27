@@ -3,9 +3,9 @@
     x:Class="Project.App.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:u="clr-namespace:Project.App.Views.User"
     xmlns:local="clr-namespace:Project.App"
-    Shell.FlyoutBehavior="Locked"
-    FlyoutBackgroundColor="Red">
+    Shell.FlyoutBehavior="Locked">
 
     <FlyoutItem Title="Home">
         <Tab>
@@ -16,13 +16,13 @@
                 Route="MainPage" />
         </Tab>
     </FlyoutItem>
-    <FlyoutItem Title="Temp">
+    <FlyoutItem Title="Users (temp)">
         <Tab>
             <ShellContent
                 
-                Title="IDUNO"
-                ContentTemplate="{DataTemplate local:TempPage}"
-                Route="TempPage" />
+                Title="Users (temp)"
+                ContentTemplate="{DataTemplate u:UserListPage}"
+                Route="UserList" />
         </Tab>
     </FlyoutItem>
 
