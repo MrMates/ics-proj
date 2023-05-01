@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Project.App"
+             xmlns:viewModels="clr-namespace:Project.App.ViewModels.User"
+             xmlns:views="clr-namespace:Project.App.Views"
+             xmlns:models="clr-namespace:Project.BL.Models;assembly=Project.BL"
+             x:Class="Project.App.Views.User.UserListPage"
+             Shell.NavBarIsVisible="False"
+             Shell.FlyoutBehavior="Disabled"
+             x:DataType="viewModels:UserListViewModel">
+
+    <StackLayout VerticalOptions="StartAndExpand"
+                 HorizontalOptions="Center"
+                 Spacing="100">
+        <Label 
+            Text="Who’s using the app?"
+            VerticalOptions="StartAndExpand"
+            Margin="0,120,0,0"
+            HorizontalOptions="Center"
+            FontSize="Header"
+            FontAttributes="Bold"/>
+
+        <HorizontalStackLayout HorizontalOptions="CenterAndExpand"
+                               Spacing="50">
+            <CollectionView ItemsSource="{Binding Users}" VerticalOptions="FillAndExpand">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:UserListModel">
+                        <Grid RowDefinitions="Auto, *">
+                            <Image Grid.Row="0"
+                                       HorizontalOptions="Fill" VerticalOptions="Fill"
+                                       Aspect="AspectFill"
+                                       WidthRequest="100" HeightRequest="100"
+                                       Source="{Binding UserPhotoUrl, TargetNullValue='recipe_placeholder.jpg'}" />
+
+                            <BoxView Grid.Row="0"
+                                         Opacity="0.25"
+                                         Color="White" />
+
+                            <Label Grid.Row="1"
+                                       Margin="22,12"
+                                       FontSize="20" LineBreakMode="WordWrap"
+                                       Text="{Binding UserFirstName}"
+                                       TextColor="#475B63" VerticalOptions="End" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Grid>
+                <Button 
+                    x:Name="MoveBtn"
+                    Text="+"
+                    FontSize="85"
+                    FontAttributes="Bold"
+                    HorizontalOptions="Center"
+                    VerticalOptions="CenterAndExpand"
+                    Margin="0, -50, 0, 0"
+                    BackgroundColor="#475B63"
+                    WidthRequest="85"
+                    HeightRequest="85"
+                    CornerRadius="100"
+                    Padding="0,-7,0,0"
+                    Command="{Binding GoToCreateUserCommand}">
+                </Button>
+
+
+                <Label Text="Create user" FontSize="20" TextColor="#475B63" HorizontalOptions="Center" Margin="0, 111, 0, 0"/>
+            </Grid>
+            
+        </HorizontalStackLayout>
+        
+
+    </StackLayout>
+</views:ContentPageBase>
