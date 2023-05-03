@@ -26,6 +26,10 @@ namespace Project.App
         [RelayCommand]
         private async Task GoToProjectsAsync()
             => await _navigationService.GoToAsync<ProjectListViewModel>();
+        
+        [RelayCommand]
+        private async Task GoToProjectReportsAsync()
+            => await _navigationService.GoToAsync<ProjectReportListViewModel>();
 
     }
 }
