@@ -33,4 +33,6 @@
     </FlyoutItem>
 
     <MenuItem Text="asdasd" Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToUsersCommand}" />
+    <MenuItem Text="Projects" Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToProjectsCommand}" />
+
 </Shell>
