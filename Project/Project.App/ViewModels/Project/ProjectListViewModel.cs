@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 using Project.BL.Facades;
 using Project.App.Services;
 using Project.DAL;
+using Project.DAL.Seeds;
 
 namespace Project.App.ViewModels.Project;
 
@@ -20,7 +21,7 @@ public partial class ProjectListViewModel : ViewModelBase
         INavigationService navigationService)
         : base(messengerService)
     {
-        _projectFacade = projectFacade;
+        _projectFacade = projectFacade; 
         _navigationService = navigationService;
     }
 
