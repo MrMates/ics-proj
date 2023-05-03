@@ -46,6 +46,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Resources\Raw\Resources.xaml.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Remove="Resources\Raw\Resources.xaml" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="7.0.4" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
@@ -63,6 +71,12 @@
 	  <Compile Update="Views\User\UserListPage.xaml.cs">
 	    <DependentUpon>UserListPage.xaml</DependentUpon>
 	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiAsset Update="Resources\Raw\Resources.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiAsset>
 	</ItemGroup>
 
 	<ItemGroup>

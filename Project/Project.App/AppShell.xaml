@@ -17,7 +17,21 @@
                   BackgroundColor="#729B79"
                   HeightRequest="75">
                 <!-- TODO User pfp -->
-                <Image/>
+                <Border
+                    WidthRequest="35"
+                    HeightRequest="35">
+                    <Border.StrokeShape>
+                        <Ellipse></Ellipse>
+                    </Border.StrokeShape>
+                    <Image
+                    HorizontalOptions="Fill" VerticalOptions="Fill"
+                    Aspect="AspectFill"
+                    WidthRequest="35" HeightRequest="35"
+                    Source="{DynamicResource userPic}">
+                    </Image>
+                </Border>
+                
+                
                 <Label
                     FontSize="Small"
                     Grid.Column="1"
