@@ -6,6 +6,7 @@
              xmlns:views="clr-namespace:Project.App.Views"
              xmlns:models="clr-namespace:Project.BL.Models;assembly=Project.BL"
              x:Class="Project.App.Views.User.UserCreatePage"
+             Title="UserCreatePage"
              Shell.NavBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled"
              x:DataType="viewModels:UserCreateViewModel">
