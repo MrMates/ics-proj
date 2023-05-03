@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Project.App"
+             xmlns:viewModels="clr-namespace:Project.App.ViewModels.Project"
+             xmlns:views="clr-namespace:Project.App.Views"
+             xmlns:models="clr-namespace:Project.BL.Models;assembly=Project.BL"
+             x:Class="Project.App.Views.Project.ProjectListPage"
+             x:DataType="viewModels:ProjectListViewModel">
+    
+    
+    <!--CONTENT-->
+    <StackLayout BackgroundColor="White">
+        <Border
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 0,0,20,20"
+                Background="#D9D9D9"
+                Padding="16,8"
+                HorizontalOptions="Center">
+            <StackLayout Padding="20,10,20,0">
+                <FlexLayout JustifyContent="SpaceBetween">
+                    <Label  VerticalOptions="Center" 
+                            HorizontalOptions="Center" 
+                            TextColor="#2E2C2F"
+                            FontSize="25"
+                            FontAttributes="Bold">Projects</Label>
+                    <Button Text="+ New project"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            TextColor="#F3E8EE"
+                            BackgroundColor="#729B79"
+                            FontSize="16"
+                            FontAttributes="Bold"
+                    />
+                </FlexLayout>
+
+                <FlexLayout HorizontalOptions="Start" WidthRequest="400" JustifyContent="SpaceBetween" AlignItems="Start" Margin="0,50,0,20">
+                    <Image HorizontalOptions="Fill" 
+                           VerticalOptions="Fill"
+                           Aspect="AspectFill"
+                           WidthRequest="25"
+                           HeightRequest="25"
+                           Source="filter_icon.png"/>
+                    <Label FontSize="16" TextColor="#2E2C2F" Grid.Column="1">Name</Label>
+                    <Label FontSize="16" TextColor="#2E2C2F" Grid.Column="2">Time</Label>
+                    <Label FontSize="16" TextColor="#2E2C2F" Grid.Column="3">Users</Label>
+                </FlexLayout>
+                <!--<HorizontalStackLayout Margin="0,50,0,20">
+                    
+                </HorizontalStackLayout>-->
+
+            </StackLayout>
+        </Border>
+
+        <Border>
+            <CollectionView ItemsSource="{Binding Projects}" VerticalOptions="FillAndExpand">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:ProjectListModel">
+                        <Label TextColor="Black" Text="{Binding ProjectName}"></Label>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Border>
+    </StackLayout>
+    <!--CONTENT END--> 
+</views:ContentPageBase>
+    

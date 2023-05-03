@@ -1,6 +1,8 @@
 ﻿using Project.App.Models;
 using Project.App.ViewModels;
+using Project.App.ViewModels.Project;
 using Project.App.ViewModels.User;
+using Project.App.Views.Project;
 using Project.App.Views.User;
 
 namespace Project.App.Services;
@@ -11,6 +13,7 @@ public class NavigationService : INavigationService
     {
         new("//users", typeof(UserListPage), typeof(UserListViewModel)),
         new("//users/create", typeof(UserCreatePage), typeof(UserCreateViewModel)),
+        new("//projects", typeof(ProjectListPage), typeof(ProjectListViewModel)),
     };
 
     public async Task GoToAsync<TViewModel>()
