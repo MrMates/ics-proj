@@ -67,6 +67,7 @@
                 WidthRequest="250"
                 HorizontalOptions="Center"
                 Margin="0, 125, 0, 0"
+                Command="{Binding Create_User_HandlerCommand}"
                 />
         </StackLayout>
     </VerticalStackLayout>

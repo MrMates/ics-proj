@@ -24,7 +24,6 @@ public partial class UserCreateViewModel : ViewModelBase
     {
         _userFacade = userFacade;
         _navigationService = navigationService;
-        _navigationService.SendBackButtonPressed();
     }
 
     [RelayCommand]
