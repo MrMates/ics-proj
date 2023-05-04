@@ -131,6 +131,26 @@
                         BackgroundColor="Transparent"
                         Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToUsersCommand}"/>
                 </Grid>
+
+                <Grid ColumnDefinitions="2*, 8*"
+                      HeightRequest="30">
+                    <Image
+                        VerticalOptions="Center"
+                        HeightRequest="35"
+                        Source="timer.png"/>
+                    <Label 
+                        FontSize="Small"
+                        Grid.Column="1"
+                        Text="project detail (temp)"
+                        TextColor="#F3E8EE"
+                        VerticalTextAlignment="Center"/>
+                    <Button
+                        BorderWidth="0"
+                        Grid.ColumnSpan="2"
+                        CornerRadius="0"
+                        BackgroundColor="Transparent"
+                        Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToProjectDetailCommand}"/>
+                </Grid>
             </VerticalStackLayout>
             
             <Grid 

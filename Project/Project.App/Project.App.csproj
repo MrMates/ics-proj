@@ -83,6 +83,9 @@
 	  <MauiXaml Update="Views\ContentPageBase.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Project\ProjectDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Project\ProjectListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
