@@ -1,12 +1,6 @@
-﻿using CommunityToolkit.Mvvm.Messaging;
-using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Project.App.Services;
-using Project.App.ViewModels;
-using Project.App.Views;
 using Project.BL;
-using System.Reflection;
 
 namespace Project.App
 {

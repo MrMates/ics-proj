@@ -7,32 +7,169 @@
     xmlns:local="clr-namespace:Project.App"
     x:Name="AppShellRoot"
     Shell.FlyoutBehavior="Locked">
+    
+    <Shell.FlyoutContent>
+        <Grid
+            BackgroundColor="#475B63"
+            RowDefinitions="*,3*,2*">
+        <!-- MENU BUTTON START -->
+            <Grid ColumnDefinitions="2*, 8*"
+                  BackgroundColor="#729B79"
+                  HeightRequest="75">
+                <!-- TODO User pfp -->
+                <Border
+                    WidthRequest="35"
+                    HeightRequest="35">
+                    <Border.StrokeShape>
+                        <Ellipse></Ellipse>
+                    </Border.StrokeShape>
+                    <Image
+                    HorizontalOptions="Fill" VerticalOptions="Fill"
+                    Aspect="AspectFill"
+                    WidthRequest="35" HeightRequest="35"
+                    Source="{DynamicResource userPic}">
+                    </Image>
+                </Border>
+                
+                
+                <Label
+                    FontSize="Small"
+                    Grid.Column="1"
+                    Text="User Profile"
+                    TextColor="#F3E8EE"
+                    VerticalTextAlignment="Center"/>
+            </Grid>
+            <Button
+                CornerRadius="0"
+                HeightRequest="75"
+                BackgroundColor="Transparent"
+                Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToUsersCommand}"/>
+        <!-- MENU BUTTON END -->
+
+
+            <VerticalStackLayout
+                Spacing="30"
+                VerticalOptions="Center"
+                Grid.Row="1">
+                
+                <Grid ColumnDefinitions="2*, 8*"
+                      HeightRequest="30">
+                    <Image
+                        VerticalOptions="Center"
+                        HeightRequest="35"
+                        Source="timer.png"/>
+                    <Label 
+                        FontSize="Small"
+                        Grid.Column="1"
+                        Text="Timer"
+                        TextColor="#F3E8EE"
+                        VerticalTextAlignment="Center"/>
+                    <Button
+                        BorderWidth="0"
+                        Grid.ColumnSpan="2"
+                        CornerRadius="0"
+                        BackgroundColor="Transparent"
+                        Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToUsersCommand}"/>
+                </Grid>
+
+                <Grid ColumnDefinitions="2*, 8*"
+                      HeightRequest="30">
+                    <Image
+                        VerticalOptions="Center"
+                        HeightRequest="35"
+                        Source="reports.png"/>
+                    <Label
+                        FontSize="Small"
+                        Grid.Column="1"
+                        Text="Reports"
+                        TextColor="#F3E8EE"
+                        VerticalTextAlignment="Center"/>
+                    <Button
+                        BorderWidth="0"
+                        Grid.ColumnSpan="2"
+                        CornerRadius="0"
+                        BackgroundColor="Transparent"
+                        Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToProjectReportsCommand}"/>
+                </Grid>
+
+                <Grid ColumnDefinitions="2*, 8*"
+                      HeightRequest="30">
+                    <Image
+                        VerticalOptions="Center"
+                        HeightRequest="35"
+                        Source="projects.png"/>
+                    <Label
+                        FontSize="Small"
+                        Grid.Column="1"
+                        Text="Projects"
+                        TextColor="#F3E8EE"
+                        VerticalTextAlignment="Center"/>
+                    <Button
+                        BorderWidth="0"
+                        Grid.ColumnSpan="2"
+                        CornerRadius="0"
+                        BackgroundColor="Transparent"
+                        Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToProjectsCommand}"/>
+                </Grid>
+
+                <Grid ColumnDefinitions="2*, 8*"
+                      HeightRequest="30">
+                    <Image
+                        VerticalOptions="Center"
+                        HeightRequest="35"
+                        Source="projects.png"/>
+                    <Label
+                        FontSize="Small"
+                        Grid.Column="1"
+                        Text="Users (temp)"
+                        TextColor="#F3E8EE"
+                        VerticalTextAlignment="Center"/>
+                    <Button
+                        BorderWidth="0"
+                        Grid.ColumnSpan="2"
+                        CornerRadius="0"
+                        BackgroundColor="Transparent"
+                        Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToUsersCommand}"/>
+                </Grid>
+            </VerticalStackLayout>
+            
+            <Grid 
+                VerticalOptions="End"
+                Margin="0,0,0,20"
+                Grid.Row="2"
+                ColumnDefinitions="2*, 8*"
+                      HeightRequest="30">
+                <Image
+                        VerticalOptions="Center"
+                        HeightRequest="35"
+                        Source="log_out.png"/>
+                <Label
+                        FontSize="Small"
+                        Grid.Column="1"
+                        Text="Log out"
+                        TextColor="#F3E8EE"
+                        VerticalTextAlignment="Center"/>
+                <Button
+                        BorderWidth="0"
+                        Grid.ColumnSpan="2"
+                        CornerRadius="0"
+                        BackgroundColor="Transparent"
+                        Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToUsersCommand}"/>
+            </Grid>
+        </Grid>
+        
+    </Shell.FlyoutContent>
 
     <Shell.BackButtonBehavior>
-        <BackButtonBehavior Command="{Binding BackCommand}"
-                            IconOverride="back.png" />
+        <BackButtonBehavior Command="{Binding BackCommand}"/>
     </Shell.BackButtonBehavior>
 
     <FlyoutItem Title="Home">
         <Tab>
             <ShellContent
-                
                 Title="Home"
                 ContentTemplate="{DataTemplate local:MainPage}"
                 Route="MainPage" />
         </Tab>
     </FlyoutItem>
-    <FlyoutItem Title="Users (temp)">
-        <Tab>
-            <ShellContent
-                
-                Title="Users (temp)"
-                ContentTemplate="{DataTemplate u:UserListPage}"
-                Route="UserList" />
-        </Tab>
-    </FlyoutItem>
-
-    <MenuItem Text="asdasd" Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToUsersCommand}" />
-    <MenuItem Text="Projects" Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToProjectsCommand}" />
-
 </Shell>
