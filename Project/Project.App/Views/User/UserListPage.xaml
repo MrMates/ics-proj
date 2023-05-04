@@ -18,24 +18,25 @@
             VerticalOptions="StartAndExpand"
             Margin="0,120,0,0"
             HorizontalOptions="Center"
-            FontSize="Header"
+            FontSize="70"
             FontAttributes="Bold"/>
 
         <HorizontalStackLayout HorizontalOptions="CenterAndExpand"
                                Spacing="50">
-            <CollectionView ItemsSource="{Binding Users}" VerticalOptions="FillAndExpand">
+            <CollectionView ItemsSource="{Binding Users}" VerticalOptions="FillAndExpand" HorizontalOptions="StartAndExpand">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:UserListModel">
                         <Grid RowDefinitions="Auto, *" ColumnDefinitions="200">
-                            <Image Grid.Row="0"
-                                       HorizontalOptions="Fill" VerticalOptions="Fill"
-                                       Aspect="AspectFill"
-                                       WidthRequest="100" HeightRequest="100"
-                                       Source="{Binding UserPhotoUrl, TargetNullValue='recipe_placeholder.jpg'}" />
-
+                            
+                        <Image Grid.Row="0"
+                               HorizontalOptions="Fill" VerticalOptions="Fill"
+                               Aspect="AspectFill"
+                               WidthRequest="130" HeightRequest="130"
+                               Source="{Binding UserPhotoUrl, TargetNullValue='recipe_placeholder.jpg'}"/>
+       
                             <BoxView Grid.Row="0"
                                          Opacity="0.25"
                                          Color="White" />
@@ -50,25 +51,25 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Grid>
+            <Grid WidthRequest="200">
                 <Button 
                     x:Name="MoveBtn"
                     Text="+"
-                    FontSize="85"
+                    FontSize="95"
                     FontAttributes="Bold"
                     HorizontalOptions="Center"
                     VerticalOptions="CenterAndExpand"
                     Margin="0, -50, 0, 0"
                     BackgroundColor="#475B63"
-                    WidthRequest="85"
-                    HeightRequest="85"
+                    WidthRequest="100"
+                    HeightRequest="100"
                     CornerRadius="100"
                     Padding="0,-7,0,0"
                     Command="{Binding GoToCreateUserCommand}">
                 </Button>
 
 
-                <Label Text="Create user" FontSize="20" TextColor="#475B63" HorizontalOptions="Center" Margin="0, 111, 0, 0"/>
+                <Label Text="Create user" FontSize="20" TextColor="#475B63" HorizontalOptions="Center" Margin="0, 140, 0, 0"/>
             </Grid>
             
         </HorizontalStackLayout>

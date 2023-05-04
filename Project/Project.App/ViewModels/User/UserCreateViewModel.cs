@@ -3,6 +3,7 @@ using Project.App.Services;
 using Project.BL.Facades;
 using CommunityToolkit.Mvvm.Input;
 using System.Diagnostics;
+using Microsoft.Maui.ApplicationModel;
 
 namespace Project.App.ViewModels.User;
 
@@ -53,5 +54,7 @@ public partial class UserCreateViewModel : ViewModelBase
             await _navigationService.GoToAsync("//users");
         }
     }
+    
+
 
 }
