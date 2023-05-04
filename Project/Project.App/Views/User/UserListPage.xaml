@@ -24,9 +24,12 @@
         <HorizontalStackLayout HorizontalOptions="CenterAndExpand"
                                Spacing="50">
             <CollectionView ItemsSource="{Binding Users}" VerticalOptions="FillAndExpand">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal"/>
+                </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:UserListModel">
-                        <Grid RowDefinitions="Auto, *">
+                        <Grid RowDefinitions="Auto, *" ColumnDefinitions="200">
                             <Image Grid.Row="0"
                                        HorizontalOptions="Fill" VerticalOptions="Fill"
                                        Aspect="AspectFill"
@@ -41,7 +44,7 @@
                                        Margin="22,12"
                                        FontSize="20" LineBreakMode="WordWrap"
                                        Text="{Binding UserFirstName}"
-                                       TextColor="#475B63" VerticalOptions="End" />
+                                       TextColor="#475B63" VerticalOptions="Center" HorizontalOptions="Center"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

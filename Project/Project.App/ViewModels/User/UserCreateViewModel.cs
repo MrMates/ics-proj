@@ -2,6 +2,7 @@
 using Project.App.Services;
 using Project.BL.Facades;
 using CommunityToolkit.Mvvm.Input;
+using System.Diagnostics;
 
 namespace Project.App.ViewModels.User;
 
@@ -14,6 +15,8 @@ public partial class UserCreateViewModel : ViewModelBase
 
     public string FirstName { get; set; }
     public string SurName { get; set; }
+    public Color FrameBackgroundColor { get; set; }
+    public string ImageFileString { get; set; }
 
 
     public UserCreateViewModel(
@@ -29,12 +32,16 @@ public partial class UserCreateViewModel : ViewModelBase
     [RelayCommand]
     private async Task PickPhoto()
     {
+        FrameBackgroundColor = Color.FromRgba(0, 255, 0, 0);
+        //Debug.WriteLine(FrameBackgroundColor.ToString());
         var result = await MediaPicker.PickPhotoAsync();
         if (result != null)
         {
             var imageSource = ImageSource.FromFile(result.FullPath);
+            ImageFileString = imageSource.ToString();
+            ImageFileString = ImageFileString.Replace("File: ", "");
             //profilePic.Source = imageSource;
-            //frame.BackgroundColor = Color.FromRgba(0, 0, 0, 0);
+            //_frame.BackgroundColor = Color.FromRgba(0, 0, 0, 0);
         }
     }
     [RelayCommand]
@@ -42,7 +49,8 @@ public partial class UserCreateViewModel : ViewModelBase
     {
         if (FirstName != null && SurName != null)   
         {
-            await _userFacade.SaveAsync(new BL.Models.UserDetailModel { UserFirstName = FirstName, UserLastName = SurName });
+            await _userFacade.SaveAsync(new BL.Models.UserDetailModel { UserFirstName = FirstName, UserLastName = SurName, UserPhotoUrl = ImageFileString });
+            await _navigationService.GoToAsync("//users");
         }
     }
 
