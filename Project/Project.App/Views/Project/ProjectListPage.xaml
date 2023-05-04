@@ -19,13 +19,12 @@
                 HorizontalOptions="Center">
             <StackLayout
                 Padding="20,10,20,0">
-                <HorizontalStackLayout HorizontalOptions="CenterAndExpand" >
+                <FlexLayout JustifyContent="SpaceBetween"  HorizontalOptions="FillAndExpand">
                     <Label  VerticalOptions="Center" 
                             HorizontalOptions="Center" 
                             TextColor="#2E2C2F"
                             FontSize="25"
                             FontAttributes="Bold">Projects</Label>
-                    <!--TODO: Button proklik na Create Project-->
                     <Button Text="+ New project"
                             VerticalOptions="Center"
                             HorizontalOptions="Center"
@@ -33,8 +32,9 @@
                             BackgroundColor="#729B79"
                             FontSize="16"
                             FontAttributes="Bold"
-                    />
-                </HorizontalStackLayout>
+                            Command="{Binding GoToCreateProjectCommand}"
+                        />
+                </FlexLayout>
 
                 <FlexLayout HorizontalOptions="Start" WidthRequest="400" JustifyContent="SpaceBetween" AlignItems="Start" Margin="0,50,0,20">
                     <Image HorizontalOptions="Fill" 
@@ -62,39 +62,35 @@
                 <Label TextColor="#2E2C2F" FontSize="17" Text="Project Name" FontAttributes="Bold" Grid.Column="0" />
                 <Label TextColor="#2E2C2F" FontSize="17" Text="Time Spent" FontAttributes="Bold" Grid.Column="1" />
                 <Label TextColor="#2E2C2F" FontSize="17" Text="Users" FontAttributes="Bold" Grid.Column="2" />
+                <StackLayout HeightRequest="2"  Grid.ColumnSpan="4" BackgroundColor="#2E2C2F" Margin="0,35,0,0" Opacity="0.7" />
             </Grid>
             <ScrollView VerticalOptions="FillAndExpand">
                 <CollectionView ItemsSource="{Binding Projects}" VerticalOptions="FillAndExpand">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:ProjectListModel">
-                            <Border
-                                StrokeThickness="1"
-                                StrokeShape="Rectangle"
-                                Background="#D9D9D9"
-                                Padding="16,8"
-                                Margin="0,5,0,5"
-                                HorizontalOptions="Center">
-                                <Grid Margin="0,20,0,20">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Label VerticalOptions="Center" TextColor="Black" Text="{Binding ProjectName}" Grid.Column="0" />
-                                    <Label VerticalOptions="Center" TextColor="Black" Text="{Binding ProjectName}" Grid.Column="1" />
-                                    <Label VerticalOptions="Center" TextColor="Black" Text="{Binding ProjectName}" Grid.Column="2" />
-                                    <Button Text="Join project"
+                            <Grid Margin="0,10,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <StackLayout HeightRequest="1"  Grid.ColumnSpan="4" BackgroundColor="#2E2C2F" Margin="0,-100,0,0" Opacity="0.2" />
+                                <Label VerticalOptions="Center" TextColor="Black" Text="{Binding ProjectName}" Grid.Column="0" />
+                                <Label VerticalOptions="Center" TextColor="Black" Text="{Binding ProjectName}" Grid.Column="1" />
+                                <Label VerticalOptions="Center" TextColor="Black" Text="{Binding ProjectName}" Grid.Column="2" />
+                                <Button Text="Join project"
                                     VerticalOptions="Center"
                                     HorizontalOptions="Center"
                                     TextColor="#F3E8EE"
                                     BackgroundColor="#729B79"
-                                    FontSize="16"
+                                    FontSize="14"
                                     FontAttributes="Bold"
-                                    Grid.Column="3"                                    
+                                    Grid.Column="3"            
+                                    <!--TODO: Připojení uivatele do projektu-->
                                     />
-                                </Grid>
-                            </Border>
+                                <StackLayout HeightRequest="1"  Grid.ColumnSpan="4" BackgroundColor="#2E2C2F" Margin="0,100,0,0" Opacity="0.2" />
+                            </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

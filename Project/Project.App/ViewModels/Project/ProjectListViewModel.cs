@@ -21,7 +21,7 @@ public partial class ProjectListViewModel : ViewModelBase
         INavigationService navigationService)
         : base(messengerService)
     {
-        _projectFacade = projectFacade; 
+        _projectFacade = projectFacade;
         _navigationService = navigationService;
     }
 
@@ -30,5 +30,11 @@ public partial class ProjectListViewModel : ViewModelBase
         await base.LoadDataAsync();
 
         Projects = await _projectFacade.GetAsync();
+    }
+
+    [RelayCommand]
+    private async Task GoToCreateProject()
+    {
+        await _navigationService.GoToAsync("/create");
     }
 }

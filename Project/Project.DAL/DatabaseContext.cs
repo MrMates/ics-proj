@@ -50,6 +50,7 @@ public class DatabaseContext : DbContext
         if(_seedDemoData)
         {
             UserSeeds.Seed(modelBuilder);
+            ActivitySeeds.Seed(modelBuilder);
             ProjectSeeds.Seed(modelBuilder);
         }
 
