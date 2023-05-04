@@ -11,8 +11,8 @@ using Project.DAL;
 namespace Project.DAL.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20230407144323_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20230504114236_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -118,8 +118,7 @@ namespace Project.DAL.Migrations
                     b.HasOne("Project.DAL.Project", null)
                         .WithMany("Activities")
                         .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Project.DAL.User", null)
                         .WithMany("Activities")

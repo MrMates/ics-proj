@@ -6,7 +6,7 @@ namespace Project.DAL
     public record Activity : IEntity
     {
         public required Guid Id { get; set; }
-        public Guid ProjectId { get; set; }
+        public Guid? ProjectId { get; set; }
         public required Guid UserId { get; set; }
         public required string Name { get; set; }
         public DateTime TimeBegin { get; set; }
