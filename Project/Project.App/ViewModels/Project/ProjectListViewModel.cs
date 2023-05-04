@@ -21,7 +21,7 @@ public partial class ProjectListViewModel : ViewModelBase
         INavigationService navigationService)
         : base(messengerService)
     {
-        _projectFacade = projectFacade; 
+        _projectFacade = projectFacade;
         _navigationService = navigationService;
     }
 

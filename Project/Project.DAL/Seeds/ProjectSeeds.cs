@@ -41,7 +41,7 @@ namespace Project.DAL.Seeds
         {
             Id = Guid.Parse("188BFF5B-FCC8-452E-A20E-AF0DEB0DDD1B"),
             Name = "Profit",
-            //Activities = new List<Activity> { Seeds.ActivitySeeds.DefaultActivity }
+            Activities = new List<Activity> { Seeds.ActivitySeeds.DefaultActivity }
         };
 
         public static void Seed(this ModelBuilder modelBuilder) =>
