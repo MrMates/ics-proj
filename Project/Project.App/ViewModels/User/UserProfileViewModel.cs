@@ -1,12 +1,12 @@
-﻿using Project.App.Services;
+using Microsoft.Maui.Controls;
+using Project.App.Services;
 using Project.BL.Facades;
 using CommunityToolkit.Mvvm.Input;
-using Project.DAL.Seeds;
 
 namespace Project.App.ViewModels.User;
 
 
-public partial class UserCreateViewModel : ViewModelBase
+public partial class UserProfileViewModel : ViewModelBase
 {
     private readonly IUserFacade _userFacade;
     private readonly INavigationService _navigationService;
@@ -18,7 +18,7 @@ public partial class UserCreateViewModel : ViewModelBase
     public string ImageFileString { get; set; }
 
 
-    public UserCreateViewModel(
+    public UserProfileViewModel(
         IUserFacade userFacade,
         IMessengerService messengerService,
         INavigationService navigationService)
@@ -46,16 +46,13 @@ public partial class UserCreateViewModel : ViewModelBase
     [RelayCommand]
     private async Task Create_User_Handler()
     {
-        if (FirstName != null && SurName != null)   
+        if (FirstName != null && SurName != null)
         {
             await _userFacade.SaveAsync(new BL.Models.UserDetailModel { UserFirstName = FirstName, UserLastName = SurName, UserPhotoUrl = ImageFileString });
-            Shell.Current.Resources.Add("userPic", ImageFileString);
-            Shell.Current.Resources.Add("userId", UserSeeds.DefaultUser.Id);
             await _navigationService.GoToAsync("//users");
-
         }
     }
-    
+
 
 
 }
