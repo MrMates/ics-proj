@@ -40,6 +40,19 @@ public sealed class ProjectFacadeTests : FacadeTestsBase
     }
 
     [Fact]
+    public async Task Add_Activity_Added()
+    {
+        await _facadeSUT.AddActivityToProject(ActivitySeeds.WorkActivity.Id, ProjectSeeds.AgencyProject.Id);
+
+
+        await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+        var project = await dbxAssert.Projects
+            .Include(i => i.Activities)
+            .SingleAsync(i => i.Id == ProjectSeeds.AgencyProject.Id);
+        Assert.NotEmpty(project!.Activities);
+    }
+
+    [Fact]
     public async Task Create_CreationModel_DoesNotThrow()
     {
         var model = new ProjectCreationDetailModel()
