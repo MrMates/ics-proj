@@ -14,6 +14,7 @@ public class NavigationService : INavigationService
         new("//users", typeof(UserListPage), typeof(UserListViewModel)),
         new("//users/create", typeof(UserCreatePage), typeof(UserCreateViewModel)),
         new("//projects", typeof(ProjectListPage), typeof(ProjectListViewModel)),
+        new("//projects/report" , typeof(ProjectReportListPage),typeof(ProjectReportListViewModel))
     };
 
     public async Task GoToAsync<TViewModel>()
