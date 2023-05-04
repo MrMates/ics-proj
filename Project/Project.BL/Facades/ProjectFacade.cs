@@ -45,6 +45,44 @@ public class ProjectFacade :
         }
     }
 
+    public async Task AddUserToProject(Guid userID, Guid projectID)
+    {
+        await using IUnitOfWork uow = UnitOfWorkFactory.Create();
+
+        var userRep = uow.GetRepository<User, UserEntityMapper>();
+        var userProjectRep = uow.GetRepository<UserProject, UserProjectEntityMapper>();
+        var projectRep = uow.GetRepository<DAL.Project, ProjectEntityMapper>();
+
+        User user = await userRep
+            .Get()
+            .FirstAsync(user => user.Id == userID);
+
+        DAL.Project project = await projectRep
+            .Get()
+            .Include(project => project.Activities)
+            .FirstAsync(project => project.Id == projectID);
+
+        if (user != null && project != null)
+        {
+            UserProject userProject = new UserProject() 
+            { 
+                Id = Guid.NewGuid(),
+                ProjectId = project.Id,
+                UserId = user.Id,
+                Project = project,
+                User = user
+            };
+
+            project.UserProjects.Add(userProject);
+            user.UserProjects.Add(userProject);
+
+            await userProjectRep.InsertAsync(userProject);
+            await userRep.UpdateAsync(user);
+            await projectRep.UpdateAsync(project);
+            await uow.CommitAsync();
+        }
+    }
+
     public async Task<TimeSpan> TotalTimeSpent(Guid projectID)
     {
         await using IUnitOfWork uow = UnitOfWorkFactory.Create();

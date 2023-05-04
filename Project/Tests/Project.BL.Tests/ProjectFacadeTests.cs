@@ -53,6 +53,25 @@ public sealed class ProjectFacadeTests : FacadeTestsBase
     }
 
     [Fact]
+    public async Task Add_Users_Added()
+    {
+        await _facadeSUT.AddUserToProject(UserSeeds.DefaultUser.Id, ProjectSeeds.AgencyProject.Id);
+
+
+        await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+        var project = await dbxAssert.Projects
+            .Include(i => i.UserProjects)
+            .SingleAsync(i => i.Id == ProjectSeeds.AgencyProject.Id);
+        var user = await dbxAssert.Users
+            .Include(i => i.UserProjects)
+            .SingleAsync(i => i.Id == UserSeeds.DefaultUser.Id);
+
+        Assert.NotEmpty(project!.UserProjects);
+        Assert.NotEmpty(user!.UserProjects);
+        Assert.True(dbxAssert.UserProjects.Any());
+    }
+
+    [Fact]
     public async Task Create_CreationModel_DoesNotThrow()
     {
         var model = new ProjectCreationDetailModel()
