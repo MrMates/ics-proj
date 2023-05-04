@@ -87,8 +87,8 @@
                                     FontSize="14"
                                     FontAttributes="Bold"
                                     Grid.Column="3"            
-                                    <!--TODO: Připojení uivatele do projektu-->
                                     />
+                                    <!--TODO: Připojení uivatele do projektu-->
                                 <StackLayout HeightRequest="1"  Grid.ColumnSpan="4" BackgroundColor="#2E2C2F" Margin="0,100,0,0" Opacity="0.2" />
                             </Grid>
                         </DataTemplate>
