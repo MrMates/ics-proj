@@ -8,7 +8,7 @@ namespace Project.BL.Models
 {
     public record ActivityListModel : ModelBase
     {
-        public Guid ProjectId { get; set; }
+        public Guid? ProjectId { get; set; }
         public required string ActivityName { get; set; }
 
         public static ActivityListModel Empty => new()
