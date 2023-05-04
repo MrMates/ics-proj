@@ -31,4 +31,10 @@ public partial class ProjectListViewModel : ViewModelBase
 
         Projects = await _projectFacade.GetAsync();
     }
+
+    [RelayCommand]
+    private async Task GoToCreateProject()
+    {
+        await _navigationService.GoToAsync("/create");
+    }
 }

@@ -68,6 +68,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Views\Project\ProjectCreatePage.xaml.cs">
+	    <DependentUpon>ProjectCreatePage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\User\UserListPage.xaml.cs">
 	    <DependentUpon>UserListPage.xaml</DependentUpon>
 	  </Compile>
@@ -81,6 +84,9 @@
 
 	<ItemGroup>
 	  <MauiXaml Update="Views\ContentPageBase.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Project\ProjectCreatePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Project\ProjectListPage.xaml">
