@@ -51,7 +51,6 @@ public class DatabaseContext : DbContext
         {
             UserSeeds.Seed(modelBuilder);
             ProjectSeeds.Seed(modelBuilder);
-            ActivitySeeds.Seed(modelBuilder);
         }
 
 
