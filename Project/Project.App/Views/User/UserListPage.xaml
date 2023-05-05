@@ -31,11 +31,19 @@
                     <DataTemplate x:DataType="models:UserListModel">
                         <Grid RowDefinitions="Auto, *" ColumnDefinitions="200">
 
-                            <Image Grid.Row="0"
-                               HorizontalOptions="Fill" VerticalOptions="Fill"
-                               Aspect="AspectFill"
-                               WidthRequest="130" HeightRequest="130"
-                               Source="{Binding UserPhotoUrl, TargetNullValue='recipe_placeholder.jpg'}"/>
+                            <Border
+                    WidthRequest="35"
+                    HeightRequest="35">
+                    <Border.StrokeShape>
+                        <Ellipse></Ellipse>
+                    </Border.StrokeShape>
+                    <Image
+                    HorizontalOptions="Fill" VerticalOptions="Fill"
+                    Aspect="AspectFill"
+                    WidthRequest="35" HeightRequest="35"
+                    Source="{Binding UserPhotoUrl}">
+                    </Image>
+                </Border>
 
                             <BoxView Grid.Row="0"
                                          Opacity="0.25"
