@@ -81,6 +81,8 @@ namespace Project.DAL.Seeds
                         UserProjects = Array.Empty<UserProject>(),
                         Activities = Array.Empty<Activity>(),
                     }
+
+                    
                 );
     }
 }
