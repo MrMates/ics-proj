@@ -7,6 +7,7 @@ using Project.DAL;
 using Project.DAL.Seeds;
 using Project.DAL.Mappers;
 using Project.DAL.UnitOfWork;
+using System.Windows.Input;
 
 namespace Project.App.ViewModels.Project;
 
@@ -14,8 +15,10 @@ public partial class ProjectListViewModel : ViewModelBase
 {
     private readonly IProjectFacade _projectFacade;
     private readonly INavigationService _navigationService;
-    public IEnumerable<ProjectListModel> Projects { get; set; } = null!;
+    private bool _isTimeSpentSortedAscending = true;
+    private bool _isProjectNameSortedAscending = true;
 
+    public IEnumerable<ProjectListModel> Projects { get; set; } = null!;
 
 
     public ProjectListViewModel(
@@ -28,17 +31,53 @@ public partial class ProjectListViewModel : ViewModelBase
         _navigationService = navigationService;
     }
 
+    
+
 
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
-        Projects = await _projectFacade.GetAsync();
+
+        //Simulace dat 
+        await _projectFacade.AddActivityToProject(ActivitySeeds.DefaultActivity.Id, ProjectSeeds.DefaultProject.Id);
+
+        Projects = (await _projectFacade.GetAsync()).ToList();
 
 
         foreach (ProjectListModel project in Projects)
         {
             project.TimeSpent = await _projectFacade.TotalTimeSpent(project.Id);
         }
+    }
+    
+    [RelayCommand]
+    private void SortByProjectName()
+    {
+        if (_isProjectNameSortedAscending)
+        {
+            Projects = Projects.OrderBy(x => x.ProjectName);
+        }
+        else
+        {
+            Projects = Projects.OrderByDescending(x => x.ProjectName);
+        }
+
+        _isProjectNameSortedAscending = !_isProjectNameSortedAscending;
+    }
+
+    [RelayCommand]
+    private void SortByTimeSpent()
+    {
+        if (_isTimeSpentSortedAscending)
+        {
+            Projects = Projects.OrderBy(x => x.TimeSpent);
+        }
+        else
+        {
+            Projects = Projects.OrderByDescending(x => x.TimeSpent);
+        }
+
+        _isTimeSpentSortedAscending = !_isTimeSpentSortedAscending;
     }
 
     [RelayCommand]
