@@ -43,7 +43,7 @@
                 CornerRadius="0"
                 HeightRequest="75"
                 BackgroundColor="Transparent"
-                Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToUsersCommand}"/>
+                Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToUserProfilesCommand}"/>
         <!-- MENU BUTTON END -->
 
 

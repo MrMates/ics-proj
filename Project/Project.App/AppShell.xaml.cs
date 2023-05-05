@@ -2,6 +2,7 @@
 using Project.App.ViewModels.User;
 using Project.App.ViewModels.Project;
 using Project.App.Services;
+using Project.App.Views.User;
 
 namespace Project.App
 {
@@ -18,6 +19,10 @@ namespace Project.App
 
         [RelayCommand]
         private void BackAsync() => _navigationService.SendBackButtonPressed();
+
+        [RelayCommand]
+        private async Task GoToUserProfilesAsync()
+            => await _navigationService.GoToAsync<UserProfileViewModel>();
 
         [RelayCommand]
         private async Task GoToUsersAsync()

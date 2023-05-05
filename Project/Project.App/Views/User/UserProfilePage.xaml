@@ -5,26 +5,25 @@
              xmlns:viewModels="clr-namespace:Project.App.ViewModels.User"
              xmlns:views="clr-namespace:Project.App.Views"
              xmlns:models="clr-namespace:Project.BL.Models;assembly=Project.BL"
-             x:Class="Project.App.Views.User.UserCreatePage"
-             Title="UserCreatePage"
+             x:Class="Project.App.Views.User.UserProfilePage"
+             Title="UserProfilePage"
              Shell.NavBarIsVisible="False"
-             Shell.FlyoutBehavior="Disabled"
-             x:DataType="viewModels:UserCreateViewModel">
+             x:DataType="viewModels:UserProfileViewModel">
 
     <VerticalStackLayout>
         <StackLayout 
             VerticalOptions="FillAndExpand"
             Margin="0, 150, 0, 0">
-            <Grid>
+            <Grid ColumnSpacing="100">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-
+               
                 <Frame x:Name="frame"
                     Grid.Row="0" 
                     Grid.Column="0"
@@ -46,7 +45,7 @@
                         HorizontalOptions="FillAndExpand"/>
                 </Frame>
 
-                
+
                 <Label 
                     Grid.Row="1" 
                     Grid.Column="0" 
@@ -59,7 +58,7 @@
                 </StackLayout>
             </Grid>
             <Button 
-                Text="Create User"
+                Text="Save changes"
                 FontSize="25"
                 TextColor="#FBFBFB"
                 FontAttributes="Bold"
