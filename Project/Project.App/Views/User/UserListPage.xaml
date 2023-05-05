@@ -30,20 +30,20 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:UserListModel">
                         <Grid RowDefinitions="Auto, *" ColumnDefinitions="200">
-
                             <Border
-                    WidthRequest="35"
-                    HeightRequest="35">
-                    <Border.StrokeShape>
-                        <Ellipse></Ellipse>
-                    </Border.StrokeShape>
-                    <Image
-                    HorizontalOptions="Fill" VerticalOptions="Fill"
-                    Aspect="AspectFill"
-                    WidthRequest="35" HeightRequest="35"
-                    Source="{Binding UserPhotoUrl}">
-                    </Image>
-                </Border>
+                                StrokeThickness="3"
+                                WidthRequest="133"
+                                HeightRequest="133">
+                                <Border.StrokeShape>
+                                    <Ellipse></Ellipse>
+                                </Border.StrokeShape>
+                                <Image
+                                    HorizontalOptions="Fill" VerticalOptions="Fill"
+                                    Aspect="AspectFill"
+                                    WidthRequest="129" HeightRequest="129"
+                                    Source="{Binding UserPhotoUrl}">
+                                </Image>
+                            </Border>
 
                             <BoxView Grid.Row="0"
                                          Opacity="0.25"
