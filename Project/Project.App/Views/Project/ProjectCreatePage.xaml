@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Project.App"
+             xmlns:viewModels="clr-namespace:Project.App.ViewModels.Project"
+             xmlns:views="clr-namespace:Project.App.Views"
+             xmlns:models="clr-namespace:Project.BL.Models;assembly=Project.BL"
+             x:Class="Project.App.Views.Project.ProjectCreatePage"
+             x:DataType="viewModels:ProjectCreateViewModel">
+
+
+    <!--CONTENT-->
+    <VerticalStackLayout BackgroundColor="White">
+        <StackLayout 
+            VerticalOptions="FillAndExpand"
+            Margin="0, 150, 0, 0"
+            >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Row="0" Grid.Column="1" VerticalOptions="Center">
+                    <Entry x:Name="NameEntry" Text ="{Binding Name}" Placeholder="Project name" WidthRequest="350" Margin="0, 25, 0, 0" TextColor="Black" />
+                    <BoxView HeightRequest="3" WidthRequest="350" BackgroundColor="Black" Margin="0,-2,0,0" />
+                </StackLayout>
+            </Grid>
+            <Button 
+                Text="Create Project"
+                FontSize="25"
+                TextColor="#FBFBFB"
+                FontAttributes="Bold"
+                BackgroundColor="#475B63"
+                WidthRequest="250"
+                HorizontalOptions="Center"
+                Margin="0, 125, 0, 0"
+                Command="{Binding Create_Project_HandlerCommand}"
+                />
+        </StackLayout>
+    </VerticalStackLayout>
+    <!--CONTENT END-->
+</views:ContentPageBase>
+    

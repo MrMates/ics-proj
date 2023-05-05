@@ -12,6 +12,8 @@ namespace Project.BL.Models
         public required string ProjectName { get; set; }
         public ObservableCollection<UserListModel> Users { get; init; } = new();
 
+        public TimeSpan TimeSpent { get; set; }
+
         public static ProjectListModel empty => new()
         {
             Id = Guid.NewGuid(),

@@ -8,7 +8,7 @@ namespace Project.BL.Models
 {
     public record ActivityDetailModel : ModelBase
     {
-        public Guid ProjectId { get; set; }
+        public Guid? ProjectId { get; set; }
         public Guid UserId { get; set; }
         public required string ActivityName { get; set; }
         public DateTime TimeBegin { get; set; }

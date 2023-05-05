@@ -40,6 +40,51 @@ public sealed class ProjectFacadeTests : FacadeTestsBase
     }
 
     [Fact]
+    public async Task Add_Activity_Added()
+    {
+        await _facadeSUT.AddActivityToProject(ActivitySeeds.WorkActivity.Id, ProjectSeeds.AgencyProject.Id);
+
+
+        await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+        var project = await dbxAssert.Projects
+            .Include(i => i.Activities)
+            .SingleAsync(i => i.Id == ProjectSeeds.AgencyProject.Id);
+        Assert.NotEmpty(project!.Activities);
+    }
+
+    [Fact]
+    public async Task Add_Users_Added()
+    {
+        await _facadeSUT.AddUserToProject(UserSeeds.DefaultUser.Id, ProjectSeeds.AgencyProject.Id);
+
+
+        await using var dbxAssert = await DbContextFactory.CreateDbContextAsync();
+        var project = await dbxAssert.Projects
+            .Include(i => i.UserProjects)
+            .SingleAsync(i => i.Id == ProjectSeeds.AgencyProject.Id);
+        var user = await dbxAssert.Users
+            .Include(i => i.UserProjects)
+            .SingleAsync(i => i.Id == UserSeeds.DefaultUser.Id);
+
+        Assert.NotEmpty(project!.UserProjects);
+        Assert.NotEmpty(user!.UserProjects);
+        Assert.True(dbxAssert.UserProjects.Any());
+    }
+
+    [Fact]
+    public async Task Get_UsersInProject_Works()
+    {
+        var emptyUsers = await _facadeSUT.GetUsersInProject(ProjectSeeds.AgencyProject.Id);
+
+        await _facadeSUT.AddUserToProject(UserSeeds.DefaultUser.Id, ProjectSeeds.AgencyProject.Id);
+
+        var users = await _facadeSUT.GetUsersInProject(ProjectSeeds.AgencyProject.Id);
+
+        Assert.Empty(emptyUsers);
+        Assert.NotEmpty(users);
+    }
+
+    [Fact]
     public async Task Create_CreationModel_DoesNotThrow()
     {
         var model = new ProjectCreationDetailModel()

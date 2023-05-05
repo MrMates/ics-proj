@@ -40,7 +40,8 @@ namespace Project.DAL.Seeds
         public static readonly Project DefaultProject7 = new()
         {
             Id = Guid.Parse("188BFF5B-FCC8-452E-A20E-AF0DEB0DDD1B"),
-            Name = "Profit"
+            Name = "Profit",
+            Activities = new List<Activity> { Seeds.ActivitySeeds.DefaultActivity }
         };
 
         public static void Seed(this ModelBuilder modelBuilder) =>
@@ -80,6 +81,8 @@ namespace Project.DAL.Seeds
                         UserProjects = Array.Empty<UserProject>(),
                         Activities = Array.Empty<Activity>(),
                     }
+
+                    
                 );
     }
 }

@@ -115,8 +115,7 @@ namespace Project.DAL.Migrations
                     b.HasOne("Project.DAL.Project", null)
                         .WithMany("Activities")
                         .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("Project.DAL.User", null)
                         .WithMany("Activities")

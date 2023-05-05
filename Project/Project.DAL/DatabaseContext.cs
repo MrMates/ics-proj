@@ -44,11 +44,13 @@ public class DatabaseContext : DbContext
         modelBuilder.Entity<Project>()
             .HasMany(i => i.Activities)
             .WithOne()
-            .OnDelete(DeleteBehavior.Restrict);
+            .OnDelete(DeleteBehavior.SetNull)
+            .IsRequired(false);
 
         if(_seedDemoData)
         {
             UserSeeds.Seed(modelBuilder);
+            ActivitySeeds.Seed(modelBuilder);
             ProjectSeeds.Seed(modelBuilder);
         }
 
