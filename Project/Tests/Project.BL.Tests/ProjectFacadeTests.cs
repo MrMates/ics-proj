@@ -72,6 +72,19 @@ public sealed class ProjectFacadeTests : FacadeTestsBase
     }
 
     [Fact]
+    public async Task Get_UsersInProject_Works()
+    {
+        var emptyUsers = await _facadeSUT.GetUsersInProject(ProjectSeeds.AgencyProject.Id);
+
+        await _facadeSUT.AddUserToProject(UserSeeds.DefaultUser.Id, ProjectSeeds.AgencyProject.Id);
+
+        var users = await _facadeSUT.GetUsersInProject(ProjectSeeds.AgencyProject.Id);
+
+        Assert.Empty(emptyUsers);
+        Assert.NotEmpty(users);
+    }
+
+    [Fact]
     public async Task Create_CreationModel_DoesNotThrow()
     {
         var model = new ProjectCreationDetailModel()

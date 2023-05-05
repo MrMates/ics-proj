@@ -83,6 +83,20 @@ public class ProjectFacade :
         }
     }
 
+    public async Task<IEnumerable<UserListModel>> GetUsersInProject(Guid projectID)
+    {
+        await using IUnitOfWork uow = UnitOfWorkFactory.Create();
+        IEnumerable<User> users = await uow
+            .GetRepository<User, UserEntityMapper>()
+            .Get()
+            .Include(i => i.UserProjects)
+            .Where(i => i.UserProjects.Any(i => i.ProjectId == projectID))
+            .ToListAsync();
+
+        UserModelMapper mapper = new UserModelMapper();
+        return mapper.MapToListModel(users);
+    }
+
     public async Task<TimeSpan> TotalTimeSpent(Guid projectID)
     {
         await using IUnitOfWork uow = UnitOfWorkFactory.Create();
