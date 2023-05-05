@@ -4,14 +4,16 @@ using CommunityToolkit.Mvvm.Input;
 using Project.BL.Facades;
 using Project.App.Services;
 using Project.DAL;
+using Project.App.Messages;
 using Project.DAL.Seeds;
 using Project.DAL.Mappers;
 using Project.DAL.UnitOfWork;
 using System.Windows.Input;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace Project.App.ViewModels.Project;
 
-public partial class ProjectListViewModel : ViewModelBase
+public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCreatedMessage>
 {
     private readonly IProjectFacade _projectFacade;
     private readonly INavigationService _navigationService;
@@ -19,6 +21,8 @@ public partial class ProjectListViewModel : ViewModelBase
     private bool _isProjectNameSortedAscending = true;
 
     public IEnumerable<ProjectListModel> Projects { get; set; } = null!;
+
+    public IEnumerable<UserListModel> Users { get; set; } = null!;
 
 
     public ProjectListViewModel(
@@ -47,6 +51,7 @@ public partial class ProjectListViewModel : ViewModelBase
         foreach (ProjectListModel project in Projects)
         {
             project.TimeSpent = await _projectFacade.TotalTimeSpent(project.Id);
+            Users = await _projectFacade.GetUsersInProject(project.Id);
         }
     }
     
@@ -95,6 +100,11 @@ public partial class ProjectListViewModel : ViewModelBase
     [RelayCommand]
     private async Task GoToCreateProject()
     {
-        await _navigationService.GoToAsync("/create");
+        await _navigationService.GoToAsync("/create");       
+    }
+
+    public async void Receive(ProjectCreatedMessage message)
+    {
+        await LoadDataAsync();
     }
 }

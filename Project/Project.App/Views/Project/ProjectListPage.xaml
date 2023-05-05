@@ -83,7 +83,7 @@
                                 <StackLayout HeightRequest="1"  Grid.ColumnSpan="4" BackgroundColor="#2E2C2F" Margin="0,-100,0,0" Opacity="0.2" />
                                 <Label VerticalOptions="Center" TextColor="Black" Text="{Binding ProjectName}" Grid.Column="0" />
                                 <Label VerticalOptions="Center" TextColor="Black" Text="{Binding TimeSpent, StringFormat='{0:hh\\:mm\\:ss}'}" Grid.Column="1" />
-                                <Label VerticalOptions="Center" TextColor="Black" Text="{Binding ProjectName}" Grid.Column="2" />
+                                <Label VerticalOptions="Center" TextColor="Black" Text="{Binding Users.Count, StringFormat='{}{0} users'}" Grid.Column="2" />
                                 <Button Text="Join project"
                                     VerticalOptions="Center"
                                     HorizontalOptions="Center"
