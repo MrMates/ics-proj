@@ -9,5 +9,7 @@ public interface IProjectFacade : IFacade<DAL::Project, ProjectListModel, Projec
 
     public abstract Task AddUserToProject(Guid userID, Guid projectID);
 
+    public abstract Task<IEnumerable<UserListModel>> GetUsersInProject(Guid projectID);
+
     public abstract Task<TimeSpan> TotalTimeSpent(Guid projectID);
 }
