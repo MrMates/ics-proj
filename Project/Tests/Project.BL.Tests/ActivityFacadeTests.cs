@@ -72,6 +72,22 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
     }
 
     [Fact]
+    public async Task Get_UserActivities_FromSeed_Works()
+    {
+        var activities = await _facadeSUT.GetUserActivities(UserSeeds.DefaultUser.Id);
+
+        Assert.Equal(2, activities.Count());
+    }
+
+    [Fact]
+    public async Task Get_ActivityTimeSpent_Works()
+    {
+        var timeSpent = await _facadeSUT.ActivityTimeSpent(ActivitySeeds.WorkActivity.Id);
+
+        Assert.Equal(ActivitySeeds.WorkActivity.TimeEnd - ActivitySeeds.WorkActivity.TimeBegin, timeSpent);
+    }
+
+    [Fact]
     public async Task GetAll_Filter_FromPastWeek()
     {
         // None of the seeded activities have start date from past month

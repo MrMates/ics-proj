@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using Project.App.ViewModels.User;
 using Project.App.ViewModels.Project;
+using Project.App.ViewModels.Timer;
 using Project.App.Services;
+using Project.App.Views.User;
 
 namespace Project.App
 {
@@ -20,8 +22,17 @@ namespace Project.App
         private void BackAsync() => _navigationService.SendBackButtonPressed();
 
         [RelayCommand]
+        private async Task GoToUserProfilesAsync()
+            => await _navigationService.GoToAsync<UserProfileViewModel>();
+
+        [RelayCommand]
         private async Task GoToUsersAsync()
-            => await _navigationService.GoToAsync<UserListViewModel>();
+        {
+            Shell.Current.Resources.Remove("userId");
+            await _navigationService.GoToAsync<UserListViewModel>();
+        }
+            
+
 
         [RelayCommand]
         private async Task GoToProjectsAsync()
@@ -30,6 +41,10 @@ namespace Project.App
         [RelayCommand]
         private async Task GoToProjectReportsAsync()
             => await _navigationService.GoToAsync<ProjectReportListViewModel>();
+
+        [RelayCommand]
+        private async Task GoToTimersAsync()
+            => await _navigationService.GoToAsync<ActivityListViewModel>();
 
     }
 }

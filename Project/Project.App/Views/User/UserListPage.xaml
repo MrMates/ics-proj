@@ -8,7 +8,8 @@
              x:Class="Project.App.Views.User.UserListPage"
              Shell.NavBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled"
-             x:DataType="viewModels:UserListViewModel">
+             x:DataType="viewModels:UserListViewModel"
+             BackgroundColor="White">
 
     <StackLayout VerticalOptions="StartAndExpand"
                  HorizontalOptions="Center"
@@ -18,20 +19,41 @@
             VerticalOptions="StartAndExpand"
             Margin="0,120,0,0"
             HorizontalOptions="Center"
-            FontSize="Header"
+            FontSize="70"
             FontAttributes="Bold"/>
 
         <HorizontalStackLayout HorizontalOptions="CenterAndExpand"
                                Spacing="50">
-            <CollectionView ItemsSource="{Binding Users}" VerticalOptions="FillAndExpand">
+            <CollectionView ItemsSource="{Binding Users}" VerticalOptions="FillAndExpand" HorizontalOptions="StartAndExpand">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal"/>
+                </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:UserListModel">
-                        <Grid RowDefinitions="Auto, *">
-                            <Image Grid.Row="0"
-                                       HorizontalOptions="Fill" VerticalOptions="Fill"
-                                       Aspect="AspectFill"
-                                       WidthRequest="100" HeightRequest="100"
-                                       Source="{Binding UserPhotoUrl, TargetNullValue='recipe_placeholder.jpg'}" />
+                        <Grid RowDefinitions="Auto, *" ColumnDefinitions="200">
+                            <Border
+                                StrokeThickness="3"
+                                WidthRequest="133"
+                                HeightRequest="133">
+                                <Border.StrokeShape>
+                                    <Ellipse></Ellipse>
+                                </Border.StrokeShape>
+                                <Image
+                                    HorizontalOptions="Fill" VerticalOptions="Fill"
+                                    Aspect="AspectFill"
+                                    WidthRequest="129" HeightRequest="129"
+                                    Source="{Binding UserPhotoUrl}">
+                                </Image>
+                            </Border>
+                            <Button BackgroundColor="Transparent" 
+                                ZIndex="10"
+                                WidthRequest="130" 
+                                CornerRadius="100" 
+                                BorderColor="Red"
+                                Command="{Binding GoToUserProfileCommand, 
+                                Source={RelativeSource AncestorType={x:Type viewModels:UserListViewModel}}}"
+                                CommandParameter="{Binding Id}">
+                            </Button>
 
                             <BoxView Grid.Row="0"
                                          Opacity="0.25"
@@ -41,35 +63,33 @@
                                        Margin="22,12"
                                        FontSize="20" LineBreakMode="WordWrap"
                                        Text="{Binding UserFirstName}"
-                                       TextColor="#475B63" VerticalOptions="End" />
+                                       TextColor="#475B63" VerticalOptions="Center" HorizontalOptions="Center"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Grid>
+            <Grid WidthRequest="200">
                 <Button 
                     x:Name="MoveBtn"
                     Text="+"
-                    FontSize="85"
+                    FontSize="95"
                     FontAttributes="Bold"
                     HorizontalOptions="Center"
                     VerticalOptions="CenterAndExpand"
                     Margin="0, -50, 0, 0"
                     BackgroundColor="#475B63"
-                    WidthRequest="85"
-                    HeightRequest="85"
+                    WidthRequest="100"
+                    HeightRequest="100"
                     CornerRadius="100"
                     Padding="0,-7,0,0"
                     Command="{Binding GoToCreateUserCommand}">
                 </Button>
 
-
-                <Label Text="Create user" FontSize="20" TextColor="#475B63" HorizontalOptions="Center" Margin="0, 111, 0, 0"/>
+                <Label Text="Create user" FontSize="20" TextColor="#475B63" HorizontalOptions="Center" Margin="0, 140, 0, 0"/>
             </Grid>
-            
         </HorizontalStackLayout>
-        
+
 
     </StackLayout>
 </views:ContentPageBase>
