@@ -26,7 +26,12 @@ namespace Project.App
 
         [RelayCommand]
         private async Task GoToUsersAsync()
-            => await _navigationService.GoToAsync<UserListViewModel>();
+        {
+            Shell.Current.Resources.Remove("userId");
+            await _navigationService.GoToAsync<UserListViewModel>();
+        }
+            
+
 
         [RelayCommand]
         private async Task GoToProjectsAsync()

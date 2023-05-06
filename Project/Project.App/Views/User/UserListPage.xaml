@@ -8,7 +8,8 @@
              x:Class="Project.App.Views.User.UserListPage"
              Shell.NavBarIsVisible="False"
              Shell.FlyoutBehavior="Disabled"
-             x:DataType="viewModels:UserListViewModel">
+             x:DataType="viewModels:UserListViewModel"
+             BackgroundColor="White">
 
     <StackLayout VerticalOptions="StartAndExpand"
                  HorizontalOptions="Center"
@@ -45,10 +46,13 @@
                                 </Image>
                             </Border>
                             <Button BackgroundColor="Transparent" 
+                                ZIndex="10"
                                 WidthRequest="130" 
                                 CornerRadius="100" 
                                 BorderColor="Red"
-                                Command="{TemplateBinding GoToUserProfileCommand}">
+                                Command="{Binding GoToUserProfileCommand, 
+                                Source={RelativeSource AncestorType={x:Type viewModels:UserListViewModel}}}"
+                                CommandParameter="{Binding Id}">
                             </Button>
 
                             <BoxView Grid.Row="0"
@@ -81,7 +85,6 @@
                     Padding="0,-7,0,0"
                     Command="{Binding GoToCreateUserCommand}">
                 </Button>
-
 
                 <Label Text="Create user" FontSize="20" TextColor="#475B63" HorizontalOptions="Center" Margin="0, 140, 0, 0"/>
             </Grid>

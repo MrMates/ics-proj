@@ -14,7 +14,7 @@ public partial class UserCreateViewModel : ViewModelBase
 
     public string FirstName { get; set; }
     public string SurName { get; set; }
-    public Color FrameBackgroundColor { get; set; }
+    public Color FrameBackgroundColor { get; set; } = Color.FromRgba(255, 0, 0, 255);
     public string ImageFileString { get; set; }
 
 
@@ -31,7 +31,7 @@ public partial class UserCreateViewModel : ViewModelBase
     [RelayCommand]
     private async Task PickPhoto()
     {
-        FrameBackgroundColor = Color.FromRgba(0, 255, 0, 0);
+        //FrameBackgroundColor = Color.FromRgba(0, 255, 0, 0);
         //Debug.WriteLine(FrameBackgroundColor.ToString());
         var result = await MediaPicker.PickPhotoAsync();
         if (result != null)
@@ -51,9 +51,6 @@ public partial class UserCreateViewModel : ViewModelBase
             await _userFacade.SaveAsync(new BL.Models.UserDetailModel { UserFirstName = FirstName, 
                                                                         UserLastName = SurName, 
                                                                         UserPhotoUrl = ImageFileString });
-            //Shell.Current.Resources.Add("userId", Users)
-            //Shell.Current.Resources.Add("userPic", ImageFileString);
-            //Shell.Current.Resources.Add("userId", UserSeeds.DefaultUser.Id);
             await _navigationService.GoToAsync("//users");
 
         }

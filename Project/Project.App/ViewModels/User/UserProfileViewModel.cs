@@ -48,8 +48,11 @@ public partial class UserProfileViewModel : ViewModelBase
     {
         if (FirstName != null && SurName != null)
         {
-            await _userFacade.SaveAsync(new BL.Models.UserDetailModel { UserFirstName = FirstName, UserLastName = SurName, UserPhotoUrl = ImageFileString });
-            await _navigationService.GoToAsync("//users");
+            Guid currentUserId = (Guid) Shell.Current.Resources["userId"];
+            await _userFacade.SaveAsync(new BL.Models.UserDetailModel { Id = currentUserId,
+                                                                        UserFirstName = FirstName, 
+                                                                        UserLastName = SurName, 
+                                                                        UserPhotoUrl = ImageFileString });
         }
     }
 

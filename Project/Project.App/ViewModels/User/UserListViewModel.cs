@@ -29,9 +29,12 @@ public partial class UserListViewModel : ViewModelBase
         await _navigationService.GoToAsync("/create");
     }
     [RelayCommand]
-    private async Task GoToUserProfile()
+    private async Task GoToUserProfile(Guid UserId)
     {
-        await _navigationService.GoToAsync("//users");
+        string UserImage = Users.Where(i => i.Id == UserId).Single().UserPhotoUrl;
+        Shell.Current.Resources.Add("userId", UserId);
+        Shell.Current.Resources["userPic"] = UserImage;
+        await _navigationService.GoToAsync("//user-profile");
     }
 
     protected override async Task LoadDataAsync()
