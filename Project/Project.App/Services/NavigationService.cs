@@ -2,6 +2,8 @@
 using Project.App.ViewModels;
 using Project.App.ViewModels.User;
 using Project.App.Views.User;
+using Project.App.Views.Timer;
+using Project.App.ViewModels.Timer;
 
 namespace Project.App.Services;
 
@@ -11,6 +13,7 @@ public class NavigationService : INavigationService
     {
         new("//users", typeof(UserListPage), typeof(UserListViewModel)),
         new("//users/create", typeof(UserCreatePage), typeof(UserCreateViewModel)),
+        new("//timers", typeof(TimerListPage), typeof(ActivityListViewModel)),
     };
 
     public async Task GoToAsync<TViewModel>()
