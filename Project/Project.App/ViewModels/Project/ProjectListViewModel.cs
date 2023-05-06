@@ -20,11 +20,8 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
     private readonly INavigationService _navigationService;
     private bool _isTimeSpentSortedAscending = true;
     private bool _isProjectNameSortedAscending = true;
-    private bool _running;
 
     public IEnumerable<ProjectListModel> Projects { get; set; } = null!;
-
-    public static string Running { get; set; } = _running.ToString();
 
     public IEnumerable<UserListModel> Users { get; set; } = Enumerable.Empty<UserListModel>();
 
@@ -42,7 +39,6 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
 
     protected override async Task LoadDataAsync()
     {
-        _running = true;
         await base.LoadDataAsync();
 
         //Simulace dat 
@@ -55,7 +51,6 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
         {
             project.TimeSpent = await _projectFacade.TotalTimeSpent(project.Id);
         }
-        _running = false;
     }
     
     [RelayCommand]
