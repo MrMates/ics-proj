@@ -156,4 +156,30 @@ public class ActivityFacade :
 
         return ModelMapper.MapToListModel(entities);
     }
+
+    public async Task<IEnumerable<ActivityListModel>> GetUserActivities(Guid userId)
+    {
+        await using IUnitOfWork uow = UnitOfWorkFactory.Create();
+        List<Activity> entities = await uow
+            .GetRepository<Activity, ActivityEntityMapper>()
+            .Get()
+            .Where(activity => activity.UserId == userId)
+            .ToListAsync();
+
+        return ModelMapper.MapToListModel(entities);
+    }
+
+    public async Task<TimeSpan> ActivityTimeSpent(Guid activityId)
+    {
+        await using IUnitOfWork uow = UnitOfWorkFactory.Create();
+        Activity entity = await uow
+            .GetRepository<Activity, ActivityEntityMapper>()
+            .Get()
+            .Where(activity => activity.Id == activityId)
+            .SingleAsync();
+
+        DateTime? end = (entity.TimeEnd == null) ? DateTime.Now : entity.TimeEnd;
+
+        return (TimeSpan)(end - entity.TimeBegin);
+    }
 }

@@ -27,7 +27,7 @@ namespace Project.Common.Tests.Seeds
             UserId = UserSeeds.DefaultUser.Id
         };
 
-        public static readonly Activity ActivityToDelete = WorkActivity with { Id = Guid.Parse("A9336994-C6D9-482E-BEBD-40C7148E5384") };
+        public static readonly Activity ActivityToDelete = WorkActivity with { Id = Guid.Parse("A9336994-C6D9-482E-BEBD-40C7148E5384"), ProjectId = null };
 
         // NOT SEEDED ACTIVITIES ----------
         // Activities that are not inserted into the database and are here for filter testing convenience.
