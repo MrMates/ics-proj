@@ -157,35 +157,29 @@ public class ActivityFacade :
         return ModelMapper.MapToListModel(entities);
     }
 
-
-
-
-
-
-
-    public async Task AddActivityToProject(Guid activityID, Guid projectID)
+    public async Task<IEnumerable<ActivityListModel>> GetUserActivities(Guid userId)
     {
         await using IUnitOfWork uow = UnitOfWorkFactory.Create();
-
-        var activityRep = uow.GetRepository<Activity, ActivityEntityMapper>();
-        var projectRep = uow.GetRepository<DAL.Project, ProjectEntityMapper>();
-
-        Activity activity = await activityRep
+        List<Activity> entities = await uow
+            .GetRepository<Activity, ActivityEntityMapper>()
             .Get()
-            .FirstAsync(activity => activity.Id == activityID);
+            .Where(activity => activity.UserId == userId)
+            .ToListAsync();
 
-        DAL.Project project = await projectRep
+        return ModelMapper.MapToListModel(entities);
+    }
+
+    public async Task<TimeSpan> ActivityTimeSpent(Guid activityId)
+    {
+        await using IUnitOfWork uow = UnitOfWorkFactory.Create();
+        Activity entity = await uow
+            .GetRepository<Activity, ActivityEntityMapper>()
             .Get()
-            .Include(project => project.Activities)
-            .FirstAsync(project => project.Id == projectID);
+            .Where(activity => activity.Id == activityId)
+            .SingleAsync();
 
-        if (activity != null && project != null)
-        {
-            activity.ProjectId = projectID;
-            project.Activities.Add(activity);
-            await activityRep.UpdateAsync(activity);
-            await projectRep.UpdateAsync(project);
-            await uow.CommitAsync();
-        }
+        DateTime? end = (entity.TimeEnd == null) ? DateTime.Now : entity.TimeEnd;
+
+        return (TimeSpan)(end - entity.TimeBegin);
     }
 }
