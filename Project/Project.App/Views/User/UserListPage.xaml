@@ -44,6 +44,12 @@
                                     Source="{Binding UserPhotoUrl}">
                                 </Image>
                             </Border>
+                            <Button BackgroundColor="Transparent" 
+                                WidthRequest="130" 
+                                CornerRadius="100" 
+                                BorderColor="Red"
+                                Command="{TemplateBinding GoToUserProfileCommand}">
+                            </Button>
 
                             <BoxView Grid.Row="0"
                                          Opacity="0.25"
@@ -79,9 +85,8 @@
 
                 <Label Text="Create user" FontSize="20" TextColor="#475B63" HorizontalOptions="Center" Margin="0, 140, 0, 0"/>
             </Grid>
-            
         </HorizontalStackLayout>
-        
+
 
     </StackLayout>
 </views:ContentPageBase>

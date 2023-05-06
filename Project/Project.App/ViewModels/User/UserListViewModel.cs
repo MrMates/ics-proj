@@ -28,6 +28,11 @@ public partial class UserListViewModel : ViewModelBase
     {
         await _navigationService.GoToAsync("/create");
     }
+    [RelayCommand]
+    private async Task GoToUserProfile()
+    {
+        await _navigationService.GoToAsync("//users");
+    }
 
     protected override async Task LoadDataAsync()
     {

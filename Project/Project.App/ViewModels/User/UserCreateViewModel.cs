@@ -1,7 +1,7 @@
 ﻿using Project.App.Services;
 using Project.BL.Facades;
 using CommunityToolkit.Mvvm.Input;
-using Project.DAL.Seeds;
+using Project.DAL;
 
 namespace Project.App.ViewModels.User;
 
@@ -48,9 +48,12 @@ public partial class UserCreateViewModel : ViewModelBase
     {
         if (FirstName != null && SurName != null)   
         {
-            await _userFacade.SaveAsync(new BL.Models.UserDetailModel { UserFirstName = FirstName, UserLastName = SurName, UserPhotoUrl = ImageFileString });
-            Shell.Current.Resources.Add("userPic", ImageFileString);
-            Shell.Current.Resources.Add("userId", UserSeeds.DefaultUser.Id);
+            await _userFacade.SaveAsync(new BL.Models.UserDetailModel { UserFirstName = FirstName, 
+                                                                        UserLastName = SurName, 
+                                                                        UserPhotoUrl = ImageFileString });
+            //Shell.Current.Resources.Add("userId", Users)
+            //Shell.Current.Resources.Add("userPic", ImageFileString);
+            //Shell.Current.Resources.Add("userId", UserSeeds.DefaultUser.Id);
             await _navigationService.GoToAsync("//users");
 
         }
