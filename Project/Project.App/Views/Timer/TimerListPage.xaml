@@ -17,7 +17,7 @@
                     <StackLayout Orientation="Horizontal">
                         <Label Text="Start Time" TextColor="#475B63" Padding="0,5,0,0" FontSize="48" x:Name="selectedDateLabel"/>
                         <StackLayout Orientation="Vertical">
-                            <ImageButton Source="D:\Vysoká\CSS3\Project\Project.App\Resources\Images\calendar.png" Margin="60,10,0,0" Clicked="OnDatePickerClicked"/>
+                            <ImageButton Source="calendar.png" Margin="60,10,0,0" Clicked="OnDatePickerClicked"/>
                             <DatePicker x:Name="datePicker" IsVisible="False" DateSelected="OnDateSelected" BackgroundColor="#475B63" Margin="0,20,0,0"/>
                         </StackLayout>
                         <StackLayout Orientation="Vertical" Margin="10,0,0,0">
