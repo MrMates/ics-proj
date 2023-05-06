@@ -2,6 +2,8 @@
 using Project.BL.Facades;
 using CommunityToolkit.Mvvm.Input;
 using Project.DAL;
+using Project.App.Messages;
+using Microsoft.Maui.Controls;
 
 namespace Project.App.ViewModels.User;
 
@@ -14,8 +16,14 @@ public partial class UserCreateViewModel : ViewModelBase
 
     public string FirstName { get; set; }
     public string SurName { get; set; }
-    public Color FrameBackgroundColor { get; set; }
+    public Color FrameBackgroundColor { get; set; } = Color.FromRgba(217, 217, 217, 255);
     public string ImageFileString { get; set; }
+    private ImageSource _profilePicSource;
+    public ImageSource ProfilePicSource
+    {
+        get => _profilePicSource;
+        set => SetProperty(ref _profilePicSource, value);
+    }
 
 
     public UserCreateViewModel(
@@ -31,15 +39,12 @@ public partial class UserCreateViewModel : ViewModelBase
     [RelayCommand]
     private async Task PickPhoto()
     {
-        FrameBackgroundColor = Color.FromRgba(0, 255, 0, 255);
         var result = await MediaPicker.PickPhotoAsync();
         if (result != null)
         {
-            var imageSource = ImageSource.FromFile(result.FullPath);
-            ImageFileString = imageSource.ToString();
+            ProfilePicSource = ImageSource.FromFile(result.FullPath);
+            ImageFileString = ProfilePicSource.ToString();
             ImageFileString = ImageFileString.Replace("File: ", "");
-            //profilePic.Source = imageSource;
-            //_frame.BackgroundColor = Color.FromRgba(0, 0, 0, 0);
         }
     }
     [RelayCommand]
@@ -51,6 +56,7 @@ public partial class UserCreateViewModel : ViewModelBase
                                                                         UserLastName = SurName, 
                                                                         UserPhotoUrl = ImageFileString });
             await _navigationService.GoToAsync("//users");
+            MessengerService.Send<UserCreatedMessage>(new UserCreatedMessage(Guid.Empty));
 
         }
     }

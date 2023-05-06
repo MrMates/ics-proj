@@ -3,10 +3,13 @@ using Project.App.Views.User;
 using CommunityToolkit.Mvvm.Input;
 using Project.BL.Facades;
 using Project.App.Services;
+using CommunityToolkit.Mvvm.Messaging;
+using Project.App.Messages;
+
 
 namespace Project.App.ViewModels.User;
 
-public partial class UserListViewModel : ViewModelBase
+public partial class UserListViewModel : ViewModelBase, IRecipient<UserCreatedMessage>
 {
     private readonly IUserFacade _userFacade;
     private readonly INavigationService _navigationService;
@@ -43,4 +46,9 @@ public partial class UserListViewModel : ViewModelBase
 
         Users = await _userFacade.GetAsync();
     }
+    public async void Receive(UserCreatedMessage message)
+    {
+        await LoadDataAsync();
+    }
+
 }
