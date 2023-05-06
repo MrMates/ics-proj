@@ -5,6 +5,8 @@ namespace Project.BL.Facades;
 
 public interface IActivityFacade : IFacade<Activity, ActivityListModel, ActivityDetailModel>
 {
+    public abstract Task<IEnumerable<ActivityListModel>> GetUserActivities(Guid userId);
+    public abstract Task<TimeSpan> ActivityTimeSpent(Guid activityId);
     public abstract Task<IEnumerable<ActivityListModel>> GetPastWeek();
     public abstract Task<IEnumerable<ActivityListModel>> GetPastMonth();
     public abstract Task<IEnumerable<ActivityListModel>> GetPreviousMonth();

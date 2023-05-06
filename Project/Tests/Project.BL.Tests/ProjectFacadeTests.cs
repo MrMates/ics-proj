@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
 using System.Collections.ObjectModel;
+using Project.DAL;
 
 namespace Project.BL.Tests;
 
@@ -82,6 +83,19 @@ public sealed class ProjectFacadeTests : FacadeTestsBase
 
         Assert.Empty(emptyUsers);
         Assert.NotEmpty(users);
+    }
+
+    [Fact]
+    public async Task Get_ActivitiesInProject_Works()
+    {
+        var seededActivities = await _facadeSUT.GetActivitiesInProject(ProjectSeeds.AgencyProject.Id);
+
+        await _facadeSUT.AddActivityToProject(ActivitySeeds.ActivityToDelete.Id, ProjectSeeds.AgencyProject.Id);
+
+        var updatedActivities = await _facadeSUT.GetActivitiesInProject(ProjectSeeds.AgencyProject.Id);
+
+        Assert.Single(seededActivities);
+        Assert.Equal(2, updatedActivities.Count());
     }
 
     [Fact]

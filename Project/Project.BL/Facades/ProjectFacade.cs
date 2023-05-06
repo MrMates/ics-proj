@@ -28,19 +28,16 @@ public class ProjectFacade :
 
         Activity activity = await activityRep
             .Get()
-            .FirstAsync(activity => activity.Id == activityID);
+            .SingleAsync(activity => activity.Id == activityID);
 
         DAL.Project project = await projectRep
             .Get()
-            .Include(project => project.Activities)
-            .FirstAsync(project => project.Id == projectID);
+            .SingleAsync(project => project.Id == projectID);
 
         if (activity != null && project != null)
         {
             activity.ProjectId = projectID;
-            project.Activities.Add(activity);
             await activityRep.UpdateAsync(activity);
-            await projectRep.UpdateAsync(project);
             await uow.CommitAsync();
         }
     }
@@ -55,12 +52,11 @@ public class ProjectFacade :
 
         User user = await userRep
             .Get()
-            .FirstAsync(user => user.Id == userID);
+            .SingleAsync(user => user.Id == userID);
 
         DAL.Project project = await projectRep
             .Get()
-            .Include(project => project.Activities)
-            .FirstAsync(project => project.Id == projectID);
+            .SingleAsync(project => project.Id == projectID);
 
         if (user != null && project != null)
         {
@@ -73,14 +69,23 @@ public class ProjectFacade :
                 User = user
             };
 
-            project.UserProjects.Add(userProject);
-            user.UserProjects.Add(userProject);
-
             await userProjectRep.InsertAsync(userProject);
-            await userRep.UpdateAsync(user);
-            await projectRep.UpdateAsync(project);
             await uow.CommitAsync();
         }
+    }
+
+    public async Task<IEnumerable<ActivityListModel>> GetActivitiesInProject(Guid projectID)
+    {
+        await using IUnitOfWork uow = UnitOfWorkFactory.Create();
+        DAL.Project project = await uow
+            .GetRepository<DAL.Project, ProjectEntityMapper>()
+            .Get()
+            .Include(i => i.Activities)
+            .Where(i => i.Id == projectID)
+            .SingleAsync();
+
+        ActivityModelMapper mapper = new ActivityModelMapper();
+        return mapper.MapToListModel(project.Activities);
     }
 
     public async Task<IEnumerable<UserListModel>> GetUsersInProject(Guid projectID)
@@ -104,7 +109,7 @@ public class ProjectFacade :
             .GetRepository<DAL.Project, ProjectEntityMapper>()
             .Get()
             .Include(i => i.Activities)
-            .FirstAsync(project => project.Id == projectID);
+            .SingleAsync(project => project.Id == projectID);
 
         TimeSpan sum = new 
             TimeSpan(project.Activities
