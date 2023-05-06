@@ -10,6 +10,7 @@ using Project.DAL.Mappers;
 using Project.DAL.UnitOfWork;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Messaging;
+using System.Diagnostics;
 
 namespace Project.App.ViewModels.Project;
 
@@ -99,8 +100,13 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
     [RelayCommand]
     private async Task DeleteProject(Guid projectId)
     {
-        await _projectFacade.DeleteAsync(projectId);
-        await LoadDataAsync();
+        bool confirmed = await Application.Current.MainPage.DisplayAlert("Delete Project", "Are you sure you want to delete this project?", "Yes", "No");
+
+        if (confirmed)
+        {
+            await _projectFacade.DeleteAsync(projectId);
+            await LoadDataAsync();
+        }
     }
 
 
