@@ -15,6 +15,5 @@ public interface IActivityFacade : IFacade<Activity, ActivityListModel, Activity
     public abstract Task<IEnumerable<ActivityListModel>> GetBeginningAfter(DateTime date);
     public abstract Task<IEnumerable<ActivityListModel>> GetEndingBefore(DateTime date);
     public abstract Task<IEnumerable<ActivityListModel>> GetEndingAfter(DateTime date);
-    public abstract Task AddActivityToProject(Guid activityID, Guid projectID);
 
 }

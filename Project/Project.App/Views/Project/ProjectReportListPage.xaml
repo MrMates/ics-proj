@@ -76,8 +76,8 @@
                                         <ColumnDefinition Width="1*" />
                                     </Grid.ColumnDefinitions>
                                 <Label VerticalOptions="Center"  TextColor="Black" Text="{Binding ActivityName}" Grid.Column="0" />
-                                <Label VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black" Text="{Binding TimeSpent}" Grid.Column="1" />
-                                <Label VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black" Text="{Binding Percentage}" Grid.Column="2" />
+                                <Label VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black" Text="{Binding TimeSpent, StringFormat='{0:%d} days {0:hh\\:mm\\:ss}'}" Grid.Column="1" />
+                                <Label VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black" Text="{Binding Percentage, StringFormat='{0:F2} %'}" Grid.Column="2" />
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
@@ -88,7 +88,7 @@
             </Border>
             <StackLayout Grid.Column="1" Padding="0,60,0,0" HorizontalOptions="Center" >
                 <Label Text="Total time" TextColor="Black" FontSize="15" FontAttributes="Bold"/>
-                <Label Text="{Binding TotalTime}" TextColor="Grey" HorizontalOptions="Center"/>
+                <Label Text="{Binding TotalTime, StringFormat='{0:%d} days {0:hh\\:mm\\:ss}'}" TextColor="Grey" HorizontalOptions="Center"/>
                 <Label Text="Time spent in projects" TextColor="Black" FontSize="15" FontAttributes="Bold" HorizontalOptions="Center" Padding="0,50,0,0"/>
                 <Label Text="zde graph" TextColor="Grey" HorizontalOptions="Center"/>
                 

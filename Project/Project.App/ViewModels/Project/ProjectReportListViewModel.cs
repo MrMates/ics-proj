@@ -29,28 +29,28 @@ public partial class ProjectReportListViewModel : ViewModelBase
     {
         await base.LoadDataAsync();
 
-        await _activityFacade.AddActivityToProject(ActivitySeeds.DefaultActivity.Id, ProjectSeeds.DefaultProject.Id);
+        //TODO - userId brát jako aktivního uživatele
 
-        Reports = (await _activityFacade.GetAsync()).ToList();
+        if (Shell.Current.Resources.TryGetValue("userId", out object userIdObj) && userIdObj is Guid userId)
+        { 
+            Reports = (await _activityFacade.GetUserActivities(userId)).ToList(); 
+        }
+        else { 
+            Reports = null;
+            return;
+        }
+        
+
         double whole = 0.0;
         TimeSpan totalTime = TimeSpan.Zero;
         foreach (ActivityListModel activity in Reports)
         {
-            //activity.TimeSpent = await _activityFacade.ActivityTimeSpent(activity.Id);
-            if (!activity.TimeEnd.HasValue)
-            {
-               activity.TimeSpent =  TimeSpan.FromSeconds(2545);
-            }
-            else
-            {
-                activity.TimeSpent = DateTime.Now - activity.TimeBegin;
-            }
+            activity.TimeSpent = await _activityFacade.ActivityTimeSpent(activity.Id);
             whole += activity.TimeSpent.TotalSeconds;
             totalTime += activity.TimeSpent;
         }
         foreach (ActivityListModel activity in Reports)
         {
-
             activity.Percentage = activity.TimeSpent.TotalSeconds / whole*100;
         }
         TotalTime = totalTime;
