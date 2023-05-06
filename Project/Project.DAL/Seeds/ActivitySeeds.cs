@@ -26,7 +26,7 @@ namespace Project.DAL.Seeds
             ProjectId = Guid.Parse("188BFF5B-FCC8-452E-A20E-AF0DEB0DDD1B"),
             Name = "Recenze produktu",
             ActivityType = "Práce",
-            TimeBegin = DateTime.Now.AddHours(-25.5),
+            TimeBegin = DateTime.Now.AddYears(-2),
             TimeEnd = DateTime.Now.AddHours(-24.1),
         };
 
