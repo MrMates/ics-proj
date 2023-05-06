@@ -20,7 +20,7 @@
 
             <StackLayout Padding="20,10,20,0">
 
-                <Label Text="{Binding Project.ProjectName}" FontSize="25" FontAttributes="Bold" HorizontalOptions="Center"/>
+                <Label Text="{Binding Project.ProjectName}" FontSize="25" FontAttributes="Bold" HorizontalOptions="Center" TextColor="Black"/>
                 <HorizontalStackLayout>
                     <Image HorizontalOptions="Fill" 
                            VerticalOptions="Fill"
@@ -54,10 +54,7 @@
                     StrokeThickness="1"
                     StrokeShape="RoundRectangle 0,20,0,0"
                     Background="#D9D9D9">
-
-
                 <CollectionView  ItemsSource="{Binding Activities}">
-
                     <CollectionView.Header>
                         <Grid Margin="20,20,0,20">
                             <Grid.ColumnDefinitions>
@@ -73,16 +70,16 @@
                     </CollectionView.Header>
 
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:ProjectDetailModel">
+                        <DataTemplate x:DataType="models:ActivityListModel">
                             <Grid Margin="0,0,0,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*" />
                                     <ColumnDefinition Width="1*" />
                                     <ColumnDefinition Width="1*" />
                                 </Grid.ColumnDefinitions>
-                                <Label VerticalOptions="Center"  TextColor="Black" Text="{Binding Activities}" Grid.Column="0" />
-                                <Label VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black" Text="User bind here" Grid.Column="1" />
-                                <Label VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black" Text="time spent bind here" Grid.Column="2" />
+                                <Label VerticalOptions="Center"  TextColor="Black" Text="{Binding ActivityName}" Grid.Column="0" />
+                                <Label VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black" Text="{Binding UserName}" Grid.Column="1" />
+                                <Label VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black" Text="{Binding TimeSpent, StringFormat='{0:hh\\:mm\\:ss}'}" Grid.Column="2" />
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
