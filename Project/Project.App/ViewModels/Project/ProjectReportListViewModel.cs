@@ -10,8 +10,9 @@ namespace Project.App.ViewModels.Project;
 
 public partial class ProjectReportListViewModel : ViewModelBase
 {
-    private readonly IActivityFacade _activityFacade ;
+    private readonly IActivityFacade _activityFacade;
     private readonly INavigationService _navigationService;
+    private double whole = 0.0;
     public IEnumerable<ActivityListModel> Reports { get; set; } = null!;
     public TimeSpan TotalTime { get; set; }
 
@@ -28,9 +29,13 @@ public partial class ProjectReportListViewModel : ViewModelBase
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
+     
+        TimeSpan totalTime = TimeSpan.Zero;
 
-        //TODO - userId brát jako aktivního uživatele
 
+        Guid userId = Guid.Parse("188B8C5B-FCC8-452E-A20E-AF0DEB0CD21B");
+        Reports = (await _activityFacade.GetUserActivities(userId)).ToList();
+        /*
         if (Shell.Current.Resources.TryGetValue("userId", out object userIdObj) && userIdObj is Guid userId)
         { 
             Reports = (await _activityFacade.GetUserActivities(userId)).ToList(); 
@@ -39,10 +44,9 @@ public partial class ProjectReportListViewModel : ViewModelBase
             Reports = null;
             return;
         }
-        
-
-        double whole = 0.0;
-        TimeSpan totalTime = TimeSpan.Zero;
+        */
+        whole = 0.0;
+        totalTime = TimeSpan.Zero;
         foreach (ActivityListModel activity in Reports)
         {
             activity.TimeSpent = await _activityFacade.ActivityTimeSpent(activity.Id);
@@ -51,11 +55,36 @@ public partial class ProjectReportListViewModel : ViewModelBase
         }
         foreach (ActivityListModel activity in Reports)
         {
-            activity.Percentage = activity.TimeSpent.TotalSeconds / whole*100;
+            activity.Percentage = activity.TimeSpent.TotalSeconds / whole * 100;
         }
         TotalTime = totalTime;
     }
 
+    [RelayCommand]
+    private async Task LoadLastWeek()
+    {
+
+        TimeSpan totalTime = TimeSpan.Zero;
+        //if (Shell.Current.Resources.TryGetValue("userId", out object userIdObj) && userIdObj is Guid userId)
+        Guid userId = Guid.Parse("188B8C5B-FCC8-452E-A20E-AF0DEB0CD21B");
+        {
+            Reports = (await _activityFacade.GetPastWeek(userId)).ToList();
+        }
+        whole = 0.0;
+        totalTime = TimeSpan.Zero;
+        foreach (ActivityListModel activity in Reports)
+        {
+            activity.TimeSpent = await _activityFacade.ActivityTimeSpent(activity.Id);
+            whole += activity.TimeSpent.TotalSeconds;
+            totalTime += activity.TimeSpent;
+        }
+        foreach (ActivityListModel activity in Reports)
+        {
+            activity.Percentage = activity.TimeSpent.TotalSeconds / whole * 100;
+        }
+        TotalTime = totalTime;
+
+    }
 
 }
 
