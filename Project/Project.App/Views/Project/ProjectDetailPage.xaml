@@ -20,7 +20,7 @@
 
             <StackLayout Padding="20,10,20,0">
 
-                <Label Text="Project Name Bind Here" FontSize="25" FontAttributes="Bold" HorizontalOptions="Center"/>
+                <Label Text="{Binding Project.ProjectName}" FontSize="25" FontAttributes="Bold" HorizontalOptions="Center"/>
                 <HorizontalStackLayout>
                     <Image HorizontalOptions="Fill" 
                            VerticalOptions="Fill"
@@ -73,14 +73,14 @@
                     </CollectionView.Header>
 
                     <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:ProjectReportListModel">
+                        <DataTemplate x:DataType="models:ProjectDetailModel">
                             <Grid Margin="0,0,0,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*" />
                                     <ColumnDefinition Width="1*" />
                                     <ColumnDefinition Width="1*" />
                                 </Grid.ColumnDefinitions>
-                                <Label VerticalOptions="Center"  TextColor="Black" Text="Activity Name bind here" Grid.Column="0" />
+                                <Label VerticalOptions="Center"  TextColor="Black" Text="{Binding Activities}" Grid.Column="0" />
                                 <Label VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black" Text="User bind here" Grid.Column="1" />
                                 <Label VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black" Text="time spent bind here" Grid.Column="2" />
                             </Grid>

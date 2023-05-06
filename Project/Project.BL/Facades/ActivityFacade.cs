@@ -156,4 +156,36 @@ public class ActivityFacade :
 
         return ModelMapper.MapToListModel(entities);
     }
+
+
+
+
+
+
+
+    public async Task AddActivityToProject(Guid activityID, Guid projectID)
+    {
+        await using IUnitOfWork uow = UnitOfWorkFactory.Create();
+
+        var activityRep = uow.GetRepository<Activity, ActivityEntityMapper>();
+        var projectRep = uow.GetRepository<DAL.Project, ProjectEntityMapper>();
+
+        Activity activity = await activityRep
+            .Get()
+            .FirstAsync(activity => activity.Id == activityID);
+
+        DAL.Project project = await projectRep
+            .Get()
+            .Include(project => project.Activities)
+            .FirstAsync(project => project.Id == projectID);
+
+        if (activity != null && project != null)
+        {
+            activity.ProjectId = projectID;
+            project.Activities.Add(activity);
+            await activityRep.UpdateAsync(activity);
+            await projectRep.UpdateAsync(project);
+            await uow.CommitAsync();
+        }
+    }
 }

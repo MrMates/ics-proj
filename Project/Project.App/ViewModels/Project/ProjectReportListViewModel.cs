@@ -10,18 +10,18 @@ namespace Project.App.ViewModels.Project;
 
 public partial class ProjectReportListViewModel : ViewModelBase
 {
-    private readonly IProjectCreationReportFacade _projectCreationReportFacade ;
+    private readonly IActivityFacade _activityFacade ;
     private readonly INavigationService _navigationService;
-    public IEnumerable<ProjectReportListModel> Reports { get; set; } = null!;
-
+    public IEnumerable<ActivityListModel> Reports { get; set; } = null!;
+    public TimeSpan TotalTime { get; set; }
 
     public ProjectReportListViewModel(
-        IProjectCreationReportFacade projectReportFacade,
+        IActivityFacade activityFacade,
         IMessengerService messengerService,
         INavigationService navigationService)
         : base(messengerService)
     {
-        _projectCreationReportFacade = projectReportFacade;
+        _activityFacade = activityFacade;
         _navigationService = navigationService;
     }
 
@@ -29,7 +29,33 @@ public partial class ProjectReportListViewModel : ViewModelBase
     {
         await base.LoadDataAsync();
 
-        Reports = await _projectCreationReportFacade.GetAsync();
+        await _activityFacade.AddActivityToProject(ActivitySeeds.DefaultActivity.Id, ProjectSeeds.DefaultProject.Id);
+
+        Reports = (await _activityFacade.GetAsync()).ToList();
+        double whole = 0.0;
+        TimeSpan totalTime = TimeSpan.Zero;
+        foreach (ActivityListModel activity in Reports)
+        {
+            //activity.TimeSpent = await _activityFacade.ActivityTimeSpent(activity.Id);
+            if (!activity.TimeEnd.HasValue)
+            {
+               activity.TimeSpent =  TimeSpan.FromSeconds(2545);
+            }
+            else
+            {
+                activity.TimeSpent = DateTime.Now - activity.TimeBegin;
+            }
+            whole += activity.TimeSpent.TotalSeconds;
+            totalTime += activity.TimeSpent;
+        }
+        foreach (ActivityListModel activity in Reports)
+        {
+
+            activity.Percentage = activity.TimeSpent.TotalSeconds / whole*100;
+        }
+        TotalTime = totalTime;
     }
+
+
 }
 
