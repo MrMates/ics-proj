@@ -48,8 +48,12 @@ public partial class UserProfileViewModel : ViewModelBase
         if (result != null)
         {
             ProfilePicSource = ImageSource.FromFile(result.FullPath);
-            ImageFileString = ProfilePicSource.ToString();
-            ImageFileString = ImageFileString.Replace("File: ", "");
+            if (ProfilePicSource != null) 
+            {
+                ImageFileString = ProfilePicSource.ToString();
+                ImageFileString = ImageFileString.Replace("File: ", "");
+            }
+            
         }
     }
     [RelayCommand]
