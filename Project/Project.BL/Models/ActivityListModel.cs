@@ -10,6 +10,8 @@ namespace Project.BL.Models
     {
         public Guid? ProjectId { get; set; }
         public required string ActivityName { get; set; }
+        public Guid UserId { get; set; }
+        public string? UserName { get; set; }
         public DateTime TimeBegin { get; set; }
         public DateTime? TimeEnd { get; set; }
 
