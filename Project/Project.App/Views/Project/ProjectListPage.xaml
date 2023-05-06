@@ -36,17 +36,22 @@
                         />
                 </FlexLayout>
 
-                <FlexLayout HorizontalOptions="Start" WidthRequest="400" JustifyContent="SpaceBetween" AlignItems="Start" Margin="0,50,0,20">
-                    <Image HorizontalOptions="Fill" 
+                <FlexLayout HorizontalOptions="Start" WidthRequest="300" JustifyContent="SpaceBetween" Margin="0,50,0,20">
+                    <Image HorizontalOptions="End" 
                            VerticalOptions="Fill"
                            Aspect="AspectFill"
-                           WidthRequest="25"
-                           HeightRequest="25"
-                           Source="filter_icon.png"/>
-                    <!--TODO: Labely změnit na button a nastavit Sort dle dat v CollectionView-->
-                    <Label FontSize="16" TextColor="#2E2C2F" Grid.Column="1">Name</Label>
-                    <Label FontSize="16" TextColor="#2E2C2F" Grid.Column="2">Time</Label>
-                    <Label FontSize="16" TextColor="#2E2C2F" Grid.Column="3">Users</Label>
+                           WidthRequest="23"
+                           HeightRequest="23"
+                           Margin="0,7,0,0"
+                           Source="sort.png"/>
+                    <Button FontSize="16" TextColor="#2E2C2F" Grid.Column="1" Text="Sort by name" BackgroundColor="Transparent"
+                            BorderWidth="1.5"
+                            BorderColor="Black"
+                            Command="{Binding SortByProjectNameCommand}" />
+                    <Button FontSize="16" TextColor="#2E2C2F" Grid.Column="1" Text="Sort by time" BackgroundColor="Transparent"
+                            BorderWidth="1.5"
+                            BorderColor="Black"
+                            Command="{Binding SortByTimeSpentCommand}" />
                 </FlexLayout>
             </StackLayout>
         </Border>
@@ -77,17 +82,36 @@
                                 </Grid.ColumnDefinitions>
                                 <StackLayout HeightRequest="1"  Grid.ColumnSpan="4" BackgroundColor="#2E2C2F" Margin="0,-100,0,0" Opacity="0.2" />
                                 <Label VerticalOptions="Center" TextColor="Black" Text="{Binding ProjectName}" Grid.Column="0" />
-                                <Label VerticalOptions="Center" TextColor="Black" Text="{Binding ProjectName}" Grid.Column="1" />
-                                <Label VerticalOptions="Center" TextColor="Black" Text="{Binding ProjectName}" Grid.Column="2" />
-                                <Button Text="Join project"
-                                    VerticalOptions="Center"
-                                    HorizontalOptions="Center"
-                                    TextColor="#F3E8EE"
-                                    BackgroundColor="#729B79"
-                                    FontSize="14"
-                                    FontAttributes="Bold"
-                                    Grid.Column="3"            
+                                <Label VerticalOptions="Center" TextColor="Black" Text="{Binding TimeSpent, StringFormat='{0:hh\\:mm\\:ss}'}" Grid.Column="1" />
+                                <Label VerticalOptions="Center" TextColor="Black" Text="{Binding Users.Count, StringFormat='{}{0} users'}" Grid.Column="2" />
+                                <StackLayout Grid.Column="3" VerticalOptions="Center" Orientation="Horizontal">
+                                    <Button Text="Join project"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="Center"
+                                        TextColor="#F3E8EE"
+                                        BackgroundColor="#729B79"
+                                        FontSize="14"
+                                        FontAttributes="Bold"
+                                        Grid.Column="3"
+                                        Command="{Binding User_Join_ProjectCommand, Source={RelativeSource AncestorType={x:Type viewModels:ProjectListViewModel}}}"
+                                        CommandParameter="{Binding Id}"
                                     />
+                                    <Button
+                                        Margin="20,0,0,0"
+                                        BackgroundColor="Transparent"
+                                        HeightRequest="30"
+                                        WidthRequest="50"
+                                        VerticalOptions="Center"
+                                        HorizontalOptions="End"
+                                        Grid.Column="3"
+                                        ImageSource="remove.png"
+                                        Command="{Binding DeleteProjectCommand, Source={RelativeSource AncestorType={x:Type viewModels:ProjectListViewModel}}}"
+                                        CommandParameter="{Binding Id}"
+                                        Padding="0"
+                                    />
+
+
+                                </StackLayout>
                                     <!--TODO: Připojení uivatele do projektu-->
                                 <StackLayout HeightRequest="1"  Grid.ColumnSpan="4" BackgroundColor="#2E2C2F" Margin="0,100,0,0" Opacity="0.2" />
                             </Grid>
