@@ -29,6 +29,7 @@ namespace Project.App
         private async Task GoToUsersAsync()
         {
             Shell.Current.Resources.Remove("userId");
+            Shell.Current.Resources.Remove("userPic");
             await _navigationService.GoToAsync<UserListViewModel>();
         }
             
