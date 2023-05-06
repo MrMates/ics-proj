@@ -54,8 +54,8 @@
                         Margin="0, 20, 0, 0"
                         />
                     <StackLayout Grid.Row="0" Grid.Column="1" VerticalOptions="Center">
-                        <Entry x:Name="FirstNameEntry" Text ="{Binding FirstName}" Placeholder="Name" WidthRequest="350" Margin="0, 25, 0, 0"/>
-                        <Entry x:Name="SurNameEntry" Text ="{Binding SurName}" Placeholder="Surname" WidthRequest="350" Margin="0, 25, 0, 0"/>
+                        <Entry x:Name="FirstNameEntry" TextColor="Black" Text ="{Binding FirstName}" Placeholder="Name" WidthRequest="350" Margin="0, 25, 0, 0"/>
+                        <Entry x:Name="SurNameEntry" TextColor="Black" Text ="{Binding SurName}" Placeholder="Surname" WidthRequest="350" Margin="0, 25, 0, 0"/>
                     </StackLayout>
                 </Grid>
             <Button 
