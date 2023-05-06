@@ -14,9 +14,22 @@ public partial class UserProfileViewModel : ViewModelBase
 
     public string FirstName { get; set; }
     public string SurName { get; set; }
-    public Color FrameBackgroundColor { get; set; }
+    public Color FrameBackgroundColor { get; set; } = Color.FromRgba(217, 217, 217, 255);
     public string ImageFileString { get; set; }
+    private ImageSource _profilePicSource = (string)Shell.Current.Resources["userPic"];
 
+    public ImageSource ProfilePicSource
+    {
+        get => _profilePicSource;
+        set 
+        { 
+            if (_profilePicSource != null)
+            {
+                SetProperty(ref _profilePicSource, value);
+
+            }
+        }
+    }
 
     public UserProfileViewModel(
         IUserFacade userFacade,
@@ -31,31 +44,25 @@ public partial class UserProfileViewModel : ViewModelBase
     [RelayCommand]
     private async Task PickPhoto()
     {
-        FrameBackgroundColor = Color.FromRgba(0, 255, 0, 0);
-        //Debug.WriteLine(FrameBackgroundColor.ToString());
         var result = await MediaPicker.PickPhotoAsync();
         if (result != null)
         {
-            var imageSource = ImageSource.FromFile(result.FullPath);
-            ImageFileString = imageSource.ToString();
+            ProfilePicSource = ImageSource.FromFile(result.FullPath);
+            ImageFileString = ProfilePicSource.ToString();
             ImageFileString = ImageFileString.Replace("File: ", "");
-            //profilePic.Source = imageSource;
-            //_frame.BackgroundColor = Color.FromRgba(0, 0, 0, 0);
         }
     }
     [RelayCommand]
-    private async Task Create_User_Handler()
+    private async Task UpdateUserProfile()
     {
         if (FirstName != null && SurName != null)
         {
-            Guid currentUserId = (Guid) Shell.Current.Resources["userId"];
+            Guid currentUserId = (Guid)Shell.Current.Resources["userId"];
             await _userFacade.SaveAsync(new BL.Models.UserDetailModel { Id = currentUserId,
-                                                                        UserFirstName = FirstName, 
-                                                                        UserLastName = SurName, 
-                                                                        UserPhotoUrl = ImageFileString });
+                UserFirstName = FirstName,
+                UserLastName = SurName,
+                UserPhotoUrl = ImageFileString });
+            Shell.Current.Resources["userPic"] = ImageFileString;
         }
     }
-
-
-
 }
