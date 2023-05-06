@@ -96,6 +96,13 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
         }
     }
 
+    [RelayCommand]
+    private async Task DeleteProject(Guid projectId)
+    {
+        await _projectFacade.DeleteAsync(projectId);
+        await LoadDataAsync();
+    }
+
 
     [RelayCommand]
     private async Task GoToCreateProject()
