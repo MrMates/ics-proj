@@ -14,16 +14,18 @@ using System.Diagnostics;
 
 namespace Project.App.ViewModels.Project;
 
-public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCreatedMessage>
+public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCreatedMessage>, IRecipient<UserJoinedProjectMessage>
 {
     private readonly IProjectFacade _projectFacade;
     private readonly INavigationService _navigationService;
     private bool _isTimeSpentSortedAscending = true;
     private bool _isProjectNameSortedAscending = true;
+    //private Dictionary<Guid, bool> _userIsInProjectDictionary = new Dictionary<Guid, bool>();
 
     public IEnumerable<ProjectListModel> Projects { get; set; } = null!;
 
-    public IEnumerable<UserListModel> Users { get; set; } = null!;
+    public IEnumerable<UserListModel> Users { get; set; } = Enumerable.Empty<UserListModel>();
+
 
 
     public ProjectListViewModel(
@@ -49,6 +51,11 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
         foreach (ProjectListModel project in Projects)
         {
             project.TimeSpent = await _projectFacade.TotalTimeSpent(project.Id);
+            //if (Shell.Current.Resources.TryGetValue("userId", out object userIdObj) && userIdObj is Guid userId)
+            //{
+            //    //bool userIsInProject = Users.Any(u => u.Id == (Guid)Shell.Current.Resources["userId"]);
+            //    //_userIsInProjectDictionary[project.Id] = userIsInProject;
+            //}
         }
     }
     
@@ -66,6 +73,12 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
 
         _isProjectNameSortedAscending = !_isProjectNameSortedAscending;
     }
+
+    //[RelayCommand]
+    //private void UserInProject(Guid projectId)
+    //{
+
+    //}
 
     [RelayCommand]
     private void SortByTimeSpent()
@@ -88,8 +101,12 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
         if (Shell.Current.Resources.TryGetValue("userId", out object userIdObj) && userIdObj is Guid userId)
         {
             await _projectFacade.AddUserToProject(userId,projectId);
+            MessengerService.Send<UserJoinedProjectMessage>(new UserJoinedProjectMessage(Guid.Empty));
+
         }
     }
+
+
 
     [RelayCommand]
     private async Task DeleteProject(Guid projectId)
@@ -111,6 +128,11 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
     }
 
     public async void Receive(ProjectCreatedMessage message)
+    {
+        await LoadDataAsync();
+    }
+
+    public async void Receive(UserJoinedProjectMessage message)
     {
         await LoadDataAsync();
     }
