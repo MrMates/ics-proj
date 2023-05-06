@@ -69,7 +69,7 @@
                         Grid.ColumnSpan="2"
                         CornerRadius="0"
                         BackgroundColor="Transparent"
-                        Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToUsersCommand}"/>
+                        Command="{Binding Source={x:Reference AppShellRoot}, Path=GoToTimersCommand}"/>
                 </Grid>
 
                 <Grid ColumnDefinitions="2*, 8*"
