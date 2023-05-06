@@ -14,21 +14,22 @@
         <StackLayout 
             VerticalOptions="FillAndExpand"
             Margin="0, 150, 0, 0">
-            <Grid ColumnSpacing="100">
+            <Grid ColumnSpacing="500" Margin="160, 0, 0, 0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                
                 <Frame x:Name="frame"
                     Grid.Row="0" 
                     Grid.Column="0"
                     WidthRequest="200" 
-                    HeightRequest="200" 
+                    HeightRequest="200"
+                    ZIndex="100"
                     CornerRadius="100"
                     Padding="10"
                     BackgroundColor="{Binding FrameBackgroundColor}"
