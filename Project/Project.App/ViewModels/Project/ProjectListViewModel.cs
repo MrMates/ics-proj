@@ -36,9 +36,6 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
         _navigationService = navigationService;
     }
 
-    
-
-
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
@@ -46,13 +43,12 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
         //Simulace dat 
         await _projectFacade.AddActivityToProject(ActivitySeeds.DefaultActivity.Id, ProjectSeeds.DefaultProject.Id);
 
-        Projects = (await _projectFacade.GetAsync()).ToList();
+        Projects = (await _projectFacade.GetAsyncWithUsers()).ToList();
 
 
         foreach (ProjectListModel project in Projects)
         {
             project.TimeSpent = await _projectFacade.TotalTimeSpent(project.Id);
-            Users = await _projectFacade.GetUsersInProject(project.Id);
         }
     }
     
@@ -91,9 +87,7 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
     {
         if (Shell.Current.Resources.TryGetValue("userId", out object userIdObj) && userIdObj is Guid userId)
         {
-            ProjectDetailModel project = await _projectFacade.GetAsync(projectId);
             await _projectFacade.AddUserToProject(userId,projectId);
-            await _projectFacade.SaveAsync(project);
         }
     }
 

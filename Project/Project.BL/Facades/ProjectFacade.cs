@@ -118,4 +118,16 @@ public class ProjectFacade :
 
         return sum;
     }
+
+    public async Task<IEnumerable<ProjectListModel>> GetAsyncWithUsers()
+    {
+        await using IUnitOfWork uow = UnitOfWorkFactory.Create();
+        List<DAL.Project> entities = await uow
+            .GetRepository<DAL.Project, ProjectEntityMapper>()
+            .Get()
+            .Include(i => i.UserProjects)
+            .ToListAsync();
+
+        return ModelMapper.MapToListModel(entities);
+    }
 }
