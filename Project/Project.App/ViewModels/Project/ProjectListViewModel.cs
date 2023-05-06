@@ -20,7 +20,6 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
     private readonly INavigationService _navigationService;
     private bool _isTimeSpentSortedAscending = true;
     private bool _isProjectNameSortedAscending = true;
-    //private Dictionary<Guid, bool> _userIsInProjectDictionary = new Dictionary<Guid, bool>();
 
     public IEnumerable<ProjectListModel> Projects { get; set; } = null!;
 
@@ -51,11 +50,6 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
         foreach (ProjectListModel project in Projects)
         {
             project.TimeSpent = await _projectFacade.TotalTimeSpent(project.Id);
-            //if (Shell.Current.Resources.TryGetValue("userId", out object userIdObj) && userIdObj is Guid userId)
-            //{
-            //    //bool userIsInProject = Users.Any(u => u.Id == (Guid)Shell.Current.Resources["userId"]);
-            //    //_userIsInProjectDictionary[project.Id] = userIsInProject;
-            //}
         }
     }
     
@@ -73,12 +67,6 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
 
         _isProjectNameSortedAscending = !_isProjectNameSortedAscending;
     }
-
-    //[RelayCommand]
-    //private void UserInProject(Guid projectId)
-    //{
-
-    //}
 
     [RelayCommand]
     private void SortByTimeSpent()
@@ -98,11 +86,18 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
     [RelayCommand]
     private async Task User_Join_Project(Guid projectId)
     {
+        ProjectListModel project = Projects.Where(i => i.Id == projectId).Single();
         if (Shell.Current.Resources.TryGetValue("userId", out object userIdObj) && userIdObj is Guid userId)
         {
-            await _projectFacade.AddUserToProject(userId,projectId);
-            MessengerService.Send<UserJoinedProjectMessage>(new UserJoinedProjectMessage(Guid.Empty));
-
+            if (project.Users.Any(u => u.Id == (Guid)Shell.Current.Resources["userId"]))
+            {
+                await Application.Current.MainPage.DisplayAlert("Delete Project", "Are you sure you want to delete this project?", "Ok bro");
+            }
+            else
+            {
+                await _projectFacade.AddUserToProject(userId,projectId);
+                MessengerService.Send<UserJoinedProjectMessage>(new UserJoinedProjectMessage(Guid.Empty));
+            }
         }
     }
 
