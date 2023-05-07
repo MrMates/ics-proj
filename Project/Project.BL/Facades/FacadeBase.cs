@@ -65,10 +65,15 @@ public abstract class
     public virtual async Task<IEnumerable<TListModel>> GetAsync()
     {
         await using IUnitOfWork uow = UnitOfWorkFactory.Create();
-        List<TEntity> entities = await uow
-            .GetRepository<TEntity, TEntityMapper>()
-            .Get()
-            .ToListAsync();
+        IQueryable<TEntity> query = uow.GetRepository<TEntity, TEntityMapper>().Get();
+
+        if (string.IsNullOrWhiteSpace(IncludesNavigationPathDetail) is false)
+        {
+            query = query.Include(IncludesNavigationPathDetail);
+        }
+
+        List<TEntity> entities = await query.ToListAsync();
+
 
         return ModelMapper.MapToListModel(entities);
     }

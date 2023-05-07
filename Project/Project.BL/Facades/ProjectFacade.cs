@@ -120,27 +120,6 @@ public class ProjectFacade :
         return sum;
     }
 
-    public async Task<IEnumerable<ProjectListModel>> GetAsyncWithUsers()
-    {
-        await using IUnitOfWork uow = UnitOfWorkFactory.Create();
-        List<DAL.Project> entities = await uow
-            .GetRepository<DAL.Project, ProjectEntityMapper>()
-            .Get()
-            .Include(i => i.UserProjects)
-            .ToListAsync();
-
-        var userRepo = uow.GetRepository<User, UserEntityMapper>();
-
-        // We're fixing the User reference here
-        foreach (var entity in entities)
-        {
-            var nulls = entity.UserProjects.Where(i => i.User == null);
-            foreach (var user in nulls)
-            {
-                user.User = await userRepo.Get().Where(i => i.Id == user.UserId).SingleAsync();
-            }
-        }
-
-        return ModelMapper.MapToListModel(entities);
-    }
+    protected override string IncludesNavigationPathDetail => 
+        $"{nameof(DAL.Project.UserProjects)}.{nameof(UserProject.User)}";
 }
