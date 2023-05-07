@@ -1,7 +1,9 @@
-﻿using Microsoft.Maui.Controls;
-using Project.App.Services;
+﻿using Project.App.Services;
 using Project.BL.Facades;
 using CommunityToolkit.Mvvm.Input;
+using Project.DAL;
+using Project.App.Messages;
+using Microsoft.Maui.Controls;
 
 namespace Project.App.ViewModels.User;
 
@@ -14,6 +16,14 @@ public partial class UserCreateViewModel : ViewModelBase
 
     public string FirstName { get; set; }
     public string SurName { get; set; }
+    public Color FrameBackgroundColor { get; set; } = Color.FromRgba(217, 217, 217, 255);
+    public string ImageFileString { get; set; }
+    private ImageSource _profilePicSource;
+    public ImageSource ProfilePicSource
+    {
+        get => _profilePicSource;
+        set => SetProperty(ref _profilePicSource, value);
+    }
 
 
     public UserCreateViewModel(
@@ -32,9 +42,9 @@ public partial class UserCreateViewModel : ViewModelBase
         var result = await MediaPicker.PickPhotoAsync();
         if (result != null)
         {
-            var imageSource = ImageSource.FromFile(result.FullPath);
-            //profilePic.Source = imageSource;
-            //frame.BackgroundColor = Color.FromRgba(0, 0, 0, 0);
+            ProfilePicSource = ImageSource.FromFile(result.FullPath);
+            ImageFileString = ProfilePicSource.ToString();
+            ImageFileString = ImageFileString.Replace("File: ", "");
         }
     }
     [RelayCommand]
@@ -42,8 +52,15 @@ public partial class UserCreateViewModel : ViewModelBase
     {
         if (FirstName != null && SurName != null)   
         {
-            await _userFacade.SaveAsync(new BL.Models.UserDetailModel { UserFirstName = FirstName, UserLastName = SurName });
+            await _userFacade.SaveAsync(new BL.Models.UserDetailModel { UserFirstName = FirstName, 
+                                                                        UserLastName = SurName, 
+                                                                        UserPhotoUrl = ImageFileString });
+            await _navigationService.GoToAsync("//users");
+            MessengerService.Send<UserCreatedMessage>(new UserCreatedMessage(Guid.Empty));
+
         }
     }
+    
+
 
 }

@@ -10,7 +10,9 @@ namespace Project.BL.Models
     public record ProjectListModel : ModelBase
     {
         public required string ProjectName { get; set; }
-        public ObservableCollection<UserListModel> Users { get; init; } = new();
+        public ICollection<UserListModel>? Users { get; set; }
+
+        public TimeSpan TimeSpent { get; set; }
 
         public static ProjectListModel empty => new()
         {

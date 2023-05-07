@@ -11,9 +11,17 @@ namespace Project.BL.Mappers
     public class ProjectModelMapper : ModelMapperBase<DAL.Project, ProjectListModel, ProjectDetailModel>, IProjectModelMapper
     {
         public override ProjectListModel MapToListModel(DAL.Project? entity)
-            => entity is null
+        {
+            if (entity is null) return ProjectListModel.empty;
+
+            var users = entity.UserProjects.Select(i => i.User);
+
+            UserModelMapper mapper = new UserModelMapper();
+
+            return entity is null
             ? ProjectListModel.empty
-            : new ProjectListModel { Id= entity.Id, ProjectName = entity.Name};
+            : new ProjectListModel { Id = entity.Id, ProjectName = entity.Name, Users = mapper.MapToListModel(users).ToList() };
+        }
 
         public override ProjectDetailModel MapToDetailModel(DAL.Project? entity)
             => entity is null

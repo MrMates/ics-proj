@@ -4,7 +4,7 @@ namespace Project.App.Views.Project;
 
 public partial class ProjectCreatePage
 {
-    public ProjectCreatePage(ProjectListViewModel projectCreateViewModel)
+    public ProjectCreatePage(ProjectCreateViewModel projectCreateViewModel)
         : base(projectCreateViewModel)
     {
         InitializeComponent();
