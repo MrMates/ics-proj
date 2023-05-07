@@ -20,10 +20,6 @@ public partial class ProjectDetailViewModel : ViewModelBase
     public IEnumerable<ActivityListModel> Activities { get; set; } = null!;
     public UserDetailModel ActivityUser { get; set; } = null!;
 
-
-    //TODO:
-    //Aby fungovalo na proklik (načtení ProjectId z Shell.Current.Resources
-
     public Guid Id = Guid.Parse("188BFF5B-FCC8-452E-A20E-AF0DEB0DDD1B");
     public ProjectDetailModel Project { get; set; }
 
@@ -47,21 +43,24 @@ public partial class ProjectDetailViewModel : ViewModelBase
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
-        Project = await _projectFacade.GetAsync(Id);
-        Activities = (await _projectFacade.GetActivitiesInProject(Id)).ToList();
-
-        foreach (ActivityListModel activity in Activities)
+        if (Shell.Current.Resources.TryGetValue("projectId", out object projectId) && projectId is Guid id)
         {
-            if (activity.UserId != Guid.Empty)
+            Project = await _projectFacade.GetAsync(id);
+            Activities = (await _projectFacade.GetActivitiesInProject(id)).ToList();
+
+            foreach (ActivityListModel activity in Activities)
             {
-                ActivityUser = await _userFacade.GetAsync(activity.UserId);
-                activity.UserName = ActivityUser.UserFirstName + " " + ActivityUser.UserLastName;
+                if (activity.UserId != Guid.Empty)
+                {
+                    ActivityUser = await _userFacade.GetAsync(activity.UserId);
+                    activity.UserName = ActivityUser.UserFirstName + " " + ActivityUser.UserLastName;
+                }
+                else
+                {
+                    activity.UserName = "Unknown user";
+                }
+                activity.TimeSpent = await _activityFacade.ActivityTimeSpent(activity.Id);
             }
-            else
-            {
-                activity.UserName =  "Unknown user";
-            }
-            activity.TimeSpent = await _activityFacade.ActivityTimeSpent(activity.Id);
         }
     }
 

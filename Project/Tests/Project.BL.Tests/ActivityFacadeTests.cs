@@ -91,7 +91,7 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
     public async Task GetAll_Filter_FromPastWeek()
     {
         // None of the seeded activities have start date from past month
-        var fromSeeds = await _facadeSUT.GetPastWeek();
+        var fromSeeds = await _facadeSUT.GetPastWeek(UserSeeds.DefaultUser.Id);
         Assert.Empty(fromSeeds);
 
         // We add a new activity that took place today
@@ -109,7 +109,7 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
         await _facadeSUT.SaveAsync(detailModel);
         await _facadeSUT.SaveAsync(oldDetailModel);
 
-        var fromAdded = await _facadeSUT.GetPastWeek();
+        var fromAdded = await _facadeSUT.GetPastWeek(UserSeeds.DefaultUser.Id);
 
         // Output of GetPastWeek is not empty
         Assert.NotEmpty(fromAdded);
@@ -128,7 +128,7 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
     public async Task GetAll_Filter_FromPastMonth()
     {
         // None of the seeded activities have start date from past month
-        var fromSeeds = await _facadeSUT.GetPastMonth();
+        var fromSeeds = await _facadeSUT.GetPastMonth(UserSeeds.DefaultUser.Id);
         Assert.Empty(fromSeeds);
 
         // We add a new activity that took place on the first day of this month
@@ -146,7 +146,7 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
         await _facadeSUT.SaveAsync(detailModel);
         await _facadeSUT.SaveAsync(oldDetailModel);
 
-        var fromAdded = await _facadeSUT.GetPastMonth();
+        var fromAdded = await _facadeSUT.GetPastMonth(UserSeeds.DefaultUser.Id);
 
         // Output of GetPastWeek is not empty
         Assert.NotEmpty(fromAdded);
@@ -165,7 +165,7 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
     public async Task GetAll_Filter_FromPreviousMonth()
     {
         // None of the seeded activities have start date from previous month
-        var fromSeeds = await _facadeSUT.GetPreviousMonth();
+        var fromSeeds = await _facadeSUT.GetPreviousMonth(UserSeeds.DefaultUser.Id);
         Assert.Empty(fromSeeds);
 
         // We add a new activity that took place on the first day of previous month
@@ -183,7 +183,7 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
         await _facadeSUT.SaveAsync(detailModel);
         await _facadeSUT.SaveAsync(oldDetailModel);
 
-        var fromAdded = await _facadeSUT.GetPreviousMonth();
+        var fromAdded = await _facadeSUT.GetPreviousMonth(UserSeeds.DefaultUser.Id);
 
         // Output of GetPastWeek is not empty
         Assert.NotEmpty(fromAdded);
@@ -202,7 +202,7 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
     public async Task GetAll_Filter_FromPastYear()
     {
         // None of the seeded activities have start date from past year
-        var fromSeeds = await _facadeSUT.GetPastYear();
+        var fromSeeds = await _facadeSUT.GetPastYear(UserSeeds.DefaultUser.Id);
         Assert.Empty(fromSeeds);
 
         // We add a new activity that took place on the first day of past year
@@ -220,7 +220,7 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
         await _facadeSUT.SaveAsync(detailModel);
         await _facadeSUT.SaveAsync(oldDetailModel);
 
-        var fromAdded = await _facadeSUT.GetPastYear();
+        var fromAdded = await _facadeSUT.GetPastYear(UserSeeds.DefaultUser.Id);
 
         // Output of GetPastWeek is not empty
         Assert.NotEmpty(fromAdded);
