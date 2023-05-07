@@ -47,21 +47,24 @@ public partial class ProjectDetailViewModel : ViewModelBase
     protected override async Task LoadDataAsync()
     {
         await base.LoadDataAsync();
-        Project = await _projectFacade.GetAsync(Id);
-        Activities = (await _projectFacade.GetActivitiesInProject(Id)).ToList();
-
-        foreach (ActivityListModel activity in Activities)
+        if (Shell.Current.Resources.TryGetValue("projectId", out object projectId) && projectId is Guid id)
         {
-            if (activity.UserId != Guid.Empty)
+            Project = await _projectFacade.GetAsync(id);
+            Activities = (await _projectFacade.GetActivitiesInProject(id)).ToList();
+
+            foreach (ActivityListModel activity in Activities)
             {
-                ActivityUser = await _userFacade.GetAsync(activity.UserId);
-                activity.UserName = ActivityUser.UserFirstName + " " + ActivityUser.UserLastName;
+                if (activity.UserId != Guid.Empty)
+                {
+                    ActivityUser = await _userFacade.GetAsync(activity.UserId);
+                    activity.UserName = ActivityUser.UserFirstName + " " + ActivityUser.UserLastName;
+                }
+                else
+                {
+                    activity.UserName = "Unknown user";
+                }
+                activity.TimeSpent = await _activityFacade.ActivityTimeSpent(activity.Id);
             }
-            else
-            {
-                activity.UserName =  "Unknown user";
-            }
-            activity.TimeSpent = await _activityFacade.ActivityTimeSpent(activity.Id);
         }
     }
 
