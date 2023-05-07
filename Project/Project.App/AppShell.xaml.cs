@@ -19,9 +19,6 @@ namespace Project.App
         }
 
         [RelayCommand]
-        private void BackAsync() => _navigationService.SendBackButtonPressed();
-
-        [RelayCommand]
         private async Task GoToUserProfilesAsync()
             => await _navigationService.GoToAsync<UserProfileViewModel>();
 

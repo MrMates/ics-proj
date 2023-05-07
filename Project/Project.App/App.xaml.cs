@@ -1,4 +1,7 @@
-﻿namespace Project.App
+﻿using Project.App.Services;
+using Project.App.ViewModels.User;
+
+namespace Project.App
 {
     public partial class App : Application
     {

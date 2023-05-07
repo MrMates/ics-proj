@@ -17,7 +17,7 @@ public class NavigationService : INavigationService
         new("//users/create", typeof(UserCreatePage), typeof(UserCreateViewModel)),
         new("//projects", typeof(ProjectListPage), typeof(ProjectListViewModel)),
         new("//projects/create", typeof(ProjectCreatePage), typeof(ProjectCreateViewModel)),
-        new("//projects/report" , typeof(ProjectReportListPage), typeof(ProjectReportListViewModel)),
+        new("//reports" , typeof(ProjectReportListPage), typeof(ProjectReportListViewModel)),
         new("//projects/detail" , typeof(ProjectDetailPage), typeof(ProjectDetailViewModel)),
         new("//user-profile", typeof(UserProfilePage), typeof(UserProfileViewModel)),
         new("//timers", typeof(TimerListPage), typeof(ActivityListViewModel)),
