@@ -23,7 +23,7 @@ public class ActivityFacade :
     /// </summary>
     /// <remarks>Past week is considered from the last Monday, not last 7 days.</remarks>
     /// <returns>Collection of ActivityListModels that began in the past week.</returns>
-    public async Task<IEnumerable<ActivityListModel>> GetPastWeek()
+    public async Task<IEnumerable<ActivityListModel>> GetPastWeek(Guid userId)
     {
         DateTime dt = DateTime.Now;
 
@@ -37,7 +37,7 @@ public class ActivityFacade :
         List<Activity> entities = await uow
             .GetRepository<Activity, ActivityEntityMapper>()
             .Get()
-            .Where(activity => activity.TimeBegin >= lastMonday && activity.TimeBegin <= endOfWeek)
+            .Where(activity => activity.TimeBegin >= lastMonday && activity.TimeBegin <= endOfWeek && activity.UserId == userId)
             .ToListAsync();
 
         return ModelMapper.MapToListModel(entities);
@@ -48,7 +48,7 @@ public class ActivityFacade :
     /// </summary>
     /// <remarks>Past month is considered from the first day, not last 30/31 days.</remarks>
     /// <returns>Collection of ActivityListModels that began in the past month.</returns>
-    public async Task<IEnumerable<ActivityListModel>> GetPastMonth()
+    public async Task<IEnumerable<ActivityListModel>> GetPastMonth(Guid userId)
     {
         DateTime dt = DateTime.Now;
 
@@ -59,7 +59,7 @@ public class ActivityFacade :
         List<Activity> entities = await uow
             .GetRepository<Activity, ActivityEntityMapper>()
             .Get()
-            .Where(activity => activity.TimeBegin >= firstDayOfMonth && activity.TimeBegin <= lastDayOfMonth)
+            .Where(activity => activity.TimeBegin >= firstDayOfMonth && activity.TimeBegin <= lastDayOfMonth && activity.UserId == userId)
             .ToListAsync();
 
         return ModelMapper.MapToListModel(entities);
@@ -70,7 +70,7 @@ public class ActivityFacade :
     /// </summary>
     /// <remarks>Previous month is considered from the first day.</remarks>
     /// <returns>Collection of ActivityListModels that began in the previous month.</returns>
-    public async Task<IEnumerable<ActivityListModel>> GetPreviousMonth()
+    public async Task<IEnumerable<ActivityListModel>> GetPreviousMonth(Guid userId)
     {
         DateTime dt = DateTime.Now.AddMonths(-1);
 
@@ -81,7 +81,7 @@ public class ActivityFacade :
         List<Activity> entities = await uow
             .GetRepository<Activity, ActivityEntityMapper>()
             .Get()
-            .Where(activity => activity.TimeBegin >= firstDayOfMonth && activity.TimeBegin <= lastDayOfMonth)
+            .Where(activity => activity.TimeBegin >= firstDayOfMonth && activity.TimeBegin <= lastDayOfMonth && activity.UserId == userId)
             .ToListAsync();
 
         return ModelMapper.MapToListModel(entities);
@@ -92,7 +92,7 @@ public class ActivityFacade :
     /// </summary>
     /// <remarks>Past year is considered from the first of January, not last 365 days.</remarks>
     /// <returns>Collection of ActivityListModels that began in the past year.</returns>
-    public async Task<IEnumerable<ActivityListModel>> GetPastYear()
+    public async Task<IEnumerable<ActivityListModel>> GetPastYear(Guid userId)
     {
         DateTime dt = DateTime.Now;
 
@@ -103,7 +103,7 @@ public class ActivityFacade :
         List<Activity> entities = await uow
             .GetRepository<Activity, ActivityEntityMapper>()
             .Get()
-            .Where(activity => activity.TimeBegin >= firstDayOfYear && activity.TimeBegin <= lastDayOfYear)
+            .Where(activity => activity.TimeBegin >= firstDayOfYear && activity.TimeBegin <= lastDayOfYear && activity.UserId == userId)
             .ToListAsync();
 
         return ModelMapper.MapToListModel(entities);

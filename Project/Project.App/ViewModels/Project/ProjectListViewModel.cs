@@ -83,6 +83,8 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
         _isTimeSpentSortedAscending = !_isTimeSpentSortedAscending;
     }
 
+
+
     [RelayCommand]
     private async Task User_Join_Project(Guid projectId)
     {
