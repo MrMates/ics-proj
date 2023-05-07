@@ -58,6 +58,9 @@ public partial class UserCreateViewModel : ViewModelBase
             await _navigationService.GoToAsync("//users");
             MessengerService.Send<UserCreatedMessage>(new UserCreatedMessage(Guid.Empty));
 
+        } else
+        {
+            await Application.Current.MainPage.DisplayAlert("Error", "You have to put both first name and surname to create account!", "OK");
         }
     }
     

@@ -10,26 +10,26 @@
              Shell.FlyoutBehavior="Disabled"
              x:DataType="viewModels:UserListViewModel"
              BackgroundColor="White">
+
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-            <Label 
-            Text="Who’s using the app?"
-            VerticalOptions="StartAndExpand"
-            Margin="0,70,0,0"
-            Padding="0,0,0,40"
-            HorizontalOptions="Center"
-            TextColor="Black"
-            FontSize="70"
-            FontAttributes="Bold"/>
-        <StackLayout VerticalOptions="StartAndExpand"
+        <Label 
+                Text="Who’s using the app?"
+                VerticalOptions="StartAndExpand"
+                Margin="0,70,0,0"
+                Padding="0,0,0,40"
+                HorizontalOptions="Center"
+                TextColor="Black"
+                FontSize="70"
+                FontAttributes="Bold"/>
+        <StackLayout VerticalOptions="CenterAndExpand"
                  HorizontalOptions="Center"
-                 Spacing="50"
-                 Margin="0,275,0,0">
+                 Spacing="50">
             <HorizontalStackLayout HorizontalOptions="CenterAndExpand" 
                                Spacing="50">
                 <CollectionView ItemsSource="{Binding Users}" 
