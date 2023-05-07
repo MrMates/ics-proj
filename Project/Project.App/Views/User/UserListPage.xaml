@@ -83,6 +83,7 @@
                     HorizontalOptions="Center"
                     VerticalOptions="CenterAndExpand"
                     Margin="0, -50, 0, 0"
+                    TextColor="WhiteSmoke"
                     BackgroundColor="#475B63"
                     WidthRequest="100"
                     HeightRequest="100"

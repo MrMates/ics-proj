@@ -30,6 +30,13 @@ public partial class UserProfileViewModel : ViewModelBase
             }
         }
     }
+    private bool _isLoading;
+    public bool IsLoading
+    {
+        get => _isLoading;
+        set => SetProperty(ref _isLoading, value);
+    }
+
 
     public UserProfileViewModel(
         IUserFacade userFacade,
@@ -44,6 +51,7 @@ public partial class UserProfileViewModel : ViewModelBase
     [RelayCommand]
     private async Task PickPhoto()
     {
+        IsLoading = true;
         var result = await MediaPicker.PickPhotoAsync();
         if (result != null)
         {
@@ -55,6 +63,7 @@ public partial class UserProfileViewModel : ViewModelBase
             }
             
         }
+        IsLoading = false;
     }
     [RelayCommand]
     private async Task UpdateUserProfile()
