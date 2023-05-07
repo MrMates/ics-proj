@@ -6,7 +6,7 @@ public partial class TimerListPage
 {
 	private TimeOnly time = new();
 	private bool isRunning;
-	public TimerListPage(ActivityListViewModel activityListViewModel) : base(activityListViewModel)
+	public TimerListPage(ActivityDetailViewModel activityDetailViewModel) : base(activityDetailViewModel)
 	{
 		InitializeComponent();
 	}
@@ -26,16 +26,5 @@ public partial class TimerListPage
 	private void SetTime()
 	{
 		timeLabel.Text = $"{time.Hour}:{time.Minute}:{time.Second}";
-	}
-
-	private void OnDatePickerClicked(object sender, EventArgs e)
-	{
-		datePicker.IsVisible = true;
-	}
-
-	private void OnDateSelected(object sender, DateChangedEventArgs e)
-	{
-		selectedDateLabel.Text = e.NewDate.ToString("dd.MM.yyyy");
-		datePicker.IsVisible = false;
 	}
 }

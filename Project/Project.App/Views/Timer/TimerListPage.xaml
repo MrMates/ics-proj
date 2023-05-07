@@ -6,23 +6,19 @@
              xmlns:views="clr-namespace:Project.App.Views"
              xmlns:models="clr-namespace:Project.BL.Models;assembly=Project.BL"
              x:Class="Project.App.Views.Timer.TimerListPage"
-             x:DataType="viewModels:ActivityListViewModel">
+             x:DataType="viewModels:ActivityDetailViewModel">
     <!--CONTENT ZDE-->
     <StackLayout BackgroundColor="White">
         <StackLayout Orientation="Vertical" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" Margin="0,00,0,0">
             <StackLayout Orientation="Horizontal" HeightRequest="100">
                 <StackLayout Orientation="Vertical" HorizontalOptions="Center">
-                    <Entry Text="Activity Name" TextColor="#475B63" FontSize="48"/>
+                    <Entry Text="{Binding activity_Name}" TextColor="#475B63" FontSize="48" Placeholder="Activity Name"/>
                     <BoxView Color="#2E2C2F" HeightRequest="1" WidthRequest="600" HorizontalOptions="Center"/>
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="Start Time" TextColor="#475B63" Padding="0,5,0,0" FontSize="48" x:Name="selectedDateLabel"/>
-                        <StackLayout Orientation="Vertical">
-                            <ImageButton Source="calendar.png" Margin="60,10,0,0" Clicked="OnDatePickerClicked"/>
-                            <DatePicker x:Name="datePicker" IsVisible="False" DateSelected="OnDateSelected" BackgroundColor="#475B63" Margin="0,20,0,0"/>
-                        </StackLayout>
-                        <StackLayout Orientation="Vertical" Margin="10,0,0,0">
-                            <Label Text="NOW" TextColor="#475B63" Margin="10,10,0,0"/>
-                            <CheckBox IsChecked="True" Margin="10,-10,0,0" Color="#D9D9D9"/>
+                        <Label Text="{Binding date_Converted}" TextColor="#475B63" Padding="0,5,0,0" FontSize="48"/>
+                        <StackLayout Orientation="Horizontal">
+                            <ImageButton Source="calendar.png" Margin="60,10,0,0" Command="{Binding DateClickedCommand}"/>
+                            <DatePicker Date="{Binding time_Begin}"  x:Name="datePicker" IsVisible="{Binding is_Visible}" BackgroundColor="#475B63" Margin="0,20,0,0"/>
                         </StackLayout>
                         <Label Text="00:00:00" TextColor="#475B63" FontSize="48" Margin="30,0,0,0" x:Name="timeLabel"/>
                     </StackLayout>
@@ -38,15 +34,13 @@
                     </Picker.Items>
                 </Picker>
                 <BoxView Color="#2E2C2F" HeightRequest="1" WidthRequest="300" HorizontalOptions="Center" Margin="0,0,405,0"/>
-                <Picker Title="Projekt" FontSize="24" TextColor="#475B63" VerticalOptions="Center">
+                <Picker Title="{Binding project_Id}" FontSize="24" TextColor="#475B63" VerticalOptions="Center">
                     <Picker.Items>
-                        <x:String>Option 1</x:String>
-                        <x:String>Option 2</x:String>
-                        <x:String>Option 3</x:String>
+                        
                     </Picker.Items>
                 </Picker>
                 <BoxView Color="#2E2C2F" HeightRequest="1" WidthRequest="300" HorizontalOptions="Center" Margin="0,0,405,0"/>
-                <Entry Text="Description" FontSize="24" TextColor="#475B63" Margin="0,0,410,0" MaximumWidthRequest="300"/>
+                <Entry Text="{Binding activity_Description}" FontSize="24" TextColor="#475B63" Margin="0,0,410,0" MaximumWidthRequest="300" Placeholder="Description"/>
                 <BoxView Color="#2E2C2F" HeightRequest="1" WidthRequest="300" HorizontalOptions="Center" Margin="0,0,405,0"/>
             </StackLayout>
         </StackLayout>
