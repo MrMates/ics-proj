@@ -15,6 +15,8 @@ public partial class ProjectReportListViewModel : ViewModelBase
     private readonly INavigationService _navigationService;
     private double whole = 0.0;
     private TimeSpan totalTime = TimeSpan.Zero;
+    private bool _isTimeSpentSortedAscending = true;
+    private bool _isActivityNameSortedAscending = true;
 
     public ICommand LoadDataCommand => new Command(async () => await LoadDataAsync());
     public IEnumerable<ActivityListModel> Reports { get; set; } = null!;
@@ -36,7 +38,6 @@ public partial class ProjectReportListViewModel : ViewModelBase
      
         
 
-        //Guid userId = Guid.Parse("188B8C5B-FCC8-452E-A20E-AF0DEB0CD21B");        
         if (Shell.Current.Resources.TryGetValue("userId", out object userIdObj) && userIdObj is Guid userId)
         { 
             Reports = (await _activityFacade.GetUserActivities(userId)).ToList(); 
@@ -66,7 +67,6 @@ public partial class ProjectReportListViewModel : ViewModelBase
     private async Task LoadPreviousMonth()
     {
         if (Shell.Current.Resources.TryGetValue("userId", out object userIdObj) && userIdObj is Guid userId)
-        //Guid userId = Guid.Parse("188B8C5B-FCC8-452E-A20E-AF0DEB0CD21B");
         {
             Reports = (await _activityFacade.GetPreviousMonth(userId)).ToList();
             whole = 0.0;
@@ -94,7 +94,6 @@ public partial class ProjectReportListViewModel : ViewModelBase
     private async Task LoadPastWeek()
     {
         if (Shell.Current.Resources.TryGetValue("userId", out object userIdObj) && userIdObj is Guid userId)
-        //Guid userId = Guid.Parse("188B8C5B-FCC8-452E-A20E-AF0DEB0CD21B");
         {
             Reports = (await _activityFacade.GetPastWeek(userId)).ToList();
             whole = 0.0;
@@ -123,7 +122,6 @@ public partial class ProjectReportListViewModel : ViewModelBase
     private async Task LoadPastMonth()
     {
         if (Shell.Current.Resources.TryGetValue("userId", out object userIdObj) && userIdObj is Guid userId)
-        //Guid userId = Guid.Parse("188B8C5B-FCC8-452E-A20E-AF0DEB0CD21B");
         {
             Reports = (await _activityFacade.GetPastMonth(userId)).ToList();
             whole = 0.0;
@@ -152,7 +150,6 @@ public partial class ProjectReportListViewModel : ViewModelBase
     private async Task LoadPastYear()
     {
         if (Shell.Current.Resources.TryGetValue("userId", out object userIdObj) && userIdObj is Guid userId)
-        //Guid userId = Guid.Parse("188B8C5B-FCC8-452E-A20E-AF0DEB0CD21B");
         {
             Reports = (await _activityFacade.GetPastYear(userId)).ToList();
             whole = 0.0;
@@ -175,6 +172,24 @@ public partial class ProjectReportListViewModel : ViewModelBase
             TotalTime = TimeSpan.Zero;
         }
 
+    }
+
+
+
+
+    [RelayCommand]
+    private void SortByActivityName()
+    {
+        if (_isActivityNameSortedAscending)
+        {
+            Reports = Reports.OrderBy(x => x.ActivityName);
+        }
+        else
+        {
+            Reports = Reports.OrderByDescending(x => x.ActivityName);
+        }
+
+        _isActivityNameSortedAscending = !_isActivityNameSortedAscending;
     }
 
 }
