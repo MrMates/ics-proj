@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Project.Common.Enums;
 
 namespace Project.BL.Models
 {
@@ -13,7 +9,7 @@ namespace Project.BL.Models
         public required string ActivityName { get; set; }
         public DateTime TimeBegin { get; set; }
         public DateTime? TimeEnd { get; set; }
-        public required string ActivityType { get; set; }
+        public required ActivityType Type { get; set; }
         public string? ActivityDescription { get; set; }
 
         public static ActivityDetailModel Empty => new()
@@ -22,7 +18,7 @@ namespace Project.BL.Models
             ProjectId = Guid.Empty,
             UserId = Guid.Empty,
             ActivityName = string.Empty,
-            ActivityType = string.Empty,
+            Type = ActivityType.Other,
             TimeBegin =DateTime.Now
         };
     }

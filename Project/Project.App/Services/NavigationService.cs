@@ -20,7 +20,7 @@ public class NavigationService : INavigationService
         new("//projects/report" , typeof(ProjectReportListPage), typeof(ProjectReportListViewModel)),
         new("//projects/detail" , typeof(ProjectDetailPage), typeof(ProjectDetailViewModel)),
         new("//user-profile", typeof(UserProfilePage), typeof(UserProfileViewModel)),
-        new("//timers", typeof(TimerListPage), typeof(ActivityDetailViewModel)),
+        new("//timers", typeof(TimerListPage), typeof(TimerViewModel)),
     };
 
     public async Task GoToAsync<TViewModel>()

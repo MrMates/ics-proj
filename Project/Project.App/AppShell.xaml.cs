@@ -49,7 +49,7 @@ namespace Project.App
 
         [RelayCommand]
         private async Task GoToTimersAsync()
-            => await _navigationService.GoToAsync<ActivityDetailViewModel>();
+            => await _navigationService.GoToAsync<TimerViewModel>();
 
     }
 }
