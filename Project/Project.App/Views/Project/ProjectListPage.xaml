@@ -22,12 +22,12 @@
                      ZIndex="3">
             <ActivityIndicator
                 Opacity="1"
-                Color="Blue"
+                Color="#ff9933"
                 IsRunning="True"
                 IsVisible="{Binding IsLoading}"
                 WidthRequest="100"
                 HeightRequest="100"
-
+                Scale="1.5"
                 VerticalOptions="CenterAndExpand"
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>
