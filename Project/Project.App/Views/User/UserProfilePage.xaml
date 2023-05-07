@@ -54,13 +54,6 @@
                                 Aspect="AspectFill"
                                 VerticalOptions="FillAndExpand"
                                 HorizontalOptions="FillAndExpand"/>
-                        <ActivityIndicator IsRunning="{Binding IsLoading}" 
-                                            Color="Red"
-                                            VerticalOptions="Center"
-                                            HorizontalOptions="Center"
-                                            WidthRequest="200"
-                                            HeightRequest="200"
-                                            ZIndex="100"/>
                     </Grid>
                 </Frame>
 
