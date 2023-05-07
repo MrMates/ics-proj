@@ -26,6 +26,7 @@ namespace Project.DAL.Seeds
             ProjectId = Guid.Parse("188BFF5B-FCC8-452E-A20E-AF0DEB0DDD1B"),
             Name = "Recenze produktu",
             ActivityType = "Práce",
+            ActivityDescription = "Tento balíček jsme vybrali protože obsahoval vesměs vše a byl to náš první nákup, první zkušenost, takže nedokážu moc porovnat kvalitu. Nevěděli jsme zda nám to bude vůbec vyhovovat. Zatím jsme zkusili pouze dvě věci a odhodláváme se na další. Myslím, že pro začátek a pro takové konzervy, jako jsme mi s manželem je to zatím akorát na to „zkoušení“.",
             TimeBegin = DateTime.Now.AddYears(-2),
             TimeEnd = DateTime.Now.AddHours(-24.1),
         };

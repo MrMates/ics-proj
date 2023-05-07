@@ -5,7 +5,6 @@ using Project.BL.Facades;
 using Project.App.Services;
 using Project.DAL;
 using Project.DAL.Seeds;
-using AdSupport;
 
 namespace Project.App.ViewModels.Project;
 
@@ -15,20 +14,21 @@ public partial class ProjectDetailViewModel : ViewModelBase
     private readonly IUserFacade _userFacade;
     private readonly IActivityFacade _activityFacade;
     private readonly INavigationService _navigationService;
+    private bool _isTimeSpentSortedAscending = true;
+    private bool _isActivityNameSortedAscending = true;
+
     public IEnumerable<ActivityListModel> Activities { get; set; } = null!;
     public UserDetailModel ActivityUser { get; set; } = null!;
 
 
     //TODO:
     //Aby fungovalo na proklik (načtení ProjectId z Shell.Current.Resources
-    //Filtery dle času / Sorty dle názvu
-    //Pokud půjde, tak tooltip nebo nějakej popup při hoveru nad danou aktivitou s jejím descriptionem :) 
-    //Případně asi mazání aktivity stejně jako u ProjectListu
 
     public Guid Id = Guid.Parse("188BFF5B-FCC8-452E-A20E-AF0DEB0DDD1B");
     public ProjectDetailModel Project { get; set; }
 
     public string UserName = string.Empty;
+
 
     public ProjectDetailViewModel(
         IProjectFacade projectFacade,
@@ -64,5 +64,56 @@ public partial class ProjectDetailViewModel : ViewModelBase
             activity.TimeSpent = await _activityFacade.ActivityTimeSpent(activity.Id);
         }
     }
+
+    [RelayCommand]
+    private async Task DeleteActivity(Guid activityId)
+    {
+        bool confirmed = await Application.Current.MainPage.DisplayAlert("Delete Activity", "Are you sure you want to delete this activity?", "Yes", "No");
+
+        if (confirmed)
+        {
+            await _activityFacade.DeleteAsync(activityId);
+            await LoadDataAsync();
+        }
+    }
+
+    [RelayCommand]
+    private async Task ActivityDescription(Guid activityId)
+    {
+        ActivityDetailModel activity = await _activityFacade.GetAsync(activityId);
+        await Application.Current.MainPage.DisplayAlert("Description of " + activity.ActivityName, activity.ActivityDescription, "Thanks!");
+    }
+
+
+    [RelayCommand]
+    private void SortByProjectName()
+    {
+        if (_isActivityNameSortedAscending)
+        {
+            Activities = Activities.OrderBy(x => x.ActivityName);
+        }
+        else
+        {
+            Activities = Activities.OrderByDescending(x => x.ActivityName);
+        }
+
+        _isActivityNameSortedAscending = !_isActivityNameSortedAscending;
+    }
+
+    [RelayCommand]
+    private void SortByTimeSpent()
+    {
+        if (_isTimeSpentSortedAscending)
+        {
+            Activities = Activities.OrderBy(x => x.TimeSpent);
+        }
+        else
+        {
+            Activities = Activities.OrderByDescending(x => x.ActivityName);
+        }
+
+        _isTimeSpentSortedAscending = !_isTimeSpentSortedAscending;
+    }
+
 }
 
