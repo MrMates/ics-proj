@@ -10,22 +10,48 @@
     
     
     <!--CONTENT-->
-    <StackLayout BackgroundColor="White" VerticalOptions="FillAndExpand" HorizontalOptions="CenterAndExpand">
-        <Border
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <StackLayout IsVisible="{Binding IsLoading}"
+                     BackgroundColor="{Binding BackgroundColorSet}"
+                     ZIndex="3">
+            <ActivityIndicator
+                Opacity="1"
+                Color="Blue"
+                IsRunning="True"
+                IsVisible="{Binding IsLoading}"
+                WidthRequest="100"
+                HeightRequest="100"
+
+                VerticalOptions="CenterAndExpand"
+                HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+        
+        <StackLayout BackgroundColor="White" 
+                     VerticalOptions="FillAndExpand" 
+                     HorizontalOptions="CenterAndExpand">
+
+            <Border
+                ZIndex="0"
                 StrokeThickness="1"
                 StrokeShape="RoundRectangle 0,0,20,20"
                 Background="#D9D9D9"
                 Padding="16,8"
                 HorizontalOptions="Center">
-            <StackLayout
+                <StackLayout
                 Padding="20,10,20,0">
-                <FlexLayout JustifyContent="SpaceBetween"  HorizontalOptions="FillAndExpand">
-                    <Label  VerticalOptions="Center" 
+                    <FlexLayout JustifyContent="SpaceBetween"  HorizontalOptions="FillAndExpand">
+                        <Label  VerticalOptions="Center" 
                             HorizontalOptions="Center" 
                             TextColor="#2E2C2F"
                             FontSize="25"
                             FontAttributes="Bold">Projects</Label>
-                    <Button Text="+ New project"
+                        <Button Text="+ New project"
                             VerticalOptions="Center"
                             HorizontalOptions="Center"
                             TextColor="#F3E8EE"
@@ -34,54 +60,54 @@
                             FontAttributes="Bold"
                             Command="{Binding GoToCreateProjectCommand}"
                         />
-                </FlexLayout>
+                    </FlexLayout>
 
-                <FlexLayout HorizontalOptions="Start" WidthRequest="300" JustifyContent="SpaceBetween" Margin="0,50,0,20">
-                    <Image HorizontalOptions="End" 
+                    <FlexLayout HorizontalOptions="Start" WidthRequest="300" JustifyContent="SpaceBetween" Margin="0,50,0,20">
+                        <Image HorizontalOptions="End" 
                            VerticalOptions="Fill"
                            Aspect="AspectFill"
                            WidthRequest="23"
                            HeightRequest="23"
                            Margin="0,7,0,0"
                            Source="sort.png"/>
-                    <Button FontSize="16" TextColor="#2E2C2F" Grid.Column="1" Text="Sort by name" BackgroundColor="Transparent"
+                        <Button FontSize="16" TextColor="#2E2C2F" Grid.Column="1" Text="Sort by name" BackgroundColor="Transparent"
                             BorderWidth="1.5"
                             BorderColor="Black"
                             Command="{Binding SortByProjectNameCommand}" />
-                    <Button FontSize="16" TextColor="#2E2C2F" Grid.Column="1" Text="Sort by time" BackgroundColor="Transparent"
+                        <Button FontSize="16" TextColor="#2E2C2F" Grid.Column="1" Text="Sort by time" BackgroundColor="Transparent"
                             BorderWidth="1.5"
                             BorderColor="Black"
                             Command="{Binding SortByTimeSpentCommand}" />
-                </FlexLayout>
-            </StackLayout>
-        </Border>
+                    </FlexLayout>
+                </StackLayout>
+            </Border>
 
-        <StackLayout Margin="0,50,0,0" Padding="20,10,20,0" BackgroundColor="#D9D9D9" VerticalOptions="FillAndExpand">
-            <Grid Padding="0,10,0,30">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Label TextColor="#2E2C2F" FontSize="17" Text="Project Name" FontAttributes="Bold" Grid.Column="0" />
-                <Label TextColor="#2E2C2F" FontSize="17" Text="Time Spent" FontAttributes="Bold" Grid.Column="1" />
-                <Label TextColor="#2E2C2F" FontSize="17" Text="Users" FontAttributes="Bold" Grid.Column="2" />
-                <StackLayout HeightRequest="2"  Grid.ColumnSpan="4" BackgroundColor="#2E2C2F" Margin="0,35,0,0" Opacity="0.7" />
-            </Grid>
-            <ScrollView VerticalOptions="FillAndExpand">
-                <CollectionView ItemsSource="{Binding Projects}" VerticalOptions="FillAndExpand">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:ProjectListModel">
-                            <Grid Margin="0,10,0,10">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <StackLayout HeightRequest="1"  Grid.ColumnSpan="4" BackgroundColor="#2E2C2F" Margin="0,-100,0,0" Opacity="0.2" />
-                                <Button
+            <StackLayout ZIndex="0" Margin="0,50,0,0" Padding="20,10,20,0" BackgroundColor="#D9D9D9" VerticalOptions="FillAndExpand">
+                <Grid Padding="0,10,0,30">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Label TextColor="#2E2C2F" FontSize="17" Text="Project Name" FontAttributes="Bold" Grid.Column="0" />
+                    <Label TextColor="#2E2C2F" FontSize="17" Text="Time Spent" FontAttributes="Bold" Grid.Column="1" />
+                    <Label TextColor="#2E2C2F" FontSize="17" Text="Users" FontAttributes="Bold" Grid.Column="2" />
+                    <StackLayout HeightRequest="2"  Grid.ColumnSpan="4" BackgroundColor="#2E2C2F" Margin="0,35,0,0" Opacity="0.7" />
+                </Grid>
+                <ScrollView VerticalOptions="FillAndExpand">
+                    <CollectionView ItemsSource="{Binding Projects}" VerticalOptions="FillAndExpand">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:ProjectListModel">
+                                <Grid Margin="0,10,0,10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <StackLayout HeightRequest="1"  Grid.ColumnSpan="4" BackgroundColor="#2E2C2F" Margin="0,-100,0,0" Opacity="0.2" />
+                                    <Button
                                     Grid.ColumnSpan="3"
                                     Grid.RowSpan="1"
                                     BackgroundColor="Transparent"
@@ -89,11 +115,11 @@
                                     Command="{Binding GoToProjectDetailCommand, Source={RelativeSource AncestorType={x:Type viewModels:ProjectListViewModel}}}"
                                     CommandParameter="{Binding Id}"
                                     />
-                                <Label VerticalOptions="Center" TextColor="Black" Text="{Binding ProjectName}" Grid.Column="0" />
-                                <Label VerticalOptions="Center" TextColor="Black" Text="{Binding TimeSpent, StringFormat='{0:hh\\:mm\\:ss}'}" Grid.Column="1" />
-                                <Label VerticalOptions="Center" TextColor="Black" Text="{Binding Users.Count, StringFormat='{}{0} users'}" Grid.Column="2" />
-                                <StackLayout Grid.Column="3" VerticalOptions="Center" Orientation="Horizontal">
-                                    <Button Text="Join project"
+                                    <Label VerticalOptions="Center" TextColor="Black" Text="{Binding ProjectName}" Grid.Column="0" />
+                                    <Label VerticalOptions="Center" TextColor="Black" Text="{Binding TimeSpent, StringFormat='{0:hh\\:mm\\:ss}'}" Grid.Column="1" />
+                                    <Label VerticalOptions="Center" TextColor="Black" Text="{Binding Users.Count, StringFormat='{}{0} users'}" Grid.Column="2" />
+                                    <StackLayout Grid.Column="3" VerticalOptions="Center" Orientation="Horizontal">
+                                        <Button Text="Join project"
                                         VerticalOptions="Center"
                                         HorizontalOptions="Center"
                                         TextColor="#F3E8EE"
@@ -104,7 +130,7 @@
                                         Command="{Binding User_Join_ProjectCommand, Source={RelativeSource AncestorType={x:Type viewModels:ProjectListViewModel}}}"
                                         CommandParameter="{Binding Id}"
                                     />
-                                    <Button
+                                        <Button
                                         Margin="20,0,0,0"
                                         BackgroundColor="Transparent"
                                         HeightRequest="30"
@@ -117,15 +143,17 @@
                                         CommandParameter="{Binding Id}"
                                         Padding="0"
                                     />
-                                </StackLayout>
-                                <StackLayout HeightRequest="1"  Grid.ColumnSpan="4" BackgroundColor="#2E2C2F" Margin="0,100,0,0" Opacity="0.2" />
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </ScrollView>
+                                    </StackLayout>
+                                    <StackLayout HeightRequest="1"  Grid.ColumnSpan="4" BackgroundColor="#2E2C2F" Margin="0,100,0,0" Opacity="0.2" />
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </ScrollView>
+            </StackLayout>
         </StackLayout>
-    </StackLayout>
-    <!--CONTENT END--> 
+        <!--CONTENT END-->
+    </Grid>
+    
 </views:ContentPageBase>
     

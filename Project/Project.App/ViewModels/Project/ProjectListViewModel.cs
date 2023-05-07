@@ -20,6 +20,13 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
     private readonly INavigationService _navigationService;
     private bool _isTimeSpentSortedAscending = true;
     private bool _isProjectNameSortedAscending = true;
+    private bool _isLoading;
+    public bool IsLoading
+    {
+        get => _isLoading;
+        set => SetProperty(ref _isLoading, value);
+    }
+    public Color BackgroundColorSet { get; set; }
 
     public IEnumerable<ProjectListModel> Projects { get; set; } = null!;
 
@@ -39,6 +46,8 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
 
     protected override async Task LoadDataAsync()
     {
+        IsLoading = true;
+        BackgroundColorSet = Color.FromRgba(48, 48, 48, 75);
         await base.LoadDataAsync();
 
         //Simulace dat 
@@ -51,6 +60,7 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
         {
             project.TimeSpent = await _projectFacade.TotalTimeSpent(project.Id);
         }
+        IsLoading = false;
     }
     
     [RelayCommand]
@@ -88,20 +98,26 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
     [RelayCommand]
     private async Task User_Join_Project(Guid projectId)
     {
-        ProjectListModel project = Projects.Where(i => i.Id == projectId).Single();
-        if (Shell.Current.Resources.TryGetValue("userId", out object userIdObj) && userIdObj is Guid userId)
+        IsLoading = true;
+        await Task.Run(async () =>
         {
-            if (project.Users.Any(u => u.Id == (Guid)Shell.Current.Resources["userId"]))
+            ProjectListModel project = Projects.Where(i => i.Id == projectId).Single();
+            if (Shell.Current.Resources.TryGetValue("userId", out object userIdObj) && userIdObj is Guid userId)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "You are already a part of this project!", "OK");
+                if (project.Users.Any(u => u.Id == (Guid)Shell.Current.Resources["userId"]))
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "You are already a part of this project!", "OK");
+                }
+                else
+                {
+                    await _projectFacade.AddUserToProject(userId, projectId);
+                    MessengerService.Send<UserJoinedProjectMessage>(new UserJoinedProjectMessage(Guid.Empty));
+                }
             }
-            else
-            {
-                await _projectFacade.AddUserToProject(userId,projectId);
-                MessengerService.Send<UserJoinedProjectMessage>(new UserJoinedProjectMessage(Guid.Empty));
-            }
-        }
+        });
+        IsLoading = false;
     }
+
 
 
     [RelayCommand]
