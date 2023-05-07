@@ -57,13 +57,13 @@
                                     </Image>
                                 </Border>
                                 <Button BackgroundColor="Transparent" 
-                                ZIndex="10"
-                                WidthRequest="133" 
-                                CornerRadius="100" 
-                                BorderColor="#D9D9D9"
-                                Command="{Binding GoToUserProfileCommand, 
-                                Source={RelativeSource AncestorType={x:Type viewModels:UserListViewModel}}}"
-                                CommandParameter="{Binding Id}">
+                                    ZIndex="10"
+                                    WidthRequest="133" 
+                                    CornerRadius="100" 
+                                    BorderColor="#D9D9D9"
+                                    Command="{Binding GoToUserProfileCommand, 
+                                    Source={RelativeSource AncestorType={x:Type viewModels:UserListViewModel}}}"
+                                    CommandParameter="{Binding Id}">
                                 </Button>
 
                                 <BoxView Grid.Row="0"

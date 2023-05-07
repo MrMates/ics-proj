@@ -22,7 +22,7 @@
                      ZIndex="3">
             <ActivityIndicator
                 Opacity="1"
-                Color="#ff9933"
+                Color="#729B79"
                 IsRunning="True"
                 IsVisible="{Binding IsLoading}"
                 WidthRequest="100"
