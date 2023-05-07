@@ -106,7 +106,10 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
             {
                 if (project.Users.Any(u => u.Id == (Guid)Shell.Current.Resources["userId"]))
                 {
-                    await Application.Current.MainPage.DisplayAlert("Error", "You are already a part of this project!", "OK");
+                    await Application.Current.Dispatcher.DispatchAsync(async () =>
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Error", "You are already a part of this project!", "OK");
+                    });
                 }
                 else
                 {
