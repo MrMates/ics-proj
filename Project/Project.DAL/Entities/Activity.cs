@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Project.Common.Enums;
 
 
 namespace Project.DAL
@@ -11,7 +11,7 @@ namespace Project.DAL
         public required string Name { get; set; }
         public DateTime TimeBegin { get; set; }
         public DateTime? TimeEnd { get; set; } // activity doesnt have to have end time
-        public required string ActivityType { get; set; }
+        public required ActivityType Type { get; set; }
         public string? ActivityDescription { get; set; }
     }
 }

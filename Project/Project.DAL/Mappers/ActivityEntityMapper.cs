@@ -6,7 +6,7 @@ public class ActivityEntityMapper : IEntityMapper<Activity>
             existingEntity.Name = newEntity.Name;
             existingEntity.TimeBegin = newEntity.TimeBegin;
             existingEntity.TimeEnd = newEntity.TimeEnd;
-            existingEntity.ActivityType = newEntity.ActivityType;
+            existingEntity.Type = newEntity.Type;
             existingEntity.ActivityDescription = newEntity.ActivityDescription;
 
         }

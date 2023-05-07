@@ -26,15 +26,11 @@ namespace Project.DAL.Migrations
                     b.Property<string>("ActivityDescription")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ActivityType")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("ProjectId")
+                    b.Property<Guid?>("ProjectId")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("TimeBegin")
@@ -42,6 +38,9 @@ namespace Project.DAL.Migrations
 
                     b.Property<DateTime?>("TimeEnd")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("INTEGER");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("TEXT");
