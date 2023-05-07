@@ -20,10 +20,6 @@ public partial class ProjectDetailViewModel : ViewModelBase
     public IEnumerable<ActivityListModel> Activities { get; set; } = null!;
     public UserDetailModel ActivityUser { get; set; } = null!;
 
-
-    //TODO:
-    //Aby fungovalo na proklik (načtení ProjectId z Shell.Current.Resources
-
     public Guid Id = Guid.Parse("188BFF5B-FCC8-452E-A20E-AF0DEB0DDD1B");
     public ProjectDetailModel Project { get; set; }
 
