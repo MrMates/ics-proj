@@ -17,8 +17,14 @@
                 Padding="16,8"
                 HorizontalOptions="FillAndExpand"
             VerticalOptions="Fill">
-            
-            <StackLayout Padding="20,10,20,0">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+            <StackLayout Grid.Column="0" Padding="20,10,20,0">
 
                 <Label Text="Reports" FontSize="25" FontAttributes="Bold"/> 
                 <HorizontalStackLayout>
@@ -30,7 +36,16 @@
                            Margin="20,50,0,0"
                            Source="filter_icon.png"/>
 
-
+                    <Button Text="sort by name"
+                            Margin="20,50,0,0" 
+                            Background="transparent" 
+                            BorderColor="Black" 
+                            BorderWidth="2" 
+                            TextColor="Black" 
+                            FontAttributes="Bold"
+                            Command="{Binding SortByActivityNameCommand}">
+                    </Button>
+                    
                     <Button Text="right click to filter" 
                             Margin="20,50,0,0" 
                             Background="transparent" 
@@ -48,19 +63,43 @@
                             </MenuFlyout>
                         </FlyoutBase.ContextFlyout>
                     </Button>
-
-                    <Button Text="sort by name"
-                            Margin="20,50,0,0" 
-                            Background="transparent" 
-                            BorderColor="Black" 
-                            BorderWidth="2" 
-                            TextColor="Black" 
-                            FontAttributes="Bold"
-                            Command="{Binding SortByActivityNameCommand}">
-                        
-                    </Button>
-                </HorizontalStackLayout> 
+                    
+                </HorizontalStackLayout>
             </StackLayout>
+                <HorizontalStackLayout VerticalOptions="End" Grid.Column="1" HorizontalOptions="End">
+                    <VerticalStackLayout>
+                        <Label Text="from"/>
+                        <DatePicker Date="{Binding DateAfter}"/>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Grid.Column="1">
+                        <Label Text="to"/>
+                        <DatePicker  Date="{Binding DateBefore}"/>
+                    </VerticalStackLayout>
+                    <HorizontalStackLayout Grid.Column="1">
+                        <Button Text="filter start"
+                                MaximumHeightRequest="30"
+                                Background="transparent" 
+                                BorderColor="Black" 
+                                BorderWidth="2" 
+                                TextColor="Black" 
+                                FontAttributes="Bold"
+                                Margin="10,20,0,0"
+                                Command="{Binding LoadStartTimeCommand}"/>
+                        <Button Text="filter end"
+                                MaximumHeightRequest="30"
+                                Background="transparent" 
+                                BorderColor="Black" 
+                                BorderWidth="2" 
+                                TextColor="Black" 
+                                FontAttributes="Bold"
+                                Margin="10,20,20,0"
+                                Command="{Binding LoadEndTimeCommand}"
+                                />
+                    </HorizontalStackLayout>
+                </HorizontalStackLayout>
+                
+            </Grid> 
+            
         </Border>
 
         <Grid VerticalOptions="FillAndExpand">
