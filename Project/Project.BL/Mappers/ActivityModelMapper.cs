@@ -13,7 +13,7 @@ namespace Project.BL.Mappers
         public override ActivityListModel MapToListModel(Activity? entity)
             => entity is null
             ? ActivityListModel.Empty
-            : new ActivityListModel { Id= entity.Id,ProjectId = entity.ProjectId,ActivityName = entity.Name};
+            : new ActivityListModel { Id= entity.Id, UserId = entity.UserId, ProjectId = entity.ProjectId,ActivityName = entity.Name};
 
         public override ActivityDetailModel MapToDetailModel(Activity? entity)
             => entity is null

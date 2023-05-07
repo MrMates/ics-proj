@@ -82,6 +82,7 @@ public class ProjectFacade :
             .GetRepository<DAL.Project, ProjectEntityMapper>()
             .Get()
             .Include(i => i.Activities)
+            .Include("UserProjects.User")
             .Where(i => i.Id == projectID)
             .SingleAsync();
 

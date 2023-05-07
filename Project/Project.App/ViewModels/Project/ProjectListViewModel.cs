@@ -14,7 +14,7 @@ using System.Diagnostics;
 
 namespace Project.App.ViewModels.Project;
 
-public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCreatedMessage>, IRecipient<UserJoinedProjectMessage>
+public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCreatedMessage>, IRecipient<UserJoinedProjectMessage>, IRecipient<ActivityFinishedMessage>
 {
     private readonly IProjectFacade _projectFacade;
     private readonly INavigationService _navigationService;
@@ -164,6 +164,11 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
     }
 
     public async void Receive(UserJoinedProjectMessage message)
+    {
+        await LoadDataAsync();
+    }
+
+    public async void Receive(ActivityFinishedMessage message)
     {
         await LoadDataAsync();
     }

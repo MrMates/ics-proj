@@ -84,6 +84,7 @@ namespace Project.App.ViewModels.Timer
                 }
                 else
                 {
+                    _timer.Enabled = false;
                     Task.Run(async () =>
                     {
                         var model = new ActivityDetailModel
@@ -97,6 +98,8 @@ namespace Project.App.ViewModels.Timer
                             Type = ActivityType
                         };
                         await _activityFacade.SaveAsync(model);
+                        MessengerService.Send(new ActivityFinishedMessage(SelectedActivity.Id));
+                        SelectedActivity = ActivityDetailModel.Empty;
                     });
                 }
             }
