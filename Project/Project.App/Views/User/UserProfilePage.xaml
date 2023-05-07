@@ -60,7 +60,7 @@
                                             HorizontalOptions="Center"
                                             WidthRequest="200"
                                             HeightRequest="200"
-                                           ZIndex="100"/>
+                                            ZIndex="100"/>
                     </Grid>
                 </Frame>
 
