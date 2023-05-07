@@ -15,6 +15,16 @@
     <StackLayout VerticalOptions="FillAndExpand">
         <StackLayout 
             VerticalOptions="FillAndExpand">
+            <StackLayout.Resources>
+                <Style TargetType="Entry">
+                    <Setter Property="BackgroundColor" Value="#D9D9D9" />
+                    <Style.Triggers>
+                        <Trigger TargetType="Entry" Property="IsFocused" Value="True">
+                            <Setter Property="BackgroundColor" Value="#EFEFEF" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </StackLayout.Resources>
             <Grid HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" ColumnSpacing="210" Grid.Row="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -52,10 +62,26 @@
                         Text="Profile picture" 
                         HorizontalOptions="Center" 
                         Margin="0, 20, 0, 0"
+                        FontSize="Small"
+                        TextColor="Black"
                         />
-                    <StackLayout Grid.Row="0" Grid.Column="1" VerticalOptions="Center">
-                        <Entry x:Name="FirstNameEntry" TextColor="Black" Text ="{Binding FirstName}" Placeholder="Name" WidthRequest="350" Margin="0, 25, 0, 0"/>
-                        <Entry x:Name="SurNameEntry" TextColor="Black" Text ="{Binding SurName}" Placeholder="Surname" WidthRequest="350" Margin="0, 25, 0, 0"/>
+                <StackLayout Grid.Row="0" Grid.Column="1" VerticalOptions="Center">
+                    <Entry x:Name="FirstNameEntry" 
+                               BackgroundColor="#D9D9D9"
+                               FontAttributes="Bold"
+                               TextColor="Black" 
+                               Text ="{Binding FirstName}" 
+                               Placeholder="Name" 
+                               WidthRequest="350" 
+                               Margin="0, 25, 0, 0"/>
+                        <Entry x:Name="SurNameEntry" 
+                               BackgroundColor="#D9D9D9"
+                               FontAttributes="Bold"
+                               TextColor="Black"
+                               Text ="{Binding SurName}" 
+                               Placeholder="Surname" 
+                               WidthRequest="350" 
+                               Margin="0, 25, 0, 0"/>
                     </StackLayout>
                 </Grid>
             <Button 

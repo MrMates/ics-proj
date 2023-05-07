@@ -35,8 +35,13 @@ public partial class UserListViewModel : ViewModelBase, IRecipient<UserCreatedMe
     private async Task GoToUserProfile(Guid UserId)
     {
         string UserImage = Users.Where(i => i.Id == UserId).Single().UserPhotoUrl;
+        string UserFirstName = Users.Where(i => i.Id == UserId).Single().UserFirstName;
+        string UserLastName = Users.Where(i => i.Id == UserId).Single().UserLastName;
         Shell.Current.Resources.Add("userId", UserId);
         Shell.Current.Resources["userPic"] = UserImage;
+        Shell.Current.Resources["firstName"] = UserFirstName;
+        Shell.Current.Resources["surName"] = UserLastName;
+
         await _navigationService.GoToAsync("//user-profile");
     }
 

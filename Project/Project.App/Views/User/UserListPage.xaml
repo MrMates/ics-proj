@@ -11,46 +11,52 @@
              x:DataType="viewModels:UserListViewModel"
              BackgroundColor="White">
 
-    <StackLayout VerticalOptions="StartAndExpand"
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Label 
+                Text="Who’s using the app?"
+                VerticalOptions="StartAndExpand"
+                Margin="0,70,0,0"
+                Padding="0,0,0,40"
+                HorizontalOptions="Center"
+                TextColor="Black"
+                FontSize="70"
+                FontAttributes="Bold"/>
+        <StackLayout VerticalOptions="CenterAndExpand"
                  HorizontalOptions="Center"
                  Spacing="50">
-
-        <Label 
-            Text="Who’s using the app?"
-            VerticalOptions="StartAndExpand"
-            Margin="0,70,0,0"
-            Padding="0,0,0,70"
-            HorizontalOptions="Center"
-            FontSize="70"
-            FontAttributes="Bold"/>
-
-        <HorizontalStackLayout HorizontalOptions="CenterAndExpand" 
+            <HorizontalStackLayout HorizontalOptions="CenterAndExpand" 
                                Spacing="50">
-            <CollectionView ItemsSource="{Binding Users}" 
+                <CollectionView ItemsSource="{Binding Users}" 
                             VerticalOptions="FillAndExpand" 
                             HorizontalOptions="StartAndExpand" 
                             Margin="0,0,0,0">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal"/>
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="models:UserListModel">
-                        <Grid RowDefinitions="Auto, *" ColumnDefinitions="200">
-                            <Border
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:UserListModel">
+                            <Grid RowDefinitions="Auto, *" ColumnDefinitions="200">
+                                <Border
                                 StrokeThickness="2"
                                 WidthRequest="133"
                                 HeightRequest="133">
-                                <Border.StrokeShape>
-                                    <Ellipse></Ellipse>
-                                </Border.StrokeShape>
-                                <Image
+                                    <Border.StrokeShape>
+                                        <Ellipse></Ellipse>
+                                    </Border.StrokeShape>
+                                    <Image
                                     HorizontalOptions="Fill" VerticalOptions="Fill"
                                     Aspect="AspectFill"
                                     WidthRequest="130" HeightRequest="130"
                                     Source="{Binding UserPhotoUrl}">
-                                </Image>
-                            </Border>
-                            <Button BackgroundColor="Transparent" 
+                                    </Image>
+                                </Border>
+                                <Button BackgroundColor="Transparent" 
                                 ZIndex="10"
                                 WidthRequest="133" 
                                 CornerRadius="100" 
@@ -58,24 +64,24 @@
                                 Command="{Binding GoToUserProfileCommand, 
                                 Source={RelativeSource AncestorType={x:Type viewModels:UserListViewModel}}}"
                                 CommandParameter="{Binding Id}">
-                            </Button>
+                                </Button>
 
-                            <BoxView Grid.Row="0"
+                                <BoxView Grid.Row="0"
                                          Opacity="0.25"
                                          Color="White" />
 
-                            <Label Grid.Row="1"
+                                <Label Grid.Row="1"
                                        Margin="22,12"
                                        FontSize="20" LineBreakMode="WordWrap"
                                        Text="{Binding UserFirstName}"
                                        TextColor="#475B63" VerticalOptions="Center" HorizontalOptions="Center"/>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
-            <Grid WidthRequest="200">
-                <Button 
+                <Grid WidthRequest="200">
+                    <Button 
                     x:Name="MoveBtn"
                     Text="+"
                     FontSize="95"
@@ -83,18 +89,21 @@
                     HorizontalOptions="Center"
                     VerticalOptions="CenterAndExpand"
                     Margin="0, -50, 0, 0"
+                    TextColor="WhiteSmoke"
                     BackgroundColor="#475B63"
                     WidthRequest="100"
                     HeightRequest="100"
                     CornerRadius="100"
                     Padding="0,-7,0,0"
                     Command="{Binding GoToCreateUserCommand}">
-                </Button>
+                    </Button>
 
-                <Label Text="Create user" FontSize="20" TextColor="#475B63" HorizontalOptions="Center" Margin="0, 140, 0, 0"/>
-            </Grid>
-        </HorizontalStackLayout>
+                    <Label Text="Create user" FontSize="20" TextColor="#475B63" HorizontalOptions="Center" Margin="0, 140, 0, 0"/>
+                </Grid>
+            </HorizontalStackLayout>
 
 
-    </StackLayout>
+        </StackLayout>
+    </Grid>
+    
 </views:ContentPageBase>

@@ -12,8 +12,8 @@ public partial class UserProfileViewModel : ViewModelBase
     private readonly INavigationService _navigationService;
 
 
-    public string FirstName { get; set; }
-    public string SurName { get; set; }
+    public string FirstName { get; set; } = (string) Shell.Current.Resources["firstName"];
+    public string SurName { get; set; } = (string)Shell.Current.Resources["surName"];
     public Color FrameBackgroundColor { get; set; } = Color.FromRgba(217, 217, 217, 255);
     public string ImageFileString { get; set; }
     private ImageSource _profilePicSource = (string)Shell.Current.Resources["userPic"];
@@ -30,6 +30,13 @@ public partial class UserProfileViewModel : ViewModelBase
             }
         }
     }
+    private bool _isLoading;
+    public bool IsLoading
+    {
+        get => _isLoading;
+        set => SetProperty(ref _isLoading, value);
+    }
+
 
     public UserProfileViewModel(
         IUserFacade userFacade,
@@ -44,6 +51,7 @@ public partial class UserProfileViewModel : ViewModelBase
     [RelayCommand]
     private async Task PickPhoto()
     {
+        IsLoading = true;
         var result = await MediaPicker.PickPhotoAsync();
         if (result != null)
         {
@@ -55,6 +63,7 @@ public partial class UserProfileViewModel : ViewModelBase
             }
             
         }
+        IsLoading = false;
     }
     [RelayCommand]
     private async Task UpdateUserProfile()
