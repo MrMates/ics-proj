@@ -107,9 +107,18 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
     [RelayCommand]
     private async Task GoToProjectDetail(Guid projectId)
     {
-        Shell.Current.Resources.Add("projectId", projectId);
+        if (!Shell.Current.Resources.ContainsKey("projectId"))
+        {
+            Shell.Current.Resources.Add("projectId", projectId);
+        }
+        else
+        {
+            Shell.Current.Resources["projectId"] = projectId;
+        }
+
         await _navigationService.GoToAsync("/detail");
     }
+
 
     [RelayCommand]
     private async Task DeleteProject(Guid projectId)
