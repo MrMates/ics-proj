@@ -21,4 +21,7 @@ public class UserFacade :
         : base(unitOfWorkFactory, UserModelMapper) =>
         _UserModelMapper = UserModelMapper;
 
+    protected override string IncludesNavigationPathDetail =>
+        $"{nameof(User.Activities)}";
+
 }

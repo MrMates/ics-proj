@@ -53,7 +53,7 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
         //Simulace dat 
         await _projectFacade.AddActivityToProject(ActivitySeeds.DefaultActivity.Id, ProjectSeeds.DefaultProject.Id);
 
-        Projects = (await _projectFacade.GetAsyncWithUsers()).ToList();
+        Projects = (await _projectFacade.GetAsync()).ToList();
 
 
         foreach (ProjectListModel project in Projects)

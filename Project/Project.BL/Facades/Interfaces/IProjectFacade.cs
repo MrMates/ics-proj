@@ -5,7 +5,6 @@ namespace Project.BL.Facades;
 
 public interface IProjectFacade : IFacade<DAL::Project, ProjectListModel, ProjectDetailModel>
 {
-    public abstract Task<IEnumerable<ProjectListModel>> GetAsyncWithUsers();
     public abstract Task AddActivityToProject(Guid activityID, Guid projectID);
 
     public abstract Task AddUserToProject(Guid userID, Guid projectID);
