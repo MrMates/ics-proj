@@ -14,7 +14,7 @@ using System.Diagnostics;
 
 namespace Project.App.ViewModels.Project;
 
-public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCreatedMessage>
+public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCreatedMessage>, IRecipient<UserJoinedProjectMessage>
 {
     private readonly IProjectFacade _projectFacade;
     private readonly INavigationService _navigationService;
@@ -23,7 +23,8 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
 
     public IEnumerable<ProjectListModel> Projects { get; set; } = null!;
 
-    public IEnumerable<UserListModel> Users { get; set; } = null!;
+    public IEnumerable<UserListModel> Users { get; set; } = Enumerable.Empty<UserListModel>();
+
 
 
     public ProjectListViewModel(
@@ -85,10 +86,27 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
     [RelayCommand]
     private async Task User_Join_Project(Guid projectId)
     {
+        ProjectListModel project = Projects.Where(i => i.Id == projectId).Single();
         if (Shell.Current.Resources.TryGetValue("userId", out object userIdObj) && userIdObj is Guid userId)
         {
-            await _projectFacade.AddUserToProject(userId,projectId);
+            if (project.Users.Any(u => u.Id == (Guid)Shell.Current.Resources["userId"]))
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "You are already a part of this project!", "OK");
+            }
+            else
+            {
+                await _projectFacade.AddUserToProject(userId,projectId);
+                MessengerService.Send<UserJoinedProjectMessage>(new UserJoinedProjectMessage(Guid.Empty));
+            }
         }
+    }
+
+
+    [RelayCommand]
+    private async Task GoToProjectDetail(Guid projectId)
+    {
+        Shell.Current.Resources.Add("projectId", projectId);
+        await _navigationService.GoToAsync("/detail");
     }
 
     [RelayCommand]
@@ -111,6 +129,11 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
     }
 
     public async void Receive(ProjectCreatedMessage message)
+    {
+        await LoadDataAsync();
+    }
+
+    public async void Receive(UserJoinedProjectMessage message)
     {
         await LoadDataAsync();
     }

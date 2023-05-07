@@ -52,6 +52,7 @@ public class ProjectFacade :
 
         User user = await userRep
             .Get()
+            .Include(u => u.UserProjects)
             .SingleAsync(user => user.Id == userID);
 
         DAL.Project project = await projectRep
@@ -127,6 +128,18 @@ public class ProjectFacade :
             .Get()
             .Include(i => i.UserProjects)
             .ToListAsync();
+
+        var userRepo = uow.GetRepository<User, UserEntityMapper>();
+
+        // We're fixing the User reference here
+        foreach (var entity in entities)
+        {
+            var nulls = entity.UserProjects.Where(i => i.User == null);
+            foreach (var user in nulls)
+            {
+                user.User = await userRepo.Get().Where(i => i.Id == user.UserId).SingleAsync();
+            }
+        }
 
         return ModelMapper.MapToListModel(entities);
     }
