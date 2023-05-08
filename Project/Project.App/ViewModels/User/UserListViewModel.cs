@@ -42,10 +42,6 @@ public partial class UserListViewModel : ViewModelBase, IRecipient<UserCreatedMe
         Shell.Current.Resources.Add("firstName", UserFirstName);
         Shell.Current.Resources.Add("surName", UserLastName);
 
-        //Shell.Current.Resources["userPic"] = UserImage;
-        //Shell.Current.Resources["firstName"] = UserFirstName;
-        //Shell.Current.Resources["surName"] = UserLastName;
-
         MessengerService.Send(new UserPickedMessage(UserId));
 
         await _navigationService.GoToAsync("//user-profile");
