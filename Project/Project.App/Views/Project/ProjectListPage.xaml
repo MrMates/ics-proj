@@ -22,7 +22,7 @@
                      ZIndex="3">
             <ActivityIndicator
                 Opacity="1"
-                Color="#ff9933"
+                Color="#729B79"
                 IsRunning="True"
                 IsVisible="{Binding IsLoading}"
                 WidthRequest="100"
@@ -31,7 +31,7 @@
                 VerticalOptions="CenterAndExpand"
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>
-        
+
         <StackLayout BackgroundColor="White" 
                      VerticalOptions="FillAndExpand" 
                      HorizontalOptions="CenterAndExpand">
@@ -99,52 +99,74 @@
                     <CollectionView ItemsSource="{Binding Projects}" VerticalOptions="FillAndExpand">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="models:ProjectListModel">
-                                <Grid Margin="0,10,0,10">
+
+                                <Grid Margin="0,5,0,5" VerticalOptions="Start">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                         <ColumnDefinition Width="*" />
                                     </Grid.ColumnDefinitions>
-                                    <StackLayout HeightRequest="1"  Grid.ColumnSpan="4" BackgroundColor="#2E2C2F" Margin="0,-100,0,0" Opacity="0.2" />
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="40" />
+                                    </Grid.RowDefinitions>
+
+                                    <BoxView
+                                        Color="Black"
+                                        Opacity="0.3"
+                                        HeightRequest="1"
+                                        Grid.RowSpan="1"
+                                        Grid.ColumnSpan="4"
+                                        HorizontalOptions="FillAndExpand"
+                                        VerticalOptions="Start"/>
+
                                     <Button
-                                    Grid.ColumnSpan="3"
-                                    Grid.RowSpan="1"
-                                    BackgroundColor="Transparent"
-                                    ZIndex="1000"
-                                    Command="{Binding GoToProjectDetailCommand, Source={RelativeSource AncestorType={x:Type viewModels:ProjectListViewModel}}}"
-                                    CommandParameter="{Binding Id}"
-                                    />
-                                    <Label VerticalOptions="Center" TextColor="Black" Text="{Binding ProjectName}" Grid.Column="0" />
-                                    <Label VerticalOptions="Center" TextColor="Black" Text="{Binding TimeSpent, StringFormat='{0:hh\\:mm\\:ss}'}" Grid.Column="1" />
-                                    <Label VerticalOptions="Center" TextColor="Black" Text="{Binding Users.Count, StringFormat='{}{0} users'}" Grid.Column="2" />
-                                    <StackLayout Grid.Column="3" VerticalOptions="Center" Orientation="Horizontal">
-                                        <Button Text="Join project"
-                                        VerticalOptions="Center"
-                                        HorizontalOptions="Center"
-                                        TextColor="#F3E8EE"
-                                        BackgroundColor="#729B79"
-                                        FontSize="14"
-                                        FontAttributes="Bold"
-                                        Grid.Column="3"
-                                        Command="{Binding User_Join_ProjectCommand, Source={RelativeSource AncestorType={x:Type viewModels:ProjectListViewModel}}}"
-                                        CommandParameter="{Binding Id}"
-                                    />
-                                        <Button
-                                        Margin="20,0,0,0"
+                                        TranslationY="4"
+                                        HeightRequest="51"
+                                        Grid.ColumnSpan="3"
+                                        Grid.RowSpan="1"
                                         BackgroundColor="Transparent"
-                                        HeightRequest="30"
-                                        WidthRequest="50"
-                                        VerticalOptions="Center"
-                                        HorizontalOptions="End"
-                                        Grid.Column="3"
-                                        ImageSource="remove.png"
-                                        Command="{Binding DeleteProjectCommand, Source={RelativeSource AncestorType={x:Type viewModels:ProjectListViewModel}}}"
+                                        ZIndex="1000"
+                                        Command="{Binding GoToProjectDetailCommand, Source={RelativeSource AncestorType={x:Type viewModels:ProjectListViewModel}}}"
                                         CommandParameter="{Binding Id}"
-                                        Padding="0"
                                     />
+                                    <Label VerticalOptions="Center" TranslationY="5" TextColor="Black" Text="{Binding ProjectName}" Grid.Column="0" Margin="5,0,0,0" />
+                                    <Label VerticalOptions="Center" TranslationY="5" TextColor="Black" Text="{Binding TimeSpent, StringFormat='{0:hh\\:mm\\:ss}'}" Grid.Column="1" Margin="5,0,0,0" />
+                                    <Label VerticalOptions="Center" TranslationY="5" TextColor="Black" Text="{Binding Users.Count, StringFormat='{}{0} users'}" Grid.Column="2" />
+                                    <StackLayout Grid.Column="3" 
+                                                 VerticalOptions="CenterAndExpand" 
+                                                 Orientation="Horizontal">
+
+                                        <Button 
+                                            Text="Join project"
+                                            VerticalOptions="Center"
+                                            HorizontalOptions="Center"
+                                            TextColor="#F3E8EE"
+                                            BackgroundColor="#729B79"
+                                            FontSize="15"
+                                            MinimumHeightRequest="35"
+                                            WidthRequest="100"
+                                            TranslationY="6"
+                                            Margin="0,0,0,0"
+                                            Padding="0,0,0,0"
+                                            FontAttributes="Bold"
+                                            Grid.Column="3"
+                                            Command="{Binding User_Join_ProjectCommand, Source={RelativeSource AncestorType={x:Type viewModels:ProjectListViewModel}}}"
+                                            CommandParameter="{Binding Id}"/>
+                                        <Button
+                                            Margin="20,15,0,0"
+                                            BackgroundColor="Transparent"
+                                            HeightRequest="36"
+                                            WidthRequest="36"
+                                            VerticalOptions="CenterAndExpand"
+                                            HorizontalOptions="End"
+                                            Grid.Column="3"
+                                            ImageSource="remove.png"
+                                            Command="{Binding DeleteProjectCommand, Source={RelativeSource AncestorType={x:Type viewModels:ProjectListViewModel}}}"
+                                            CommandParameter="{Binding Id}"
+                                            Padding="0,0,0,10"
+/>
                                     </StackLayout>
-                                    <StackLayout HeightRequest="1"  Grid.ColumnSpan="4" BackgroundColor="#2E2C2F" Margin="0,100,0,0" Opacity="0.2" />
                                 </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
