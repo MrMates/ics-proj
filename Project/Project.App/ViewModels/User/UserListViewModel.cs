@@ -9,7 +9,7 @@ using Project.App.Messages;
 
 namespace Project.App.ViewModels.User;
 
-public partial class UserListViewModel : ViewModelBase, IRecipient<UserCreatedMessage>
+public partial class UserListViewModel : ViewModelBase, IRecipient<UserCreatedMessage>, IRecipient<UserLoggedOutMessage>
 {
     private readonly IUserFacade _userFacade;
     private readonly INavigationService _navigationService;
@@ -42,10 +42,6 @@ public partial class UserListViewModel : ViewModelBase, IRecipient<UserCreatedMe
         Shell.Current.Resources.Add("firstName", UserFirstName);
         Shell.Current.Resources.Add("surName", UserLastName);
 
-        //Shell.Current.Resources["userPic"] = UserImage;
-        //Shell.Current.Resources["firstName"] = UserFirstName;
-        //Shell.Current.Resources["surName"] = UserLastName;
-
         MessengerService.Send(new UserPickedMessage(UserId));
 
         await _navigationService.GoToAsync("//user-profile");
@@ -58,6 +54,10 @@ public partial class UserListViewModel : ViewModelBase, IRecipient<UserCreatedMe
         Users = await _userFacade.GetAsync();
     }
     public async void Receive(UserCreatedMessage message)
+    {
+        await LoadDataAsync();
+    }
+    public async void Receive(UserLoggedOutMessage message)
     {
         await LoadDataAsync();
     }
