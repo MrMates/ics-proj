@@ -2,11 +2,14 @@ using Microsoft.Maui.Controls;
 using Project.App.Services;
 using Project.BL.Facades;
 using CommunityToolkit.Mvvm.Input;
+using Project.DAL;
+using CommunityToolkit.Mvvm.Messaging;
+using Project.App.Messages;
 
 namespace Project.App.ViewModels.User;
 
 
-public partial class UserProfileViewModel : ViewModelBase
+public partial class UserProfileViewModel : ViewModelBase, IRecipient<UserPickedMessage>
 {
     private readonly IUserFacade _userFacade;
     private readonly INavigationService _navigationService;
@@ -26,7 +29,6 @@ public partial class UserProfileViewModel : ViewModelBase
             if (_profilePicSource != null)
             {
                 SetProperty(ref _profilePicSource, value);
-
             }
         }
     }
@@ -46,6 +48,15 @@ public partial class UserProfileViewModel : ViewModelBase
     {
         _userFacade = userFacade;
         _navigationService = navigationService;
+    }
+
+    protected override async Task LoadDataAsync()
+    {
+        await base.LoadDataAsync();
+
+        FirstName = (string)Shell.Current.Resources["firstName"];
+        SurName = (string)Shell.Current.Resources["surName"];
+        ProfilePicSource = (string)Shell.Current.Resources["userPic"];
     }
 
     [RelayCommand]
@@ -77,5 +88,10 @@ public partial class UserProfileViewModel : ViewModelBase
                 UserPhotoUrl = ImageFileString });
             Shell.Current.Resources["userPic"] = ImageFileString;
         }
+    }
+
+    public async void Receive(UserPickedMessage message)
+    {
+        await LoadDataAsync();
     }
 }

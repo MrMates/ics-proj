@@ -9,7 +9,7 @@ using System.Timers;
 
 namespace Project.App.ViewModels.Timer
 {
-    public partial class TimerViewModel : ViewModelBase, IRecipient<UserJoinedProjectMessage>
+    public partial class TimerViewModel : ViewModelBase, IRecipient<UserJoinedProjectMessage>, IRecipient<UserPickedMessage>
     {
         private System.Timers.Timer _timer;
         private readonly IActivityFacade _activityFacade;
@@ -75,7 +75,7 @@ namespace Project.App.ViewModels.Timer
                             ActivityName = ActivityName,
                             Type = ActivityType,
                             ActivityDescription = ActivityDescription,
-                            ProjectId = SelectedProject.Id,
+                            ProjectId = (SelectedProject == null) ? null : SelectedProject.Id,
                             UserId = UserId,
                             TimeBegin = TimeBegin
                         };
@@ -100,6 +100,7 @@ namespace Project.App.ViewModels.Timer
                         await _activityFacade.SaveAsync(model);
                         MessengerService.Send(new ActivityFinishedMessage(SelectedActivity.Id));
                         SelectedActivity = ActivityDetailModel.Empty;
+                        await LoadDataAsync();
                     });
                 }
             }
@@ -116,26 +117,39 @@ namespace Project.App.ViewModels.Timer
         protected override async Task LoadDataAsync()
         {
             await base.LoadDataAsync();
-            ImageSource = IsRunning ? "pause.png" : "play.png";
+
             UserId = (Guid)Shell.Current.Resources["userId"];
-            Activities = await _activityFacade.GetAsync();
+            Activities = (await _activityFacade.GetAsync()).ToList();
             Projects = (await _userFacade.GetUsersProjects(UserId)).ToList();
-            var nullActivity = Activities.Where(i => i.Id == UserId && i.TimeEnd == null).FirstOrDefault();
+
+            var nullActivity = Activities.Where(i => i.UserId == UserId && i.TimeEnd == null).FirstOrDefault();
             if (nullActivity != null)
             {
                 SelectedActivity = await _activityFacade.GetAsync(nullActivity.Id);
                 IsRunning = true;
-                ImageSource = IsRunning ? "pause.png" : "play.png";
-                ActivityName = SelectedActivity.ActivityName;
-                ActivityDescription = SelectedActivity.ActivityDescription;
-                TimeBegin = SelectedActivity.TimeBegin;
-                ActivityType = SelectedActivity.Type;
-                SelectedProject = Projects.Where(i => i.Id == SelectedActivity.ProjectId).Single();
             }
-            
+            else
+            {
+                SelectedActivity = ActivityDetailModel.Empty;
+                IsRunning = false;
+            }
+            _timer.Enabled = IsRunning;
+            CurrentTime = (DateTime.Now - SelectedActivity.TimeBegin);
+            ImageSource = IsRunning ? "pause.png" : "play.png";
+            ActivityName = SelectedActivity.ActivityName;
+            ActivityDescription = SelectedActivity.ActivityDescription;
+            TimeBegin = SelectedActivity.TimeBegin;
+            ActivityType = SelectedActivity.Type;
+            SelectedProject = Projects.Where(i => i.Id == SelectedActivity.ProjectId).SingleOrDefault();
+
         }
 
         public async void Receive(UserJoinedProjectMessage message)
+        {
+            await LoadDataAsync();
+        }
+
+        public async void Receive(UserPickedMessage message)
         {
             await LoadDataAsync();
         }
