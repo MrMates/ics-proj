@@ -50,7 +50,7 @@ public partial class UserProfileViewModel : ViewModelBase, IRecipient<UserPicked
 
         FirstName = (string)Shell.Current.Resources["firstName"];
         SurName = (string)Shell.Current.Resources["surName"];
-        _profilePicSource = (string)Shell.Current.Resources["userPic"];
+        ProfilePicSource = (string)Shell.Current.Resources["userPic"];
     }
 
     [RelayCommand]
