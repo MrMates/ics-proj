@@ -50,7 +50,7 @@ public partial class UserProfileViewModel : ViewModelBase, IRecipient<UserPicked
 
         FirstName = (string)Shell.Current.Resources["firstName"];
         SurName = (string)Shell.Current.Resources["surName"];
-        ProfilePicSource = (string)Shell.Current.Resources["userPic"];
+        _profilePicSource = (string)Shell.Current.Resources["userPic"];
     }
 
     [RelayCommand]
@@ -73,7 +73,8 @@ public partial class UserProfileViewModel : ViewModelBase, IRecipient<UserPicked
         if (FirstName != null && SurName != null)
         {
             Guid currentUserId = (Guid)Shell.Current.Resources["userId"];
-            await _userFacade.SaveAsync(new BL.Models.UserDetailModel { Id = currentUserId,
+            await _userFacade.SaveAsync(new BL.Models.UserDetailModel { 
+                Id = currentUserId,
                 UserFirstName = FirstName,
                 UserLastName = SurName,
                 UserPhotoUrl = ImageFileString });
