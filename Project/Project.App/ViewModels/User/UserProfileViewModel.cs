@@ -20,6 +20,7 @@ public partial class UserProfileViewModel : ViewModelBase, IRecipient<UserPicked
     public Color FrameBackgroundColor { get; set; } = Color.FromRgba(217, 217, 217, 255);
     public string ImageFileString { get; set; }
     private ImageSource _profilePicSource = (string)Shell.Current.Resources["userPic"];
+    public bool ImgPicked = false;
 
     public ImageSource ProfilePicSource
     {
@@ -63,6 +64,7 @@ public partial class UserProfileViewModel : ViewModelBase, IRecipient<UserPicked
             {
                 ImageFileString = ProfilePicSource.ToString();
                 ImageFileString = ImageFileString.Replace("File: ", "");
+                ImgPicked = true;
             }
         }
     }
@@ -72,12 +74,26 @@ public partial class UserProfileViewModel : ViewModelBase, IRecipient<UserPicked
         if (FirstName != null && SurName != null)
         {
             Guid currentUserId = (Guid)Shell.Current.Resources["userId"];
-            await _userFacade.SaveAsync(new BL.Models.UserDetailModel { 
-                Id = currentUserId,
-                UserFirstName = FirstName,
-                UserLastName = SurName,
-                UserPhotoUrl = ImageFileString });
-            Shell.Current.Resources["userPic"] = ImageFileString;
+            if (ImageFileString != null) 
+            {
+                await _userFacade.SaveAsync(new BL.Models.UserDetailModel
+                {
+                    Id = currentUserId,
+                    UserFirstName = FirstName,
+                    UserLastName = SurName,
+                    UserPhotoUrl = ImageFileString
+                });
+                Shell.Current.Resources["userPic"] = ImageFileString;
+            } else
+            {
+                await _userFacade.SaveAsync(new BL.Models.UserDetailModel
+                {
+                    Id = currentUserId,
+                    UserFirstName = FirstName,
+                    UserLastName = SurName,
+                    UserPhotoUrl = (string)Shell.Current.Resources["userPic"]
+                });
+            }
         }
     }
 
