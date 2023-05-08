@@ -9,7 +9,7 @@ using Project.App.Messages;
 
 namespace Project.App.ViewModels.User;
 
-public partial class UserListViewModel : ViewModelBase, IRecipient<UserCreatedMessage>
+public partial class UserListViewModel : ViewModelBase, IRecipient<UserCreatedMessage>, IRecipient<UserLoggedOutMessage>
 {
     private readonly IUserFacade _userFacade;
     private readonly INavigationService _navigationService;
@@ -54,6 +54,10 @@ public partial class UserListViewModel : ViewModelBase, IRecipient<UserCreatedMe
         Users = await _userFacade.GetAsync();
     }
     public async void Receive(UserCreatedMessage message)
+    {
+        await LoadDataAsync();
+    }
+    public async void Receive(UserLoggedOutMessage message)
     {
         await LoadDataAsync();
     }
