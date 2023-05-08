@@ -47,6 +47,11 @@ namespace Project.App.ViewModels.Timer
             _userFacade = userFacade;
             _navigationService = navigationService;
             TimeBegin = DateTime.Now;
+
+            _timer = new System.Timers.Timer();
+            _timer.Interval = 1000;
+            _timer.Elapsed += Tick;
+            _timer.Enabled = false;
         }
 
         [RelayCommand]
@@ -64,9 +69,6 @@ namespace Project.App.ViewModels.Timer
             {
                 if(IsRunning)
                 {
-                    _timer = new System.Timers.Timer();
-                    _timer.Interval = 1000;
-                    _timer.Elapsed += Tick;
                     _timer.Enabled = true;
                     Task.Run(async () =>
                     {

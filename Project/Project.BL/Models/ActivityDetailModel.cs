@@ -14,7 +14,7 @@ namespace Project.BL.Models
 
         public static ActivityDetailModel Empty => new()
         {
-            Id = Guid.NewGuid(),
+            Id = Guid.Empty,
             ProjectId = Guid.Empty,
             UserId = Guid.Empty,
             ActivityName = string.Empty,

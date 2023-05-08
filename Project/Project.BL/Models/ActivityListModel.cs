@@ -20,7 +20,7 @@ namespace Project.BL.Models
         public double Percentage { get; set; }
         public static ActivityListModel Empty => new()
         {
-            Id = Guid.NewGuid(),
+            Id = Guid.Empty,
             ActivityName = string.Empty,
             ProjectId = Guid.Empty,
             TimeBegin = DateTime.Now
