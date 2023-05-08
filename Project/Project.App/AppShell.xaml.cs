@@ -27,6 +27,8 @@ namespace Project.App
         {
             Shell.Current.Resources.Remove("userId");
             Shell.Current.Resources.Remove("userPic");
+            Shell.Current.Resources.Remove("firstName");
+            Shell.Current.Resources.Remove("surName");
             await _navigationService.GoToAsync<UserListViewModel>();
         }
             

@@ -32,12 +32,6 @@ public partial class UserProfileViewModel : ViewModelBase, IRecipient<UserPicked
             }
         }
     }
-    private bool _isLoading;
-    public bool IsLoading
-    {
-        get => _isLoading;
-        set => SetProperty(ref _isLoading, value);
-    }
 
 
     public UserProfileViewModel(
@@ -62,7 +56,6 @@ public partial class UserProfileViewModel : ViewModelBase, IRecipient<UserPicked
     [RelayCommand]
     private async Task PickPhoto()
     {
-        IsLoading = true;
         var result = await MediaPicker.PickPhotoAsync();
         if (result != null)
         {
@@ -72,9 +65,7 @@ public partial class UserProfileViewModel : ViewModelBase, IRecipient<UserPicked
                 ImageFileString = ProfilePicSource.ToString();
                 ImageFileString = ImageFileString.Replace("File: ", "");
             }
-            
         }
-        IsLoading = false;
     }
     [RelayCommand]
     private async Task UpdateUserProfile()
