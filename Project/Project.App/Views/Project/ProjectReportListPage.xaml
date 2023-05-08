@@ -26,7 +26,7 @@
                 
             <StackLayout Grid.Column="0" Padding="20,10,20,0">
 
-                <Label Text="Reports" FontSize="25" FontAttributes="Bold"/> 
+                <Label Text="Reports" FontSize="25" FontAttributes="Bold" TextColor="#2E2C2F"/> 
                 <HorizontalStackLayout>
                     <Image HorizontalOptions="Fill" 
                            VerticalOptions="Fill"
@@ -68,12 +68,12 @@
             </StackLayout>
                 <HorizontalStackLayout VerticalOptions="End" Grid.Column="1" HorizontalOptions="End">
                     <VerticalStackLayout>
-                        <Label Text="from"/>
-                        <DatePicker Date="{Binding DateAfter}"/>
+                        <Label Text="from" TextColor="Black" FontAttributes="Bold" />
+                        <DatePicker BackgroundColor="Gray" Date="{Binding DateAfter}"/>
                     </VerticalStackLayout>
                     <VerticalStackLayout Grid.Column="1">
-                        <Label Text="to"/>
-                        <DatePicker  Date="{Binding DateBefore}"/>
+                        <Label Text="to" TextColor="Black" FontAttributes="Bold" />
+                        <DatePicker BackgroundColor="Gray" Date="{Binding DateBefore}"/>
                     </VerticalStackLayout>
                     <HorizontalStackLayout Grid.Column="1">
                         <Button Text="filter start"

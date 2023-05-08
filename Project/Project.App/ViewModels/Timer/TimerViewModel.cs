@@ -19,6 +19,8 @@ namespace Project.App.ViewModels.Timer
         public string ActivityName { get; set; }
         public TimeSpan CurrentTime { get; set; } = TimeSpan.Zero;
         public string ActivityDescription { get; set; }
+        private int _typeIndex = 0;
+        public int ActivityTypeIndex { get => _typeIndex; set { _typeIndex = value; ActivityType = (ActivityType)value; } }
         public ActivityType ActivityType { get; set; } = ActivityType.Work;
         public Guid UserId { get; set; }
         public Guid ActivityId { get; set; }
@@ -35,8 +37,8 @@ namespace Project.App.ViewModels.Timer
         public TimerViewModel(
             IActivityFacade activityFacade,
             IUserFacade userFacade,
-            IMessengerService messengerService, 
-            INavigationService navigationService) 
+            IMessengerService messengerService,
+            INavigationService navigationService)
             : base(messengerService)
         {
             _activityFacade = activityFacade;
@@ -44,7 +46,7 @@ namespace Project.App.ViewModels.Timer
             _navigationService = navigationService;
 
             _timer = new System.Timers.Timer();
-            _timer.Interval = 1000;
+            _timer.Interval = 500;
             _timer.Elapsed += Tick;
             _timer.Enabled = false;
         }
@@ -56,7 +58,7 @@ namespace Project.App.ViewModels.Timer
             ImageSource = IsRunning ? "pause.png" : "play.png";
             if (ActivityName != null)
             {
-                if(IsRunning)
+                if (IsRunning)
                 {
                     _timer.Enabled = true;
                     Task.Run(async () =>

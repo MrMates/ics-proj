@@ -21,7 +21,7 @@
                 <ImageButton ZIndex="1000" x:Name="startStopButton" Source="{Binding ImageSource}" Margin="10,0,0,0" Command="{Binding CreateActivityCommand}"/>
             </StackLayout>
             <StackLayout Orientation="Vertical" Margin="0,120,0,0">
-                <Picker HorizontalOptions="Start" SelectedIndex="{Binding ActivityType}" WidthRequest="300" FontSize="24" TextColor="White" BackgroundColor="Gray" VerticalOptions="Center">
+                <Picker HorizontalOptions="Start" SelectedIndex="{Binding ActivityTypeIndex}" WidthRequest="300" FontSize="24" TextColor="White" BackgroundColor="Gray" VerticalOptions="Center">
                     <Picker.Items>
                         <x:String>Work</x:String>
                         <x:String>School</x:String>
