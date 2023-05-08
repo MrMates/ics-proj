@@ -5,6 +5,7 @@ using Project.BL.Facades;
 using Project.App.Services;
 using Project.DAL;
 using Project.DAL.Seeds;
+using Project.Common.Enums;
 
 namespace Project.App.ViewModels.Project;
 
@@ -19,11 +20,19 @@ public partial class ProjectDetailViewModel : ViewModelBase
 
     public IEnumerable<ActivityListModel> Activities { get; set; } = null!;
     public UserDetailModel ActivityUser { get; set; } = null!;
+    public ActivityType Type { get; set; }
 
     public Guid Id = Guid.Parse("188BFF5B-FCC8-452E-A20E-AF0DEB0DDD1B");
     public ProjectDetailModel Project { get; set; }
 
     public string UserName = string.Empty;
+    private bool _isLoading;
+    public bool IsLoading
+    {
+        get => _isLoading;
+        set => SetProperty(ref _isLoading, value);
+    }
+    public Color BackgroundColorSet { get; set; }
 
 
     public ProjectDetailViewModel(
@@ -68,12 +77,18 @@ public partial class ProjectDetailViewModel : ViewModelBase
     private async Task DeleteActivity(Guid activityId)
     {
         bool confirmed = await Application.Current.MainPage.DisplayAlert("Delete Activity", "Are you sure you want to delete this activity?", "Yes", "No");
-
-        if (confirmed)
+        IsLoading = true;
+        BackgroundColorSet = Color.FromRgba(48, 48, 48, 75);
+        await Task.Run(async () =>
         {
-            await _activityFacade.DeleteAsync(activityId);
-            await LoadDataAsync();
-        }
+            if (confirmed)
+            {
+                await _activityFacade.DeleteAsync(activityId);
+                await LoadDataAsync();
+            }
+        });
+
+        IsLoading = false;
     }
 
     [RelayCommand]

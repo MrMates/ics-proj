@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Project.Common.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,7 @@ namespace Project.BL.Models
         public TimeSpan TimeSpent { get; set; }
         public TimeSpan TotalTime { get; set; }
         public double Percentage { get; set; }
+        public ActivityType Type { get; set; }
         public static ActivityListModel Empty => new()
         {
             Id = Guid.Empty,
