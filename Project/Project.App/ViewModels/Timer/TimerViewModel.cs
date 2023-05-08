@@ -18,11 +18,7 @@ namespace Project.App.ViewModels.Timer
 
         public string ActivityName { get; set; }
         public TimeSpan CurrentTime { get; set; } = TimeSpan.Zero;
-        private DateTime _timeBegin;
-        public DateTime TimeBegin { get { return _timeBegin; } set { DateConverted = value.Date.ToString("dd.MM.yyyy"); _timeBegin = value; } }
-        public string DateConverted { get; set; }
         public string ActivityDescription { get; set; }
-        public bool IsVisible { get; set; } = false;
         public ActivityType ActivityType { get; set; } = ActivityType.Work;
         public Guid UserId { get; set; }
         public Guid ActivityId { get; set; }
@@ -46,18 +42,11 @@ namespace Project.App.ViewModels.Timer
             _activityFacade = activityFacade;
             _userFacade = userFacade;
             _navigationService = navigationService;
-            TimeBegin = DateTime.Now;
 
             _timer = new System.Timers.Timer();
             _timer.Interval = 1000;
             _timer.Elapsed += Tick;
             _timer.Enabled = false;
-        }
-
-        [RelayCommand]
-        private void DateClicked()
-        {
-            IsVisible = !IsVisible;
         }
 
         [RelayCommand]
@@ -79,7 +68,7 @@ namespace Project.App.ViewModels.Timer
                             ActivityDescription = ActivityDescription,
                             ProjectId = (SelectedProject == null) ? null : SelectedProject.Id,
                             UserId = UserId,
-                            TimeBegin = TimeBegin
+                            TimeBegin = DateTime.Now
                         };
                         SelectedActivity = await _activityFacade.SaveAsync(model);
                     });
@@ -140,7 +129,6 @@ namespace Project.App.ViewModels.Timer
             ImageSource = IsRunning ? "pause.png" : "play.png";
             ActivityName = SelectedActivity.ActivityName;
             ActivityDescription = SelectedActivity.ActivityDescription;
-            TimeBegin = SelectedActivity.TimeBegin;
             ActivityType = SelectedActivity.Type;
             SelectedProject = Projects.Where(i => i.Id == SelectedActivity.ProjectId).SingleOrDefault();
 

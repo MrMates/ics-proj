@@ -15,11 +15,6 @@
                     <Entry Text="{Binding ActivityName}" TextColor="#475B63" FontSize="48" Placeholder="Activity Name"/>
                     <BoxView Color="#2E2C2F" HeightRequest="1" WidthRequest="600" HorizontalOptions="Center"/>
                     <StackLayout Orientation="Horizontal">
-                        <Label Text="{Binding DateConverted}" TextColor="#475B63" Padding="0,5,0,0" FontSize="48"/>
-                        <StackLayout Orientation="Vertical">
-                            <ImageButton Source="calendar.png" Margin="60,10,0,0" Command="{Binding DateClickedCommand}"/>
-                            <DatePicker Date="{Binding TimeBegin}" x:Name="datePicker" IsVisible="{Binding IsVisible}" BackgroundColor="#475B63" Margin="0,20,0,0"/>
-                        </StackLayout>
                         <Label Text="{Binding CurrentTime, StringFormat='{0:hh\\:mm\\:ss}'}" TextColor="#475B63" FontSize="48" Margin="30,0,0,0" x:Name="timeLabel"/>
                     </StackLayout>
                 </StackLayout>
