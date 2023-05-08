@@ -18,8 +18,8 @@ namespace Project.App
                 {
                     DatabaseName = "ics_project.db",
                     Enabled = true,
-                    RecreateDatabaseEachTime = true,
-                    SeedDemoData = true
+                    RecreateDatabaseEachTime = false,
+                    SeedDemoData = false
                 }
             };
 

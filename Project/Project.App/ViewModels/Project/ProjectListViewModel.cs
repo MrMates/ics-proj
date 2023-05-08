@@ -50,9 +50,6 @@ public partial class ProjectListViewModel : ViewModelBase, IRecipient<ProjectCre
         BackgroundColorSet = Color.FromRgba(48, 48, 48, 75);
         await base.LoadDataAsync();
 
-        //Simulace dat 
-        await _projectFacade.AddActivityToProject(ActivitySeeds.DefaultActivity.Id, ProjectSeeds.DefaultProject.Id);
-
         Projects = (await _projectFacade.GetAsync()).ToList();
 
 
