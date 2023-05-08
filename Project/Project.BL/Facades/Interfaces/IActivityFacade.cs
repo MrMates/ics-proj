@@ -11,9 +11,9 @@ public interface IActivityFacade : IFacade<Activity, ActivityListModel, Activity
     public abstract Task<IEnumerable<ActivityListModel>> GetPastMonth(Guid userId);
     public abstract Task<IEnumerable<ActivityListModel>> GetPreviousMonth(Guid userId);
     public abstract Task<IEnumerable<ActivityListModel>> GetPastYear(Guid userId);
-    public abstract Task<IEnumerable<ActivityListModel>> GetBeginningBefore(DateTime date);
-    public abstract Task<IEnumerable<ActivityListModel>> GetBeginningAfter(DateTime date);
-    public abstract Task<IEnumerable<ActivityListModel>> GetEndingBefore(DateTime date);
-    public abstract Task<IEnumerable<ActivityListModel>> GetEndingAfter(DateTime date);
+    public abstract Task<IEnumerable<ActivityListModel>> GetBeginningBefore(DateTime date, Guid userId);
+    public abstract Task<IEnumerable<ActivityListModel>> GetBeginningAfter(DateTime date, Guid userId);
+    public abstract Task<IEnumerable<ActivityListModel>> GetEndingBefore(DateTime date, Guid userId);
+    public abstract Task<IEnumerable<ActivityListModel>> GetEndingAfter(DateTime date, Guid userId);
 
 }

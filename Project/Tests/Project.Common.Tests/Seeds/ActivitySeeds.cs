@@ -10,7 +10,7 @@ namespace Project.Common.Tests.Seeds
         {
             Id = default,
             Name = default!,
-            ActivityType = default!,
+            Type = default!,
             ProjectId = default!,
             UserId = default!
         };
@@ -20,7 +20,7 @@ namespace Project.Common.Tests.Seeds
             Id = Guid.Parse("5AC46AA9-2DA3-4D1D-B89D-687850B76623"),
             Name = "Day 58394 of work",
             ActivityDescription = "so much fun...",
-            ActivityType = "Job",
+            Type = Enums.ActivityType.Work,
             TimeBegin = DateTime.Parse("2021-05-01 13:01:20"),
             TimeEnd = DateTime.Parse("2021-05-01 15:21:54"),
             ProjectId = ProjectSeeds.AgencyProject.Id,
@@ -36,7 +36,7 @@ namespace Project.Common.Tests.Seeds
         {
             Id = Guid.NewGuid(),
             Name = "Today's work",
-            ActivityType = "Type",
+            Type = Enums.ActivityType.Work,
             TimeBegin = DateTime.Today,
             UserId = UserSeeds.DefaultUser.Id,
             ProjectId = ProjectSeeds.AgencyProject.Id
@@ -46,7 +46,7 @@ namespace Project.Common.Tests.Seeds
         {
             Id = Guid.NewGuid(),
             Name = "Work from a few weeks ago",
-            ActivityType = "Type",
+            Type = Enums.ActivityType.Work,
             TimeBegin = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1),
             UserId = UserSeeds.DefaultUser.Id,
             ProjectId = ProjectSeeds.AgencyProject.Id
@@ -56,7 +56,7 @@ namespace Project.Common.Tests.Seeds
         {
             Id = Guid.NewGuid(),
             Name = "Work from the previous month",
-            ActivityType = "Type",
+            Type = Enums.ActivityType.Work,
             TimeBegin = new DateTime(DateTime.Today.AddMonths(-1).Year, DateTime.Today.AddMonths(-1).Month, 1),
             UserId = UserSeeds.DefaultUser.Id,
             ProjectId = ProjectSeeds.AgencyProject.Id
@@ -66,7 +66,7 @@ namespace Project.Common.Tests.Seeds
         {
             Id = Guid.NewGuid(),
             Name = "Work from the past year",
-            ActivityType = "Type",
+            Type = Enums.ActivityType.Work,
             TimeBegin = new DateTime(DateTime.Today.Year, 1, 1),
             UserId = UserSeeds.DefaultUser.Id,
             ProjectId = ProjectSeeds.AgencyProject.Id
@@ -76,7 +76,7 @@ namespace Project.Common.Tests.Seeds
         {
             Id = Guid.NewGuid(),
             Name = "Work from the previous year",
-            ActivityType = "Type",
+            Type = Enums.ActivityType.Work,
             TimeBegin = new DateTime(DateTime.Today.AddYears(-1).Year, 1, 1),
             UserId = UserSeeds.DefaultUser.Id,
             ProjectId = ProjectSeeds.AgencyProject.Id

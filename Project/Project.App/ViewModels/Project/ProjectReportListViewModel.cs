@@ -7,10 +7,12 @@ using Project.DAL;
 using Project.DAL.Seeds;
 using System.Windows.Input;
 using System.Globalization;
+using CommunityToolkit.Mvvm.Messaging;
+using Project.App.Messages;
 
 namespace Project.App.ViewModels.Project;
 
-public partial class ProjectReportListViewModel : ViewModelBase
+public partial class ProjectReportListViewModel : ViewModelBase, IRecipient<ActivityFinishedMessage>
 {
     private readonly IActivityFacade _activityFacade;
     private readonly INavigationService _navigationService;
@@ -200,8 +202,8 @@ public partial class ProjectReportListViewModel : ViewModelBase
     {
         if (Shell.Current.Resources.TryGetValue("userId", out object userIdObj) && userIdObj is Guid userId)
         {
-            _beforeReports = (await _activityFacade.GetBeginningBefore(DateBefore));
-            _afterReports = (await _activityFacade.GetBeginningAfter(DateAfter));
+            _beforeReports = (await _activityFacade.GetBeginningBefore(DateBefore, userId));
+            _afterReports = (await _activityFacade.GetBeginningAfter(DateAfter, userId));
 
            Reports = _beforeReports.Intersect(_afterReports).ToList();
             _whole = 0.0;
@@ -231,8 +233,8 @@ public partial class ProjectReportListViewModel : ViewModelBase
     {
         if (Shell.Current.Resources.TryGetValue("userId", out object userIdObj) && userIdObj is Guid userId)
         {
-            _beforeReports = (await _activityFacade.GetEndingBefore(DateBefore));
-            _afterReports = (await _activityFacade.GetEndingAfter(DateAfter));
+            _beforeReports = (await _activityFacade.GetEndingBefore(DateBefore, userId));
+            _afterReports = (await _activityFacade.GetEndingAfter(DateAfter, userId));
 
             Reports = _beforeReports.Intersect(_afterReports).ToList();
             _whole = 0.0;
@@ -257,5 +259,9 @@ public partial class ProjectReportListViewModel : ViewModelBase
 
     }
 
+    public async void Receive(ActivityFinishedMessage message)
+    {
+        await LoadDataAsync();
+    }
 }
 

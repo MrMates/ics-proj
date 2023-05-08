@@ -27,7 +27,7 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
         var model = new ActivityDetailModel()
         { 
             ActivityName = "Name",
-            ActivityType = "Type",
+            Type = Project.Common.Enums.ActivityType.Work,
             UserId = UserSeeds.DefaultUser.Id,
             ProjectId = ProjectSeeds.AgencyProject.Id
         };
@@ -239,14 +239,14 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
     public async Task GetAll_CustomFilter_BeginningBefore()
     {
         // There will already be some seeded activities beginning before the day a month ago
-        var fromSeeds = await _facadeSUT.GetBeginningBefore(DateTime.Today.AddMonths(-1));
+        var fromSeeds = await _facadeSUT.GetBeginningBefore(DateTime.Today.AddMonths(-1), UserSeeds.DefaultUser.Id);
         var seededCount = fromSeeds.Count();
 
         // We add a new activity from past week - the output shouldn't change
         var newModel = ActivityModelMapper.MapToDetailModel(ActivitySeeds.NotSeededPastWeek);
         await _facadeSUT.SaveAsync(newModel);
 
-        var afterNewAdd = await _facadeSUT.GetBeginningBefore(DateTime.Today.AddMonths(-1));
+        var afterNewAdd = await _facadeSUT.GetBeginningBefore(DateTime.Today.AddMonths(-1), UserSeeds.DefaultUser.Id);
         var newCount = afterNewAdd.Count();
         Assert.Equal(seededCount, newCount);
 
@@ -254,7 +254,7 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
         var oldModel = ActivityModelMapper.MapToDetailModel(ActivitySeeds.NotSeededPreviousYear);
         await _facadeSUT.SaveAsync(oldModel);
 
-        var afterOldAdd = await _facadeSUT.GetBeginningBefore(DateTime.Today.AddMonths(-1));
+        var afterOldAdd = await _facadeSUT.GetBeginningBefore(DateTime.Today.AddMonths(-1), UserSeeds.DefaultUser.Id);
         var oldCount = afterOldAdd.Count();
         Assert.NotEqual(seededCount, oldCount);
     }
@@ -263,21 +263,21 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
     public async Task GetAll_CustomFilter_BeginningAfter()
     {
         // There are no activities beginning after the day a month ago
-        var fromSeeds = await _facadeSUT.GetBeginningAfter(DateTime.Today.AddMonths(-1));
+        var fromSeeds = await _facadeSUT.GetBeginningAfter(DateTime.Today.AddMonths(-1), UserSeeds.DefaultUser.Id);
         Assert.Empty(fromSeeds);
 
         // We add a new activity from previous year - the output shouldn't change
         var oldModel = ActivityModelMapper.MapToDetailModel(ActivitySeeds.NotSeededPreviousYear);
         await _facadeSUT.SaveAsync(oldModel);
 
-        var afterOldAdd = await _facadeSUT.GetBeginningAfter(DateTime.Today.AddMonths(-1));
+        var afterOldAdd = await _facadeSUT.GetBeginningAfter(DateTime.Today.AddMonths(-1), UserSeeds.DefaultUser.Id);
         Assert.Empty(afterOldAdd);
 
         // We add an activity from past week - it should show up in the output
         var newModel = ActivityModelMapper.MapToDetailModel(ActivitySeeds.NotSeededPastWeek);
         await _facadeSUT.SaveAsync(newModel);
 
-        var afterNewAdd = await _facadeSUT.GetBeginningAfter(DateTime.Today.AddMonths(-1));
+        var afterNewAdd = await _facadeSUT.GetBeginningAfter(DateTime.Today.AddMonths(-1), UserSeeds.DefaultUser.Id);
         Assert.NotEmpty(afterNewAdd);
     }
 
