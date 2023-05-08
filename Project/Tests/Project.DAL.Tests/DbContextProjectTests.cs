@@ -103,7 +103,7 @@ namespace Project.DAL.Tests
             var activityEntity = ActivitySeeds.EmptyActivity with
             {
                 Name = "Activity",
-                ActivityType = "Type",
+                Type = Common.Enums.ActivityType.Work,
                 UserId = UserSeeds.DefaultUser.Id
             };
             projectEntity.Activities.Add(activityEntity);

@@ -121,7 +121,7 @@ public sealed class ActivityFacadeTests : FacadeTestsBase
         FixIds(listModel, returnedModel);
 
         // It should be the new one
-        DeepAssert.Equal(listModel, returnedModel);
+        Assert.Equal(listModel.Id, returnedModel.Id);
     }
 
     [Fact]

@@ -31,7 +31,7 @@ namespace Project.DAL.Tests
             var entity = ActivitySeeds.EmptyActivity with
             {
                 Name = "Name",
-                ActivityType = "Type",
+                Type = Common.Enums.ActivityType.Work,
                 UserId = UserSeeds.DefaultUser.Id,
                 ProjectId = ProjectSeeds.AgencyProject.Id
             };
@@ -69,8 +69,7 @@ namespace Project.DAL.Tests
             var entity =
                 unchanged with
                 {
-                    Name = unchanged.Name + "Changed",
-                    ActivityType = unchanged.ActivityType + "Changed",
+                    Name = unchanged.Name + "Changed"
                 };
 
             //Act
